@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Book Export</title>
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            overflow: hidden;
+        }
+
+        #export-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: #fff;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-family: sans-serif;
+            border-radius: 5px;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="export-btn">Export GLB</button>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 5, 5);
+        scene.add(directionalLight);
+
+        function createBook(color, yOffset, rotationY) {
+            const group = new THREE.Group();
+
+            // Cover
+            const coverGeo = new THREE.BoxGeometry(1.6, 2.2, 0.28);
+            const coverMat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.7, metalness: 0.1 });
+            const cover = new THREE.Mesh(coverGeo, coverMat);
+            group.add(cover);
+
+            // Pages
+            const pagesGeo = new THREE.BoxGeometry(1.52, 2.1, 0.22);
+            const pagesMat = new THREE.MeshStandardMaterial({ color: 0xfffaf0, roughness: 0.9 });
+            const pages = new THREE.Mesh(pagesGeo, pagesMat);
+            pages.position.x = 0.02;
+            group.add(pages);
+
+            // Spine
+            const spineGeo = new THREE.CapsuleGeometry(0.13, 2.05, 8, 16);
+            const spine = new THREE.Mesh(spineGeo, coverMat);
+            spine.position.x = -0.78;
+            group.add(spine);
+
+            group.position.y = yOffset;
+            group.rotation.y = rotationY;
+            return group;
+        }
+
+        const stack = new THREE.Group();
+        stack.add(createBook(0x1a365d, -0.3, -0.1));
+        stack.add(createBook(0x285e61, 0, 0.05));
+        stack.add(createBook(0x2c5282, 0.3, -0.05));
+        scene.add(stack);
+
+        camera.position.z = 5;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            stack.rotation.y += 0.005;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.exportGLB = () => {
+            const exporter = new GLTFExporter();
+            exporter.parse(scene, (result) => {
+                const blob = new Blob([result], { type: 'application/octet-stream' });
+                const reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                    const base64data = reader.result;
+                    window.exportedData = base64data;
+                    console.log("EXPORT_DATA:READY");
+                };
+            }, { binary: true });
+        };
+
+        document.getElementById('export-btn').onclick = window.exportGLB;
+    </script>
+</body>
+
+</html>

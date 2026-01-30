@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@theme {
+  /* Divya Gyan Dhara - 2026 Digital Sophistication Palette */
+  --color-primary-bg: #0F172A;
+  --color-secondary-action: #6366F1;
+  --color-accent-highlight: #FACC15;
+  --color-shadow-yellow: rgba(250, 204, 21, 0.4);
+  --color-surface-light: #F8FAFC;
+  --color-surface-border: #E2E8F0;
+
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), sans-serif;
+
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+:root {
+  --background: #0F172A;
+  /* Dark mode first */
+  --foreground: #F8FAFC;
+  --primary: #6366F1;
+  --primary-foreground: #FFFFFF;
+  --secondary: #0F172A;
+  --secondary-foreground: #F8FAFC;
+  --accent: #FACC15;
+  --accent-foreground: #0F172A;
+  --muted: rgba(248, 250, 252, 0.08);
+  /* Glassmorphism base */
+  --muted-foreground: #94A3B8;
+  --border: #E2E8F0;
+  --radius: 1.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-surface-border/10;
+  }
+
+  body {
+    @apply bg-primary-bg text-surface-light font-sans antialiased selection:bg-secondary-action/30;
+    scroll-behavior: smooth;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-bold tracking-tight;
+  }
+}
+
+@layer components {
+
+  /* Glassmorphism Cards */
+  .glass-card {
+    @apply bg-surface-light/5 backdrop-blur-xl border border-surface-light/10 rounded-2xl;
+  }
+
+  .glass-border {
+    @apply border border-white/10;
+  }
+
+  /* 2026 Button System */
+  .btn-enroll {
+    @apply relative overflow-hidden px-8 py-4 rounded-2xl font-semibold transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 bg-accent-highlight text-primary-bg hover:shadow-[0_0_20px_var(--color-shadow-yellow)];
+  }
+
+  .btn-demo {
+    @apply relative overflow-hidden px-8 py-4 rounded-2xl font-semibold transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10;
+  }
+
+  /* Floating Island Nav */
+  .floating-island {
+    @apply fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-4xl px-6 py-3 bg-surface-light/5 backdrop-blur-xl border border-surface-light/10 rounded-2xl flex items-center justify-between transition-all duration-500;
+  }
+
+  .floating-island.scrolled {
+    @apply top-4 scale-95 opacity-90;
+  }
+}
+
+/* Fluid Typography & Spacing */
+:root {
+  --step--2: clamp(0.69rem, 0.67rem + 0.11vw, 0.75rem);
+  --step--1: clamp(0.83rem, 0.79rem + 0.23vw, 0.94rem);
+  --step-0: clamp(1rem, 0.91rem + 0.43vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.05rem + 0.74vw, 1.5rem);
+  --step-2: clamp(1.44rem, 1.21rem + 1.15vw, 2rem);
+  --step-3: clamp(1.73rem, 1.38rem + 1.73vw, 2.5rem);
+  --step-4: clamp(2.07rem, 1.58rem + 2.51vw, 3.125rem);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-primary-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-secondary-action/50;
+}

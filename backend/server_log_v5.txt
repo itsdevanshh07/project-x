@@ -1,0 +1,308 @@
+
+> backend@1.0.0 dev
+> nodemon server.js
+
+[33m[nodemon] 3.1.11[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,cjs,json[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: Γ£à audit secrets and track compliance: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-00.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ΓÜÖ∩╕Å  write to custom object with { processEnv: myObject }
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒ¢á∩╕Å  run anywhere with `dotenvx run -- yourcommand`
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+Social Login attempt at: 2026-01-10T16:43:49.883Z
+C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\src\controllers\authController.js:201
+            tokenHeader: idToken ? idToken.substring(0, 20) + '...' : 'MISSING',
+                         ^
+
+ReferenceError: idToken is not defined
+    at exports.socialLogin (C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\src\controllers\authController.js:201:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+Node.js v22.20.0
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒùé∩╕Å backup and recover secrets: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-00.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+Social Login attempt at: 2026-01-10T16:49:45.675Z
+Social Login Error Detail: {
+  tokenHeader: 'eyJhbGciOiJSUzI1NiIs...',
+  errorName: 'TypeError',
+  errorMessage: 'next is not a function',
+  errorCode: undefined,
+  stack: 'TypeError: next is not a function\n' +
+    '    at model.<anonymous> (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\src\\models\\User.js:119:9)\n' +
+    '    at Kareem.execPre (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\node_modules\\kareem\\index.js:63:39)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async model.$__save (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\node_modules\\mongoose\\lib\\model.js:369:5)\n' +
+    '    at async model.save (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n' +
+    '    at async exports.socialLogin (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\src\\controllers\\authController.js:178:13)'
+}
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ΓÜÖ∩╕Å  enable debug logging with { debug: true }
+MongoDB Connected: ac-cmlda0l-shard-00-00.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒùé∩╕Å backup and recover secrets: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-02.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ΓÜÖ∩╕Å  write to custom object with { processEnv: myObject }
+MongoDB Connected: ac-cmlda0l-shard-00-02.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒæÑ sync secrets across teammates & machines: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+Social Login attempt at: 2026-01-10T16:55:57.480Z
+Social Login Error Detail: {
+  tokenHeader: 'MISSING',
+  errorName: 'TypeError',
+  errorMessage: 'next is not a function',
+  errorCode: undefined,
+  stack: 'TypeError: next is not a function\n' +
+    '    at model.<anonymous> (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\src\\models\\User.js:119:16)\n' +
+    '    at Kareem.execPre (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\node_modules\\kareem\\index.js:63:39)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async model.$__save (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\node_modules\\mongoose\\lib\\model.js:369:5)\n' +
+    '    at async model.save (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n' +
+    '    at async exports.socialLogin (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\src\\controllers\\authController.js:185:13)'
+}
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒôí add observability to secrets: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-02.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\server.js:12
+const app = express();
+      ^
+
+SyntaxError: Identifier 'app' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1638:18)
+    at Module._compile (node:internal/modules/cjs/loader:1680:20)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49
+
+Node.js v22.20.0
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒôí add observability to secrets: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-02.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒ¢á∩╕Å  run anywhere with `dotenvx run -- yourcommand`
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+Social Login attempt at: 2026-01-10T16:58:28.303Z
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒùé∩╕Å backup and recover secrets: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-00.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒöÉ encrypt with Dotenvx: https://dotenvx.com
+MongoDB Connected: ac-cmlda0l-shard-00-00.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒöÉ prevent committing .env to code: https://dotenvx.com/precommit
+MongoDB Connected: ac-cmlda0l-shard-00-00.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒæÑ sync secrets across teammates & machines: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-02.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒöÉ encrypt with Dotenvx: https://dotenvx.com
+MongoDB Connected: ac-cmlda0l-shard-00-00.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ΓÜÖ∩╕Å  write to custom object with { processEnv: myObject }
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[32m[nodemon] restarting due to changes...[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒ¢á∩╕Å  run anywhere with `dotenvx run -- yourcommand`
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ΓÜÖ∩╕Å  enable debug logging with { debug: true }
+MongoDB Connected: ac-cmlda0l-shard-00-02.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ΓÜÖ∩╕Å  enable debug logging with { debug: true }
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒöÉ prevent committing .env to code: https://dotenvx.com/precommit
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒöä add secrets lifecycle management: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-02.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒöæ add access controls to secrets: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-00.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒùé∩╕Å backup and recover secrets: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒöä add secrets lifecycle management: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-02.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Failed to start server: Error: Cannot find module './src/config/socket'
+Require stack:
+- C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\server.js
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+    at Function._load (node:internal/modules/cjs/loader:1192:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12)
+    at require (node:internal/modules/helpers:147:16)
+    at startServer (C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\server.js:30:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\server.js'
+  ]
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ΓÜÖ∩╕Å  enable debug logging with { debug: true }
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒæÑ sync secrets across teammates & machines: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒùé∩╕Å backup and recover secrets: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-00.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ΓÜÖ∩╕Å  load multiple .env files with { path: ['.env.local', '.env'] }
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ΓÜÖ∩╕Å  enable debug logging with { debug: true }
+MongoDB Connected: ac-cmlda0l-shard-00-00.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ≡ƒôí add observability to secrets: https://dotenvx.com/ops
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server running in development mode on port 5000
+API URL: http://localhost:5000
+New socket connection: 3aFAF1mkzX5aLrHlAAAC
+teacher john cena joined room 678129e7949397f90f38b8ca
+User disconnected: 3aFAF1mkzX5aLrHlAAAC
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting child process[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.2.3] injecting env (16) from .env -- tip: Γ£à audit secrets and track compliance: https://dotenvx.com/ops
