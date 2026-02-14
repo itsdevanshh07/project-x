@@ -59,7 +59,7 @@ const DoubtMeetingModal = ({ isOpen, onClose, doubtId, onComplete }) => {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    className="relative w-full max-w-lg glass-card p-8"
+                    className="relative w-full max-w-lg glass-card p-6 md:p-8 max-h-[90vh] overflow-y-auto"
                 >
                     <button onClick={onClose} className="absolute top-6 right-6 text-surface-light/40 hover:text-white">
                         <X size={20} />

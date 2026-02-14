@@ -92,11 +92,11 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-                    <p className="text-[10px] font-medium text-surface-light/20 uppercase tracking-[0.3em]">
+                <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+                    <p className="text-[10px] font-medium text-surface-light/20 uppercase tracking-[0.3em] max-w-xs md:max-w-none">
                         © {new Date().getFullYear()} Divya Gyan Dhara. Redefining Academic Excellence.
                     </p>
-                    <div className="flex items-center space-x-10 text-[10px] font-bold uppercase tracking-[0.2em] text-surface-light/20">
+                    <div className="flex items-center space-x-6 md:space-x-10 text-[10px] font-bold uppercase tracking-[0.2em] text-surface-light/20">
                         <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
                         <Link href="/terms" className="hover:text-white transition-colors">Academic Terms</Link>
                     </div>

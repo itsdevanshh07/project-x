@@ -97,38 +97,38 @@ export default function LoginPage() {
                             ))}
                         </div>
 
-                        <div className="glass-card p-10 relative overflow-hidden">
-                            <form onSubmit={onSubmit} className="space-y-8">
-                                <div className="space-y-4">
+                        <div className="glass-card p-6 md:p-10 relative overflow-hidden">
+                            <form onSubmit={onSubmit} className="space-y-6 md:space-y-8">
+                                <div className="space-y-3 md:space-y-4">
                                     <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-1">Email Identifier</label>
                                     <div className="relative group">
-                                        <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${formData.email ? 'text-secondary-action' : 'text-white/10'}`} />
+                                        <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 md:w-5 h-4 md:h-5 transition-colors duration-300 ${formData.email ? 'text-secondary-action' : 'text-white/10'}`} />
                                         <input
                                             type="email"
                                             name="email"
                                             value={email}
                                             onChange={onChange}
                                             placeholder="your@email.com"
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all font-medium placeholder:text-white/5"
+                                            className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 md:pl-12 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all font-medium placeholder:text-white/5 text-sm md:text-base"
                                             required
                                         />
                                     </div>
                                 </div>
 
-                                <div className="space-y-4">
+                                <div className="space-y-3 md:space-y-4">
                                     <div className="flex justify-between items-center px-1">
                                         <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20">Security Key</label>
                                         <Link href="#" className="text-[10px] font-bold text-secondary-action hover:text-accent-highlight tracking-widest transition-colors">FORGOT?</Link>
                                     </div>
                                     <div className="relative group">
-                                        <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${formData.password ? 'text-secondary-action' : 'text-white/10'}`} />
+                                        <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 md:w-5 h-4 md:h-5 transition-colors duration-300 ${formData.password ? 'text-secondary-action' : 'text-white/10'}`} />
                                         <input
                                             type="password"
                                             name="password"
                                             value={password}
                                             onChange={onChange}
                                             placeholder="••••••••"
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all font-medium placeholder:text-white/5"
+                                            className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 md:pl-12 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all font-medium placeholder:text-white/5 text-sm md:text-base"
                                             required
                                         />
                                     </div>
@@ -137,7 +137,7 @@ export default function LoginPage() {
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="w-full relative group overflow-hidden bg-secondary-action text-white py-5 rounded-xl font-bold uppercase tracking-[0.2em] text-xs transition-all hover:shadow-[0_0_30px_rgba(99,102,241,0.3)] active:scale-95 disabled:opacity-50"
+                                    className="w-full relative group overflow-hidden bg-secondary-action text-white py-4 md:py-5 rounded-xl font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs transition-all hover:shadow-[0_0_30px_rgba(99,102,241,0.3)] active:scale-95 disabled:opacity-50"
                                 >
                                     <div className="relative z-10 flex items-center justify-center gap-3">
                                         {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
@@ -151,10 +151,10 @@ export default function LoginPage() {
                                 </button>
                             </form>
 
-                            <div className="mt-10">
-                                <div className="relative flex items-center justify-center mb-10">
+                            <div className="mt-8 md:mt-10">
+                                <div className="relative flex items-center justify-center mb-8 md:mb-10">
                                     <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/5"></div></div>
-                                    <span className="relative bg-[#161d2f] px-4 text-[10px] font-bold text-surface-light/10 uppercase tracking-[0.3em]">Institutional Single Sign-On</span>
+                                    <span className="relative bg-[#161d2f] px-3 md:px-4 text-[10px] font-bold text-surface-light/10 uppercase tracking-[0.3em]">Single Sign-On</span>
                                 </div>
                                 <SocialAuthButtons requiredRole={selectedRole} />
                             </div>

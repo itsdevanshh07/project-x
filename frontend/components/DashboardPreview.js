@@ -28,11 +28,12 @@ const DashboardPreview = () => {
                 </div>
 
                 {/* Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 min-h-[600px]">
+                {/* Bento Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Progress Tracker (Large) */}
                     <motion.div
                         whileHover={{ y: -5 }}
-                        className="md:col-span-2 lg:col-span-2 glass-card p-8 flex flex-col justify-between group"
+                        className="md:col-span-2 lg:col-span-2 glass-card p-6 md:p-8 flex flex-col justify-between group"
                     >
                         <div className="flex justify-between items-start">
                             <div className="p-3 rounded-2xl bg-secondary-action/20 border border-secondary-action/30">
@@ -43,7 +44,7 @@ const DashboardPreview = () => {
                                 <div className="text-[10px] text-surface-light/40 uppercase font-bold tracking-widest">Global Rank: Top 2%</div>
                             </div>
                         </div>
-                        <div className="space-y-6">
+                        <div className="space-y-6 mt-8 md:mt-0">
                             <h3 className="text-2xl font-bold text-white">Learning Progress</h3>
                             <div className="relative h-2 bg-white/5 rounded-full overflow-hidden">
                                 <motion.div
@@ -52,7 +53,7 @@ const DashboardPreview = () => {
                                     className="absolute inset-y-0 left-0 bg-secondary-action"
                                 />
                             </div>
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="p-4 rounded-xl bg-white/5 border border-white/5">
                                     <div className="text-xl font-bold text-white">12</div>
                                     <div className="text-xs text-surface-light/40">Modules Done</div>
@@ -68,7 +69,7 @@ const DashboardPreview = () => {
                     {/* Upcoming Live Class */}
                     <motion.div
                         whileHover={{ y: -5 }}
-                        className="md:col-span-1 lg:col-span-1 glass-card p-8 flex flex-col justify-between relative overflow-hidden"
+                        className="col-span-1 glass-card p-6 md:p-8 flex flex-col justify-between relative overflow-hidden"
                     >
                         <div className="absolute top-0 right-0 p-4">
                             <motion.div
@@ -83,12 +84,12 @@ const DashboardPreview = () => {
                             <div className="p-3 w-fit rounded-2xl bg-accent-highlight/20 border border-accent-highlight/30">
                                 <Calendar className="text-accent-highlight w-6 h-6" />
                             </div>
-                            <div>
+                            <div className="py-4 md:py-0">
                                 <h3 className="text-xl font-bold text-white">Quantum Mechanics</h3>
                                 <p className="text-sm text-surface-light/40 mt-1">Starting in 15 mins</p>
                             </div>
                         </div>
-                        <button className="w-full py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-bold transition-all flex items-center justify-center gap-2">
+                        <button className="w-full py-4 mt-6 md:mt-0 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-bold transition-all flex items-center justify-center gap-2">
                             <Play className="w-4 h-4 fill-white" />
                             Join Session
                         </button>
@@ -97,7 +98,7 @@ const DashboardPreview = () => {
                     {/* AI Recommendations */}
                     <motion.div
                         whileHover={{ y: -5 }}
-                        className="md:col-span-1 lg:col-span-1 glass-card p-8 flex flex-col gap-6"
+                        className="col-span-1 glass-card p-6 md:p-8 flex flex-col gap-6"
                     >
                         <div className="p-3 w-fit rounded-2xl bg-purple-500/20 border border-purple-500/30">
                             <Brain className="text-purple-400 w-6 h-6" />
@@ -106,7 +107,7 @@ const DashboardPreview = () => {
                             <h3 className="text-xl font-bold text-white">AI Insights</h3>
                             <div className="space-y-3">
                                 {[1, 2].map((i) => (
-                                    <div key={i} className="p-3 rounded-xl bg-white/5 border border-white/5 text-xs text-surface-light/60">
+                                    <div key={i} className="p-3 rounded-xl bg-white/5 border border-white/5 text-xs text-surface-light/60 italic">
                                         Focus more on <span className="text-white font-bold">Vector Calculus</span> based on your last test.
                                     </div>
                                 ))}
@@ -117,18 +118,18 @@ const DashboardPreview = () => {
                     {/* Achievements */}
                     <motion.div
                         whileHover={{ y: -5 }}
-                        className="md:col-span-3 lg:col-span-4 glass-card p-8 flex items-center justify-between group"
+                        className="col-span-1 md:col-span-2 lg:col-span-4 glass-card p-6 md:p-8 flex flex-col md:flex-row items-center justify-between group gap-6"
                     >
-                        <div className="flex items-center gap-6">
+                        <div className="flex flex-col md:flex-row items-center text-center md:text-left gap-6">
                             <div className="p-4 rounded-2xl bg-accent-highlight/20 border border-accent-highlight/30 group-hover:rotate-12 transition-transform">
                                 <Trophy className="text-accent-highlight w-8 h-8" />
                             </div>
                             <div>
-                                <h3 className="text-2xl font-bold text-white">Academic Milestone Reached</h3>
+                                <h3 className="text-2xl font-display font-bold text-white">Academic Milestone</h3>
                                 <p className="text-surface-light/40 text-sm">You've maintained a 7-day streak with 95%+ accuracy!</p>
                             </div>
                         </div>
-                        <button className="hidden md:flex items-center gap-2 text-accent-highlight font-bold uppercase tracking-widest text-xs hover:gap-4 transition-all">
+                        <button className="flex items-center gap-2 text-accent-highlight font-bold uppercase tracking-widest text-[10px] hover:gap-4 transition-all">
                             View All <ArrowRight className="w-4 h-4" />
                         </button>
                     </motion.div>

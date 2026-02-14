@@ -119,7 +119,7 @@ const UploadVideoModal = ({ isOpen, onClose, courses, onUploadComplete, initialC
                     initial={{ opacity: 0, scale: 0.95, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                    className="relative w-full max-w-2xl glass-card p-8 overflow-hidden"
+                    className="relative w-full max-w-2xl glass-card p-6 md:p-8 overflow-y-auto max-h-[90vh]"
                 >
                     <button
                         onClick={onClose}

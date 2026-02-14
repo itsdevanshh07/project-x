@@ -144,46 +144,46 @@ export default function RegisterPage() {
                             ))}
                         </div>
 
-                        <div className="glass-card p-10">
-                            <form onSubmit={onSubmit} className="space-y-6">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-3">
+                        <div className="glass-card p-6 md:p-10">
+                            <form onSubmit={onSubmit} className="space-y-4 md:space-y-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                                    <div className="space-y-2 md:space-y-3">
                                         <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Full Identity</label>
                                         <div className="relative group">
                                             <User className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fullName ? 'text-secondary-action' : 'text-white/10'}`} />
-                                            <input type="text" name="fullName" value={fullName} onChange={onChange} placeholder="John Doe" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
+                                            <input type="text" name="fullName" value={fullName} onChange={onChange} placeholder="John Doe" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
                                         </div>
                                     </div>
-                                    <div className="space-y-3">
+                                    <div className="space-y-2 md:space-y-3">
                                         <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Secure Link (Phone)</label>
                                         <div className="relative group">
                                             <Phone className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${phone ? 'text-secondary-action' : 'text-white/10'}`} />
-                                            <input type="tel" name="phone" value={phone} onChange={onChange} placeholder="9876543210" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
+                                            <input type="tel" name="phone" value={phone} onChange={onChange} placeholder="9876543210" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="space-y-3">
+                                <div className="space-y-2 md:space-y-3">
                                     <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Electronic Mail Address</label>
                                     <div className="relative group">
                                         <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${email ? 'text-secondary-action' : 'text-white/10'}`} />
-                                        <input type="email" name="email" value={email} onChange={onChange} placeholder="name@domain.com" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
+                                        <input type="email" name="email" value={email} onChange={onChange} placeholder="name@domain.com" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-3">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                                    <div className="space-y-2 md:space-y-3">
                                         <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Access Key</label>
                                         <div className="relative group">
                                             <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${password ? 'text-secondary-action' : 'text-white/10'}`} />
-                                            <input type="password" name="password" value={password} onChange={onChange} placeholder="••••••••" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
+                                            <input type="password" name="password" value={password} onChange={onChange} placeholder="••••••••" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
                                         </div>
                                     </div>
-                                    <div className="space-y-3">
+                                    <div className="space-y-2 md:space-y-3">
                                         <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Confirm Key</label>
                                         <div className="relative group">
                                             <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${confirmPassword ? 'text-secondary-action' : 'text-white/10'}`} />
-                                            <input type="password" name="confirmPassword" value={confirmPassword} onChange={onChange} placeholder="••••••••" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
+                                            <input type="password" name="confirmPassword" value={confirmPassword} onChange={onChange} placeholder="••••••••" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
                                         </div>
                                     </div>
                                 </div>
@@ -192,12 +192,22 @@ export default function RegisterPage() {
                                     <button
                                         type="submit"
                                         disabled={isLoading}
-                                        className="w-full relative group overflow-hidden bg-secondary-action text-white py-5 rounded-xl font-bold uppercase tracking-[0.2em] text-xs transition-all hover:shadow-[0_0_30px_rgba(99,102,241,0.3)] active:scale-95 disabled:opacity-50"
+                                        className="w-full relative group overflow-hidden bg-secondary-action text-white py-4 md:py-5 rounded-xl font-bold uppercase tracking-[0.2em] text-[10px] md:text-sm transition-all hover:shadow-[0_0_30px_rgba(99,102,241,0.3)] active:scale-95 disabled:opacity-50"
                                     >
                                         <div className="relative z-10 flex items-center justify-center gap-3">
                                             {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
                                                 <>
-                                                    <span>{role === 'teacher' ? 'Apply for Verification' : 'Initialize Account'}</span>
+                                                    <span>{role === 'teacher' ? (
+                                                        <span className="hidden sm:inline">Apply for Verification</span>
+                                                    ) : (
+                                                        <span className="hidden sm:inline">Initialize Account</span>
+                                                    )}
+                                                        {role === 'teacher' ? (
+                                                            <span className="sm:hidden">Apply Now</span>
+                                                        ) : (
+                                                            <span className="sm:hidden">Join Now</span>
+                                                        )}
+                                                    </span>
                                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                                 </>
                                             )}
@@ -207,7 +217,7 @@ export default function RegisterPage() {
 
                                     <div className="relative flex items-center justify-center">
                                         <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/5"></div></div>
-                                        <span className="relative bg-[#161d2f] px-4 text-[10px] font-bold text-surface-light/10 uppercase tracking-[0.3em]">Institutional Single Sign-On</span>
+                                        <span className="relative bg-[#161d2f] px-3 md:px-4 text-[10px] font-bold text-surface-light/10 uppercase tracking-[0.3em]">Single Sign-On</span>
                                     </div>
                                     <SocialAuthButtons requiredRole={role} />
                                 </div>

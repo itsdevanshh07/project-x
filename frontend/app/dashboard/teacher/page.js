@@ -252,72 +252,106 @@ export default function TeacherDashboard() {
         <div className="min-h-screen bg-primary-bg overflow-hidden flex flex-col">
             <Navbar />
 
-            <div className="flex flex-col lg:flex-row pt-28 h-screen overflow-hidden">
-                {/* Fixed Premium Sidebar */}
-                <motion.div
-                    initial={{ x: -100, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    className="w-full lg:w-80 bg-primary-bg/50 backdrop-blur-2xl border-r border-white/5 flex flex-col p-8 overflow-y-auto h-[40vh] lg:h-full z-20"
-                >
-                    <div className="mb-12">
-                        <div className="flex items-center gap-4 group">
-                            <div className="relative">
-                                <div className="w-14 h-14 bg-secondary-action/20 rounded-2xl flex items-center justify-center text-white border border-secondary-action/30 group-hover:bg-secondary-action/30 transition-all duration-500 shadow-2xl shadow-secondary-action/20 overflow-hidden text-xl font-display font-black">
-                                    {user?.avatar && user?.avatar !== 'no-photo.jpg' ? (
-                                        <img src={user?.avatar} className="w-full h-full object-cover" />
-                                    ) : user?.fullName?.charAt(0) || 'T'}
-                                </div>
-                                <div className="absolute -bottom-1 -right-1 bg-accent-highlight w-4 h-4 rounded-full border-2 border-primary-bg flex items-center justify-center">
-                                    <Sparkles className="w-2 h-2 text-primary-bg" />
-                                </div>
-                            </div>
-                            <div className="space-y-1">
-                                <h3 className="font-display font-bold text-white tracking-tight">{user?.fullName}</h3>
-                                <div className="flex items-center gap-1.5">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-secondary-action animate-pulse" />
-                                    <p className="text-[10px] font-black text-secondary-action uppercase tracking-[0.2em]">Active Teacher</p>
-                                </div>
-                            </div>
+            <div className="flex flex-col lg:flex-row pt-28 h-screen overflow-hidden relative">
+                {/* Mobile Menu Trigger & Header */}
+                <div className="lg:hidden flex items-center justify-between px-6 py-4 border-b border-white/5 bg-primary-bg/50 backdrop-blur-xl z-30">
+                    <button
+                        onClick={() => setIsSidebarOpen(true)}
+                        className="p-3 bg-white/5 border border-white/10 rounded-xl text-white"
+                    >
+                        <Menu className="w-5 h-5" />
+                    </button>
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-secondary-action/20 rounded-xl flex items-center justify-center text-white border border-secondary-action/30 text-sm font-bold">
+                            {user?.fullName?.charAt(0)}
                         </div>
                     </div>
+                </div>
 
-                    <nav className="space-y-2 flex-grow">
-                        {navItems.map((item) => (
-                            <button
-                                key={item.id}
-                                onClick={() => setActiveTab(item.id)}
-                                className={`w-full flex items-center space-x-4 px-5 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all duration-500 relative group
-                                    ${activeTab === item.id
-                                        ? 'text-white bg-white/5 border border-white/10 shadow-2xl'
-                                        : 'text-surface-light/30 hover:text-white hover:bg-white/5'
-                                    }`}
+                {/* Sidebar - Desktop (Fixed) & Mobile (Drawer) */}
+                <AnimatePresence>
+                    {(isSidebarOpen || (mounted && typeof window !== 'undefined' && window.innerWidth >= 1024)) && (
+                        <>
+                            {/* Backdrop for mobile */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setIsSidebarOpen(false)}
+                                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[40] lg:hidden"
+                            />
+                            <motion.div
+                                initial={{ x: -300, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                exit={{ x: -300, opacity: 0 }}
+                                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                                className={`fixed lg:relative left-0 top-0 bottom-0 w-[280px] lg:w-80 bg-primary-bg lg:bg-primary-bg/50 backdrop-blur-2xl border-r border-white/5 flex flex-col p-8 overflow-y-auto h-full z-[50] lg:z-20 ${!isSidebarOpen ? 'hidden lg:flex' : 'flex'}`}
                             >
-                                <item.icon className={`w-4 h-4 transition-colors duration-500 ${activeTab === item.id ? 'text-secondary-action' : 'group-hover:text-secondary-action'}`} />
-                                <span className="relative z-10">{item.label}</span>
-                                {activeTab === item.id && (
-                                    <motion.div
-                                        layoutId="sidebar-active"
-                                        className="absolute left-2 w-1 h-6 bg-secondary-action rounded-full"
-                                    />
-                                )}
-                            </button>
-                        ))}
-                    </nav>
+                                <div className="mb-12">
+                                    <div className="flex items-center gap-4 group">
+                                        <div className="relative">
+                                            <div className="w-14 h-14 bg-secondary-action/20 rounded-2xl flex items-center justify-center text-white border border-secondary-action/30 group-hover:bg-secondary-action/30 transition-all duration-500 shadow-2xl shadow-secondary-action/20 overflow-hidden text-xl font-display font-black">
+                                                {user?.avatar && user?.avatar !== 'no-photo.jpg' ? (
+                                                    <img src={user?.avatar} className="w-full h-full object-cover" />
+                                                ) : user?.fullName?.charAt(0) || 'T'}
+                                            </div>
+                                            <div className="absolute -bottom-1 -right-1 bg-accent-highlight w-4 h-4 rounded-full border-2 border-primary-bg flex items-center justify-center">
+                                                <Sparkles className="w-2 h-2 text-primary-bg" />
+                                            </div>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <h3 className="font-display font-bold text-white tracking-tight">{user?.fullName}</h3>
+                                            <div className="flex items-center gap-1.5">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-secondary-action animate-pulse" />
+                                                <p className="text-[10px] font-black text-secondary-action uppercase tracking-[0.2em]">Active Teacher</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <button
-                        onClick={() => {
-                            dispatch(logout());
-                            router.push('/');
-                        }}
-                        className="flex items-center space-x-4 px-5 py-4 text-red-500/50 hover:text-red-500 font-bold text-xs uppercase tracking-widest hover:bg-red-500/5 rounded-2xl transition-all mt-auto group"
-                    >
-                        <LogOut className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                        <span>Sign Out</span>
-                    </button>
-                </motion.div>
+                                <nav className="space-y-2 flex-grow">
+                                    {navItems.map((item) => (
+                                        <button
+                                            key={item.id}
+                                            onClick={() => {
+                                                setActiveTab(item.id);
+                                                setIsSidebarOpen(false);
+                                            }}
+                                            className={`w-full flex items-center space-x-4 px-5 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all duration-500 relative group
+                                                ${activeTab === item.id
+                                                    ? 'text-white bg-white/5 border border-white/10 shadow-2xl'
+                                                    : 'text-surface-light/30 hover:text-white hover:bg-white/5'
+                                                }`}
+                                        >
+                                            <item.icon className={`w-4 h-4 transition-colors duration-500 ${activeTab === item.id ? 'text-secondary-action' : 'group-hover:text-secondary-action'}`} />
+                                            <span className="relative z-10">{item.label}</span>
+                                            {activeTab === item.id && (
+                                                <motion.div
+                                                    layoutId="sidebar-active"
+                                                    className="absolute left-2 w-1 h-6 bg-secondary-action rounded-full"
+                                                />
+                                            )}
+                                        </button>
+                                    ))}
+                                </nav>
+
+                                <button
+                                    onClick={() => {
+                                        dispatch(logout());
+                                        router.push('/');
+                                    }}
+                                    className="flex items-center space-x-4 px-5 py-4 text-red-500/50 hover:text-red-500 font-bold text-xs uppercase tracking-widest hover:bg-red-500/5 rounded-2xl transition-all mt-auto group"
+                                >
+                                    <LogOut className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                                    <span>Sign Out</span>
+                                </button>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
 
                 {/* Dynamic Main Content */}
-                <div className="flex-grow overflow-y-auto p-6 lg:p-12 h-[60vh] lg:h-full custom-scrollbar relative">
+                <div className="flex-1 overflow-y-auto p-6 md:p-8 lg:p-12 h-full custom-scrollbar relative">
                     <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-action/5 blur-[120px] rounded-full pointer-events-none" />
 
                     <AnimatePresence mode="wait">
@@ -334,7 +368,7 @@ export default function TeacherDashboard() {
                                 className="space-y-12 max-w-7xl mx-auto"
                             >
                                 {/* Stat Grid */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                                     {[
                                         { label: 'Total Students', value: stats.totalStudents, icon: Users, color: 'text-blue-400', bg: 'bg-blue-400/10' },
                                         { label: 'Total Courses', value: stats.totalCourses, icon: BookOpen, color: 'text-purple-400', bg: 'bg-purple-400/10' },
@@ -346,111 +380,112 @@ export default function TeacherDashboard() {
                                             initial={{ opacity: 0, scale: 0.9 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: i * 0.1 }}
-                                            className="glass-card p-8 group hover:border-white/20 transition-all duration-500"
+                                            className="glass-card p-6 md:p-8 group hover:border-white/20 transition-all duration-500"
                                         >
-                                            <div className="flex items-center justify-between mb-8">
-                                                <div className={`p-3 rounded-xl ${stat.bg} ${stat.color} group-hover:rotate-12 transition-transform duration-500`}>
-                                                    <stat.icon className="w-6 h-6" />
+                                            <div className="flex items-center justify-between mb-6 md:mb-8">
+                                                <div className={`p-2.5 md:p-3 rounded-xl ${stat.bg} ${stat.color} group-hover:rotate-12 transition-transform duration-500`}>
+                                                    <stat.icon className="w-5 md:w-6 h-5 md:h-6" />
                                                 </div>
-                                                <span className="text-[10px] font-black text-surface-light/20 uppercase tracking-[0.2em]">Verified</span>
+                                                <span className="text-[9px] md:text-[10px] font-black text-surface-light/20 uppercase tracking-[0.2em]">Verified</span>
                                             </div>
-                                            <p className="text-surface-light/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-2">{stat.label}</p>
-                                            <h4 className="text-3xl font-display font-black text-white">{stat.value}</h4>
+                                            <p className="text-surface-light/40 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-1 md:mb-2">{stat.label}</p>
+                                            <h4 className="text-2xl md:text-3xl font-display font-black text-white">{stat.value}</h4>
                                         </motion.div>
                                     ))}
                                 </div>
 
-                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                                    <div className="lg:col-span-8 glass-card p-10 border border-white/5 relative overflow-hidden group">
-                                        <div className="flex items-center justify-between mb-12">
+                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+                                    <div className="lg:col-span-8 glass-card p-6 md:p-10 border border-white/5 relative overflow-hidden group">
+                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8 md:mb-12">
                                             <div className="space-y-1">
-                                                <h2 className="text-2xl font-display font-black text-white">Course Progress</h2>
-                                                <p className="text-xs text-surface-light/40 font-medium tracking-tight">Real-time status of current course delivery.</p>
+                                                <h2 className="text-xl md:text-2xl font-display font-black text-white">Course Progress</h2>
+                                                <p className="text-[10px] md:text-xs text-surface-light/40 font-medium tracking-tight">Real-time status of current course delivery.</p>
                                             </div>
                                             <button
                                                 onClick={() => setActiveTab('courses')}
-                                                className="px-5 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-bold text-surface-light/60 uppercase tracking-widest hover:text-white hover:bg-white/10 transition-all"
+                                                className="px-4 py-2 w-fit rounded-xl bg-white/5 border border-white/10 text-[9px] md:text-[10px] font-bold text-surface-light/60 uppercase tracking-widest hover:text-white hover:bg-white/10 transition-all"
                                             >
-                                                Manage Courses
+                                                Manage All
                                             </button>
                                         </div>
 
-                                        <div className="space-y-6">
+                                        <div className="space-y-4 md:space-y-6">
                                             {courses.length > 0 ? courses.slice(0, 3).map((course, idx) => (
-                                                <div key={course._id} className="flex items-center justify-between p-5 hover:bg-white/5 rounded-2xl transition-all group/item border border-transparent hover:border-white/5">
-                                                    <div className="flex items-center space-x-6">
-                                                        <div className="relative">
-                                                            <img src={course.thumbnail || '/placeholder-course.jpg'} className="w-24 h-16 object-cover rounded-xl shadow-2xl bg-white/5" />
+                                                <div key={course._id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 md:p-5 hover:bg-white/5 rounded-2xl transition-all group/item border border-transparent hover:border-white/5 gap-4">
+                                                    <div className="flex items-center space-x-4 md:space-x-6">
+                                                        <div className="relative shrink-0">
+                                                            <img src={course.thumbnail || '/placeholder-course.jpg'} className="w-20 md:w-24 h-14 md:h-16 object-cover rounded-xl shadow-2xl bg-white/5" />
                                                             <div className="absolute inset-0 bg-secondary-action/20 opacity-0 group-hover/item:opacity-100 transition-opacity rounded-xl" />
                                                         </div>
-                                                        <div>
-                                                            <h4 className="font-bold text-white mb-1 group-hover/item:text-secondary-action transition-colors">{course.title}</h4>
-                                                            <div className="flex items-center gap-4">
-                                                                <span className="text-[10px] font-bold text-surface-light/30 uppercase tracking-widest">{course.category}</span>
-                                                                <div className="flex items-center gap-1.5 text-[10px] font-bold text-secondary-action uppercase tracking-widest">
+                                                        <div className="min-w-0">
+                                                            <h4 className="font-bold text-white mb-1 group-hover/item:text-secondary-action transition-colors truncate">{course.title}</h4>
+                                                            <div className="flex items-center gap-3 md:gap-4">
+                                                                <span className="text-[9px] md:text-[10px] font-bold text-surface-light/30 uppercase tracking-widest truncate">{course.category}</span>
+                                                                <div className="flex items-center gap-1.5 text-[9px] md:text-[10px] font-bold text-secondary-action uppercase tracking-widest shrink-0">
                                                                     <Users className="w-3 h-3" />
-                                                                    {course.enrolledCount || 0} Students
+                                                                    {course.enrolledCount || 0}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <button
                                                         onClick={() => { setSelectedCourse(course); setActiveTab('courses'); }}
-                                                        className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-surface-light/30 hover:text-white hover:bg-secondary-action transition-all"
+                                                        className="w-full sm:w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-surface-light/30 hover:text-white hover:bg-secondary-action transition-all"
                                                     >
-                                                        <ChevronRight className="w-5 h-5" />
+                                                        <ChevronRight className="w-5 h-5 hidden sm:block" />
+                                                        <span className="sm:hidden text-[10px] font-black uppercase tracking-widest">Performance Insights</span>
                                                     </button>
                                                 </div>
                                             )) : (
-                                                <div className="py-20 text-center space-y-4">
-                                                    <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto">
-                                                        <CircleDashed className="w-8 h-8 text-surface-light/10 animate-spin-slow" />
+                                                <div className="py-16 md:py-20 text-center space-y-4">
+                                                    <div className="w-12 md:w-16 h-12 md:h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto">
+                                                        <CircleDashed className="w-6 md:w-8 h-6 md:h-8 text-surface-light/10 animate-spin-slow" />
                                                     </div>
-                                                    <p className="text-surface-light/30 font-bold uppercase tracking-widest text-xs">No active courses found.</p>
-                                                    <button onClick={() => setShowCourseModal(true)} className="px-6 py-3 bg-secondary-action text-white rounded-xl text-[10px] font-black uppercase tracking-widest">Create Course</button>
+                                                    <p className="text-surface-light/30 font-bold uppercase tracking-widest text-[10px] md:text-xs">No active courses found.</p>
+                                                    <button onClick={() => setShowCourseModal(true)} className="px-5 md:px-6 py-2.5 md:py-3 bg-secondary-action text-white rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-widest">Create Course</button>
                                                 </div>
                                             )}
                                         </div>
                                     </div>
 
                                     <div className="lg:col-span-4 relative">
-                                        <div className="sticky top-0 bg-secondary-action rounded-[2.5rem] p-10 text-white shadow-3xl shadow-secondary-action/20 overflow-hidden min-h-[450px] flex flex-col group">
+                                        <div className="sticky top-0 bg-secondary-action rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-10 text-white shadow-3xl shadow-secondary-action/20 overflow-hidden min-h-[400px] md:min-h-[450px] flex flex-col group">
                                             <div className="relative z-10 flex-grow">
-                                                <div className="flex items-center justify-between mb-12">
-                                                    <h2 className="text-2xl font-display font-black tracking-tight">Live Classes</h2>
+                                                <div className="flex items-center justify-between mb-8 md:mb-12">
+                                                    <h2 className="text-xl md:text-2xl font-display font-black tracking-tight">Live Classes</h2>
                                                     <div className="p-2 bg-white/20 backdrop-blur-md rounded-xl">
-                                                        <Video className="w-5 h-5" />
+                                                        <Video className="w-4 md:w-5 h-4 md:h-5" />
                                                     </div>
                                                 </div>
 
-                                                <div className="space-y-8">
+                                                <div className="space-y-6 md:space-y-8">
                                                     {liveClasses.length > 0 ? (
-                                                        <div className="p-8 bg-white/10 rounded-3xl border border-white/20 backdrop-blur-md hover:bg-white/15 transition-all">
-                                                            <div className="flex items-center gap-2 mb-4">
+                                                        <div className="p-6 md:p-8 bg-white/10 rounded-3xl border border-white/20 backdrop-blur-md hover:bg-white/15 transition-all">
+                                                            <div className="flex items-center gap-2 mb-3 md:mb-4">
                                                                 <span className="w-2 h-2 rounded-full bg-red-400 animate-ping" />
-                                                                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70">Next Live Class</p>
+                                                                <p className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-white/70">Next Event</p>
                                                             </div>
-                                                            <h4 className="text-xl font-bold mb-8 leading-tight">{liveClasses[0].title}</h4>
+                                                            <h4 className="text-lg md:text-xl font-bold mb-6 md:mb-8 leading-tight">{liveClasses[0].title}</h4>
                                                             <button
                                                                 onClick={() => setShowLiveModal(true)}
-                                                                className="w-full py-5 bg-white text-secondary-action rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-white/10 flex items-center justify-center gap-3"
+                                                                className="w-full py-4 md:py-5 bg-white text-secondary-action rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-[0.2em] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-white/10 flex items-center justify-center gap-3"
                                                             >
-                                                                <Play className="w-4 h-4 fill-current" />
-                                                                Start / Manage Live
+                                                                <Play className="w-3.5 h-3.5 fill-current" />
+                                                                Start Session
                                                             </button>
                                                         </div>
                                                     ) : (
-                                                        <div className="flex flex-col items-center justify-center py-12 text-center space-y-6">
-                                                            <p className="text-white/60 text-sm font-medium">No live classes scheduled.</p>
-                                                            <button onClick={() => setShowLiveModal(true)} className="bg-white/20 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-white/30 transition-all border border-white/10">Start Live Class</button>
+                                                        <div className="flex flex-col items-center justify-center py-8 md:py-12 text-center space-y-4 md:space-y-6">
+                                                            <p className="text-white/60 text-xs md:text-sm font-medium">No live classes scheduled.</p>
+                                                            <button onClick={() => setShowLiveModal(true)} className="bg-white/20 px-5 md:px-6 py-2.5 md:py-3 rounded-2xl text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-white/30 transition-all border border-white/10">Start Live Class</button>
                                                         </div>
                                                     )}
                                                 </div>
                                             </div>
                                             <div className="mt-8 pt-8 border-t border-white/10 text-white/60">
-                                                <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.2em]">
-                                                    <span>Stream Quality</span>
-                                                    <span className="text-white">ULTRA-HD</span>
+                                                <div className="flex items-center justify-between text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em]">
+                                                    <span>Broadcasting Status</span>
+                                                    <span className="text-white">OPTIMIZED</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -460,83 +495,83 @@ export default function TeacherDashboard() {
                         )}
 
                         {activeTab === 'students' && (
-                            <motion.div key="students" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-6xl mx-auto space-y-12">
-                                <div className="flex items-center justify-between">
-                                    <h2 className="text-4xl font-display font-black text-white">Enrolled <span className="text-secondary-action">Students</span></h2>
-                                    <div className="flex gap-4">
-                                        <div className="px-5 py-2 bg-white/5 border border-white/5 rounded-xl text-[10px] font-black uppercase tracking-widest text-surface-light/40">
-                                            {enrolledStudents.length} Active Enrollments
-                                        </div>
+                            <motion.div key="students" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-6xl mx-auto space-y-8 md:space-y-12">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                                    <h2 className="text-3xl md:text-4xl font-display font-black text-white">Enrolled <span className="text-secondary-action">Students</span></h2>
+                                    <div className="px-5 py-2 bg-white/5 border border-white/5 rounded-xl text-[10px] font-black uppercase tracking-widest text-surface-light/40 w-fit">
+                                        {enrolledStudents.length} Active Enrollments
                                     </div>
                                 </div>
 
                                 <div className="glass-card overflow-hidden border border-white/5">
-                                    <table className="w-full text-left border-collapse">
-                                        <thead>
-                                            <tr className="border-b border-white/5 bg-white/5">
-                                                <th className="p-6 text-[10px] font-black text-surface-light/20 uppercase tracking-widest">Student</th>
-                                                <th className="p-6 text-[10px] font-black text-surface-light/20 uppercase tracking-widest">Course Title</th>
-                                                <th className="p-6 text-[10px] font-black text-surface-light/20 uppercase tracking-widest">Enrollment Date</th>
-                                                <th className="p-6 text-[10px] font-black text-surface-light/20 uppercase tracking-widest">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {enrolledStudents.length > 0 ? enrolledStudents.map((enrollment, idx) => (
-                                                <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors group">
-                                                    <td className="p-6">
-                                                        <div className="flex items-center gap-4">
-                                                            <div className="w-10 h-10 rounded-xl bg-secondary-action/10 flex items-center justify-center text-secondary-action font-black">
-                                                                {enrollment.student?.fullName.charAt(0)}
-                                                            </div>
-                                                            <div>
-                                                                <p className="font-bold text-white group-hover:text-secondary-action transition-colors">{enrollment.student?.fullName}</p>
-                                                                <p className="text-[10px] text-surface-light/20 font-black tracking-widest">{enrollment.student?.email}</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td className="p-6">
-                                                        <span className="text-xs font-bold text-surface-light/60">{enrollment.course?.title}</span>
-                                                    </td>
-                                                    <td className="p-6">
-                                                        <span className="text-xs font-bold text-surface-light/30">{new Date(enrollment.enrolledAt).toLocaleDateString()}</span>
-                                                    </td>
-                                                    <td className="p-6">
-                                                        <div className="flex gap-2">
-                                                            <button className="p-2.5 bg-white/5 rounded-xl text-surface-light/30 hover:text-white transition-all">
-                                                                <MessageSquare className="w-4 h-4" />
-                                                            </button>
-                                                            <button className="p-2.5 bg-white/5 rounded-xl text-red-500/30 hover:text-red-500 transition-all">
-                                                                <Lock className="w-4 h-4" />
-                                                            </button>
-                                                        </div>
-                                                    </td>
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left border-collapse min-w-[700px]">
+                                            <thead>
+                                                <tr className="border-b border-white/5 bg-white/5">
+                                                    <th className="p-6 text-[10px] font-black text-surface-light/20 uppercase tracking-widest">Student</th>
+                                                    <th className="p-6 text-[10px] font-black text-surface-light/20 uppercase tracking-widest">Course Title</th>
+                                                    <th className="p-6 text-[10px] font-black text-surface-light/20 uppercase tracking-widest">Enrollment Date</th>
+                                                    <th className="p-6 text-[10px] font-black text-surface-light/20 uppercase tracking-widest">Actions</th>
                                                 </tr>
-                                            )) : (
-                                                <tr>
-                                                    <td colSpan="4" className="py-20 text-center">
-                                                        <Users className="w-12 h-12 text-surface-light/10 mx-auto mb-4" />
-                                                        <p className="text-surface-light/20 font-black uppercase tracking-widest">No enrolled students found.</p>
-                                                    </td>
-                                                </tr>
-                                            )}
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                {enrolledStudents.length > 0 ? enrolledStudents.map((enrollment, idx) => (
+                                                    <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                                                        <td className="p-6">
+                                                            <div className="flex items-center gap-4">
+                                                                <div className="w-10 h-10 rounded-xl bg-secondary-action/10 flex items-center justify-center text-secondary-action font-black">
+                                                                    {enrollment.student?.fullName.charAt(0)}
+                                                                </div>
+                                                                <div>
+                                                                    <p className="font-bold text-white group-hover:text-secondary-action transition-colors">{enrollment.student?.fullName}</p>
+                                                                    <p className="text-[10px] text-surface-light/20 font-black tracking-widest">{enrollment.student?.email}</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td className="p-6">
+                                                            <span className="text-xs font-bold text-surface-light/60">{enrollment.course?.title}</span>
+                                                        </td>
+                                                        <td className="p-6">
+                                                            <span className="text-xs font-bold text-surface-light/30">{new Date(enrollment.enrolledAt).toLocaleDateString()}</span>
+                                                        </td>
+                                                        <td className="p-6">
+                                                            <div className="flex gap-2">
+                                                                <button className="p-2.5 bg-white/5 rounded-xl text-surface-light/30 hover:text-white transition-all">
+                                                                    <MessageSquare className="w-4 h-4" />
+                                                                </button>
+                                                                <button className="p-2.5 bg-white/5 rounded-xl text-red-500/30 hover:text-red-500 transition-all">
+                                                                    <Lock className="w-4 h-4" />
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )) : (
+                                                    <tr>
+                                                        <td colSpan="4" className="py-20 text-center">
+                                                            <Users className="w-12 h-12 text-surface-light/10 mx-auto mb-4" />
+                                                            <p className="text-surface-light/20 font-black uppercase tracking-widest">No enrolled students found.</p>
+                                                        </td>
+                                                    </tr>
+                                                )}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </motion.div>
                         )}
 
                         {activeTab === 'doubts' && (
-                            <motion.div key="doubts" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-5xl mx-auto space-y-12">
-                                <div className="flex items-center justify-between">
-                                    <h2 className="text-4xl font-display font-black text-white">Student <span className="text-secondary-action">Doubts</span></h2>
-                                    <div className="px-5 py-2 bg-white/5 border border-white/5 rounded-xl text-[10px] font-black uppercase tracking-widest text-surface-light/40">
+                            <motion.div key="doubts" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-5xl mx-auto space-y-8 md:space-y-12">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                                    <h2 className="text-3xl md:text-4xl font-display font-black text-white">Student <span className="text-secondary-action">Doubts</span></h2>
+                                    <div className="px-5 py-2 bg-white/5 border border-white/5 rounded-xl text-[10px] font-black uppercase tracking-widest text-surface-light/40 w-fit">
                                         {doubts.length} Records
                                     </div>
                                 </div>
                                 <div className="grid gap-6">
                                     {doubts.length > 0 ? doubts.map(doubt => (
-                                        <div key={doubt._id} className="glass-card p-8 flex items-center justify-between group">
-                                            <div className="space-y-4">
+                                        <div key={doubt._id} className="glass-card p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between group gap-6 md:gap-8">
+                                            <div className="space-y-4 flex-1">
                                                 <div className="flex items-center gap-4">
                                                     <div className="w-10 h-10 rounded-xl bg-secondary-action/10 border border-secondary-action/20 flex items-center justify-center text-secondary-action font-black">
                                                         {doubt.student?.fullName.charAt(0)}
@@ -548,10 +583,10 @@ export default function TeacherDashboard() {
                                                 </div>
                                                 <p className="text-white/60 font-medium italic">"{doubt.question}"</p>
                                             </div>
-                                            <div className="flex gap-3">
+                                            <div className="flex flex-col sm:flex-row gap-3">
                                                 <button
                                                     onClick={() => { setSelectedDoubt(doubt); setShowMeetingModal(true); }}
-                                                    className="px-6 py-3 rounded-xl bg-white/5 border border-white/5 text-[10px] font-black uppercase tracking-widest text-surface-light/40 hover:text-white transition-all flex items-center gap-2"
+                                                    className="px-6 py-3 rounded-xl bg-white/5 border border-white/5 text-[10px] font-black uppercase tracking-widest text-surface-light/40 hover:text-white transition-all flex items-center justify-center gap-2"
                                                 >
                                                     <Video size={12} /> Live Session
                                                 </button>
