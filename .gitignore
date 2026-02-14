@@ -30,6 +30,7 @@ frontend/.env.local
 *.json
 !package.json
 !package-lock.json
+!vercel.json
 !tsconfig.json
 !jsconfig.json
 !next.config.js
