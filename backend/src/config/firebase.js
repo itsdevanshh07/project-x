@@ -3,43 +3,52 @@ const admin = require('firebase-admin');
 const initializeFirebase = () => {
     if (!admin.apps.length) {
         try {
-            // Prefer environment variables for production-grade security
             if (process.env.FIREBASE_SERVICE_ACCOUNT) {
                 let serviceAccount;
-                const saValue = process.env.FIREBASE_SERVICE_ACCOUNT;
+                const saValue = process.env.FIREBASE_SERVICE_ACCOUNT.trim();
 
-                if (saValue.endsWith('.json')) {
-                    // It's a file path
+                // 1. Try to parse as direct JSON string first (Best for Cloud/Render)
+                if (saValue.startsWith('{')) {
+                    try {
+                        serviceAccount = JSON.parse(saValue);
+                    } catch (e) {
+                        console.error('Failed to parse FIREBASE_SERVICE_ACCOUNT as JSON string:', e.message);
+                    }
+                }
+
+                // 2. Fallback: If not JSON or parsing failed, try as a file path
+                if (!serviceAccount && saValue.endsWith('.json')) {
                     const fs = require('fs');
                     const path = require('path');
                     const saPath = path.isAbsolute(saValue)
                         ? saValue
                         : path.join(__dirname, '../../', saValue);
 
-                    serviceAccount = JSON.parse(fs.readFileSync(saPath, 'utf8'));
-                } else {
-                    // It's a raw JSON string
-                    let serviceAccountStr = saValue;
-                    if (serviceAccountStr.startsWith("'") && serviceAccountStr.endsWith("'")) {
-                        serviceAccountStr = serviceAccountStr.slice(1, -1);
+                    if (fs.existsSync(saPath)) {
+                        serviceAccount = JSON.parse(fs.readFileSync(saPath, 'utf8'));
+                    } else {
+                        console.error(`Firebase Service Account file not found at: ${saPath}`);
                     }
-                    serviceAccount = JSON.parse(serviceAccountStr);
                 }
 
-                // Fix for private_key newlines
-                if (serviceAccount.private_key) {
-                    serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
-                }
+                if (serviceAccount) {
+                    // Fix for private_key newlines if they are escaped as strings
+                    if (serviceAccount.private_key && typeof serviceAccount.private_key === 'string') {
+                        serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+                    }
 
-                admin.initializeApp({
-                    credential: admin.credential.cert(serviceAccount)
-                });
-                console.log('Firebase Admin SDK Initialized successfully');
+                    admin.initializeApp({
+                        credential: admin.credential.cert(serviceAccount)
+                    });
+                    console.log('✅ Firebase Admin SDK Initialized successfully');
+                } else {
+                    console.error('❌ Could not initialize Firebase: No valid credentials found.');
+                }
             } else {
-                console.warn('FIREBASE_SERVICE_ACCOUNT not found in environment variables');
+                console.warn('⚠️ FIREBASE_SERVICE_ACCOUNT not found in environment variables');
             }
         } catch (error) {
-            console.error('Firebase Admin Initialization Error:', error);
+            console.error('🔥 Critical Firebase Admin Initialization Error:', error.message);
         }
     }
 };
