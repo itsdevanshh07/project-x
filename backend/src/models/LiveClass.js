@@ -21,7 +21,20 @@ const liveClassSchema = new mongoose.Schema({
     },
     scheduledTime: {
         type: Date,
-        required: [true, 'Please add a scheduled time']
+        required: [true, 'Please add a scheduled date']
+    },
+    dayOfWeek: {
+        type: String,
+        enum: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'],
+        uppercase: true
+    },
+    startTime: {
+        type: String, // format "HH:mm"
+        trim: true
+    },
+    endTime: {
+        type: String, // format "HH:mm"
+        trim: true
     },
     duration: {
         type: Number, // in minutes
@@ -33,10 +46,30 @@ const liveClassSchema = new mongoose.Schema({
         default: 'upcoming'
     },
     meetingId: {
-        type: String // For Jitsi, Zoom, or internal stream ID
+        type: String
+    },
+    joinUrl: {
+        type: String
+    },
+    startUrl: {
+        type: String // Hidden for students
+    },
+    playbackId: {
+        type: String // Mux Playback ID
+    },
+    streamKey: {
+        type: String // Mux Stream Key (Private)
+    },
+    muxStreamId: {
+        type: String
     },
     recordingUrl: {
         type: String
+    },
+    platform: {
+        type: String,
+        enum: ['mux', 'zoom', 'internal'],
+        default: 'mux'
     },
     createdAt: {
         type: Date,

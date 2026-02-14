@@ -29,7 +29,7 @@ export default function CreateCourse() {
     const [formData, setFormData] = useState({
         title: '',
         description: '',
-        category: 'SSC',
+        category: 'Class 10',
         price: '',
         discountedPrice: '',
         validity: '365',
@@ -153,24 +153,32 @@ export default function CreateCourse() {
                                                 onChange={handleChange}
                                                 className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl font-bold text-slate-900 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100 appearance-none transition-all"
                                             >
-                                                <option value="SSC">SSC</option>
-                                                <option value="Railway">Railway</option>
-                                                <option value="Defence">Defence</option>
-                                                <option value="Banking">Banking</option>
-                                                <option value="State">State Exams</option>
+                                                <option value="Class 9">Class 9</option>
+                                                <option value="Class 10">Class 10</option>
+                                                <option value="Class 11">Class 11</option>
+                                                <option value="Class 12">Class 12</option>
+                                                <option value="Mathematics">Mathematics</option>
+                                                <option value="Physics">Physics</option>
+                                                <option value="Chemistry">Chemistry</option>
+                                                <option value="Biology">Biology</option>
+                                                <option value="JEE">JEE</option>
+                                                <option value="NEET">NEET</option>
+                                                <option value="Board Exam">Board Exam</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-black text-slate-400 uppercase tracking-widest px-1">Validity (Days)</label>
+                                        <label className="text-sm font-black text-slate-400 uppercase tracking-widest px-1">Course Validity (in days)</label>
                                         <div className="relative">
                                             <Calendar className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                                             <input
                                                 name="validity"
                                                 type="number"
+                                                min="1"
                                                 value={formData.validity}
                                                 onChange={handleChange}
                                                 required
+                                                placeholder="e.g. 180"
                                                 className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl font-bold text-slate-900 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all"
                                             />
                                         </div>

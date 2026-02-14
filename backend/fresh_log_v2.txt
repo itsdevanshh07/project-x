@@ -1,0 +1,15 @@
+[dotenv@17.2.3] injecting env (16) from .env -- tip: ΓÜÖ∩╕Å  suppress all logs with { quiet: true }
+MongoDB Connected: ac-cmlda0l-shard-00-01.r5rvzuv.mongodb.net
+Firebase Admin SDK Initialized successfully
+Server error: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at node:net:2206:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 5000
+}
+Port 5000 is already in use.

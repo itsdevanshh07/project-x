@@ -1,0 +1,12 @@
+[dotenv@17.2.3] injecting env (18) from .env -- tip: ≡ƒöä add secrets lifecycle management: https://dotenvx.com/ops
+MongoDB Connected for course seeding...
+Error seeding courses: TypeError: next is not a function
+    at model.<anonymous> (C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\src\models\Course.js:92:5)
+    at Kareem.execPre (C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\node_modules\kareem\index.js:63:39)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async model.$__save (C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\node_modules\mongoose\lib\model.js:369:5)
+    at async model.save (C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\node_modules\mongoose\lib\model.js:609:5)
+    at async C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\node_modules\mongoose\lib\model.js:2714:9
+    at async Promise.all (index 0)
+    at async Function.create (C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\node_modules\mongoose\lib\model.js:2699:11)
+    at async seedCourses (C:\Users\undhy\OneDrive\Desktop\ACADEMY\backend\seed_courses.js:30:9)

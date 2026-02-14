@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@mux/mux-player-react": "^3.10.2",
+    "@mux/mux-uploader-react": "^1.4.1",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@reduxjs/toolkit": "^2.11.2",

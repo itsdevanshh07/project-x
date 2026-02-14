@@ -34,8 +34,12 @@ router.route('/wishlist/:id')
     .delete(removeFromWishlist);
 
 router.get('/my-courses', getMyCourses);
+router.get('/courses/:id/content', require('../controllers/studentController').getCourseContent);
+router.get('/stats', require('../controllers/studentController').getStudentStats);
 router.post('/progress', updateProgress);
 router.get('/orders', getOrderHistory);
+router.get('/live-classes', require('../controllers/studentController').getLiveClasses);
+router.post('/doubts', require('../controllers/studentController').submitDoubt);
 router.get('/download-notes/:lessonId', require('../controllers/studentController').downloadNotes);
 
 module.exports = router;

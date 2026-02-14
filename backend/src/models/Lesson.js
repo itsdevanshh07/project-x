@@ -17,10 +17,18 @@ const lessonSchema = new mongoose.Schema({
         required: true
     },
     videoUrl: {
-        type: String,
-        required: [true, 'Please add a video URL']
+        type: String
+    },
+    muxAssetId: {
+        type: String
+    },
+    muxPlaybackId: {
+        type: String
     },
     pdfUrl: {
+        type: String
+    },
+    pdfStorageKey: {
         type: String
     },
     content: {

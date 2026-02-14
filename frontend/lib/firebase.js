@@ -1,5 +1,8 @@
 import { initializeApp, getApps } from "firebase/app";
-import { getAuth, GoogleAuthProvider, OAuthProvider } from "firebase/auth";
+import { getAuth, connectAuthEmulator, GoogleAuthProvider, OAuthProvider } from "firebase/auth";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getStorage, connectStorageEmulator } from "firebase/storage";
+import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -14,6 +17,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+const functions = getFunctions(app);
 
 const googleProvider = new GoogleAuthProvider();
 const microsoftProvider = new OAuthProvider('microsoft.com');
@@ -24,4 +30,19 @@ microsoftProvider.setCustomParameters({
     tenant: 'common'
 });
 
-export { auth, googleProvider, microsoftProvider };
+// Emulator Connection for Local Development
+if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+    // Only connect if we are running locally
+    // Use try-catch to prevent multiple connection attempts during HMR
+    try {
+        connectAuthEmulator(auth, "http://127.0.0.1:9099");
+        connectFirestoreEmulator(db, "127.0.0.1", 8080);
+        connectStorageEmulator(storage, "127.0.0.1", 9199);
+        connectFunctionsEmulator(functions, "127.0.0.1", 5001);
+        console.log("🚀 Connected to Firebase Emulators");
+    } catch (e) {
+        console.warn("Firebase Emulators connection skipped/failed:", e.message);
+    }
+}
+
+export { auth, db, storage, functions, googleProvider, microsoftProvider };

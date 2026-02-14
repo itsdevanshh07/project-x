@@ -5,14 +5,20 @@ const {
     getTeacherCourses,
     updateCourse,
     deleteCourse,
-    addLecture,
+    addLesson,
     getCourseLectures,
+    getMuxUploadUrl,
+    getStorageUploadUrl,
     scheduleLiveClass,
     getTeacherLiveClasses,
     updateLiveClassRecording,
     getCourseDoubts,
     answerDoubt,
+    getAllTeacherDoubts,
     getTeacherStats,
+    getEnrolledStudents,
+    updateProfile,
+    changePassword,
     createTestSeries,
     getTeacherTestSeries,
     createPYQ,
@@ -36,9 +42,13 @@ router.route('/courses/:id')
     .put(updateCourse)
     .delete(deleteCourse);
 
-// Lecture Routes
-router.route('/lectures')
-    .post(addLecture);
+// Lesson Routes
+router.route('/lessons')
+    .post(addLesson);
+
+// Integrations
+router.get('/mux/upload-url', getMuxUploadUrl);
+router.post('/storage/upload-url', getStorageUploadUrl);
 
 router.get('/courses/:courseId/lectures', getCourseLectures);
 
@@ -50,11 +60,19 @@ router.route('/live-classes')
 router.put('/live-classes/:id/recording', updateLiveClassRecording);
 
 // Doubt Routes
+router.get('/courses/all/doubts', getAllTeacherDoubts);
 router.get('/courses/:courseId/doubts', getCourseDoubts);
 router.post('/doubts/:id/answer', answerDoubt);
 
 // Stats
 router.get('/stats', getTeacherStats);
+
+// Students
+router.get('/students', getEnrolledStudents);
+
+// Profile
+router.put('/profile', updateProfile);
+router.put('/change-password', changePassword);
 
 // Test Series
 router.route('/test-series')

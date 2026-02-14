@@ -1,0 +1,44 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // HELPERS
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.role == 'admin';
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // --- RULES ---
+
+    // Profiles: Images only, max 2MB
+    match /profiles/{userId}/{allPaths=**} {
+      allow read: if true; // Public profiles
+      allow write: if isOwner(userId) 
+                   && request.resource.size < 2 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+
+    // Course Materials: PDFs/Docs, Admin/Teacher only
+    match /materials/{courseId}/{allPaths=**} {
+      allow read: if isAuthenticated(); // Should be refined to enrollment check
+      allow write: if isAdmin() || (isAuthenticated() && request.auth.token.role == 'teacher');
+    }
+
+    // Private Assets: No public access
+    match /private/{userId}/{allPaths=**} {
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+
+    // DEFAULT: DENY
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

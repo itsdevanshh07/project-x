@@ -36,7 +36,7 @@ const TeacherCard = ({ teacher, index }) => {
                             {teacher.fullName}
                         </h3>
                         <p className="text-secondary-action font-semibold text-sm tracking-wide">
-                            {teacher.expertise?.join(' • ') || 'Senior Faculty'}
+                            {teacher.expertise?.join(' • ') || 'Expert Teacher'}
                         </p>
                     </div>
                 </div>
@@ -55,7 +55,7 @@ const TeacherCard = ({ teacher, index }) => {
 
                 {/* Bio Snippet */}
                 <p className="text-sm text-surface-light/40 leading-relaxed mb-8 line-clamp-3">
-                    {teacher.bio || "Dedicated academic professional committed to fostering conceptual clarity and nurturing the next generation of scholars."}
+                    {teacher.bio || "Dedicated professional committed to fostering conceptual clarity and nurturing the next generation of students."}
                 </p>
 
                 {/* Assigned Courses */}
@@ -80,7 +80,7 @@ const TeacherCard = ({ teacher, index }) => {
 
                 {/* Action */}
                 <button className="mt-8 flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-sm font-bold text-white hover:bg-secondary-action hover:border-secondary-action transition-all duration-300">
-                    Connect with Faculty <ChevronRight className="w-4 h-4" />
+                    View Profile <ChevronRight className="w-4 h-4" />
                 </button>
             </div>
         </motion.div>
@@ -98,7 +98,7 @@ export default function TeachersPage() {
 
     const fetchTeachers = async () => {
         try {
-            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000/api';
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
             const response = await axios.get(`${API_URL}/auth/teachers/public`);
             setTeachers(response.data);
             setLoading(false);
@@ -174,7 +174,7 @@ export default function TeachersPage() {
                             transition={{ delay: 0.1 }}
                             className="text-step-4 md:text-7xl font-display font-bold text-white tracking-tight"
                         >
-                            Meet the <span className="text-secondary-action">Principal Faculty.</span>
+                            Meet Our <span className="text-secondary-action">Teachers.</span>
                         </motion.h1>
 
                         <motion.p
@@ -183,7 +183,7 @@ export default function TeachersPage() {
                             transition={{ delay: 0.2 }}
                             className="text-lg text-surface-light/40 leading-relaxed max-w-2xl"
                         >
-                            Our educators aren't just teachers; they are mentors, industry veterans, and researchers dedicated to unlocking your intellectual potential.
+                            Our educators are mentors and experts dedicated to unlocking your full potential.
                         </motion.p>
 
                         {/* Search Bar */}
@@ -214,7 +214,7 @@ export default function TeachersPage() {
                             <Loader2 className="w-16 h-16 text-secondary-action animate-spin" />
                             <div className="absolute inset-0 bg-secondary-action/20 blur-xl animate-pulse" />
                         </div>
-                        <p className="text-surface-light/30 font-bold uppercase tracking-[0.3em] text-[10px]">Verifying Faculty Credentials...</p>
+                        <p className="text-surface-light/30 font-bold uppercase tracking-[0.3em] text-[10px]">Loading Teacher Profiles...</p>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -227,8 +227,8 @@ export default function TeachersPage() {
                         {filtered.length === 0 && (
                             <div className="col-span-full py-40 text-center glass-card border-dashed">
                                 <Users className="w-12 h-12 text-surface-light/10 mx-auto mb-6" />
-                                <h4 className="text-white font-bold text-xl mb-2">No Faculty Found</h4>
-                                <p className="text-surface-light/30">We couldn't find any teacher matching your criteria. Try another specialization.</p>
+                                <h4 className="text-white font-bold text-xl mb-2">No Teachers Found</h4>
+                                <p className="text-surface-light/30">We couldn't find any teacher matching your search.</p>
                             </div>
                         )}
                     </div>

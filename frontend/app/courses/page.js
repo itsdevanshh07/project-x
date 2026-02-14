@@ -22,12 +22,17 @@ export default function CoursesPage() {
 
     const fetchCourses = async () => {
         try {
-            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000/api';
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
             const response = await axios.get(`${API_URL}/courses`);
             setCourses(response.data);
             setLoading(false);
         } catch (err) {
-            console.error('Error fetching courses:', err);
+            console.error('Error fetching courses:', err.message);
+            if (err.response) {
+                console.error('Response data:', err.response.data);
+            } else if (err.request) {
+                console.error('No response received (Network Error):', err.request);
+            }
             // Fallback for demo
             setCourses([
                 { _id: '1', title: 'Advanced Thermodynamics', category: 'Foundation', price: 4999, description: 'Master the laws of thermodynamics with conceptual clarity and numerical practice.', enrolledCount: '1.2k', duration: '12 Weeks' },

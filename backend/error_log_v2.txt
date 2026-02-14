@@ -1,0 +1,5 @@
+Error Data: {
+  "message": "Failed to initialize upload",
+  "error": "Mux API Error: 401 {\"error\":{\"type\":\"unauthorized\",\"messages\":[\"Unauthorized request\"]}}",
+  "stack": "Error: Mux API Error: 401 {\"error\":{\"type\":\"unauthorized\",\"messages\":[\"Unauthorized request\"]}}\n    at exports.createUploadUrl (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\src\\services\\mux.service.js:30:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async exports.createUpload (C:\\Users\\undhy\\OneDrive\\Desktop\\ACADEMY\\backend\\src\\controllers\\muxController.js:25:24)"
+}

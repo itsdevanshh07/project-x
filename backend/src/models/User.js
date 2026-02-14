@@ -116,9 +116,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    expertise: [{
-        type: String
-    }],
+    expertise: [String],
     experience: {
         type: Number,
         default: 0
@@ -130,9 +128,14 @@ userSchema.pre('save', async function () {
     if (!this.isModified('password')) {
         return;
     }
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
+    try {
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+    } catch (err) {
+        throw err;
+    }
 });
+
 
 // Match user entered password to hashed password in database
 userSchema.methods.matchPassword = async function (enteredPassword) {

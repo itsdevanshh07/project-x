@@ -9,6 +9,8 @@ const initialState = {
     wishlist: [],
     orders: [],
     profile: null,
+    stats: null,
+    liveClasses: [],
     isLoading: false,
     isError: false,
     message: '',
@@ -98,6 +100,30 @@ export const removeFromWishlist = createAsyncThunk('student/removeFromWishlist',
     }
 });
 
+// Get Student Stats
+export const getStudentStats = createAsyncThunk('student/getStats', async (_, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token;
+        const config = { headers: { Authorization: `Bearer ${token}` } };
+        const response = await axios.get(`${API_URL}/stats`, config);
+        return response.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+});
+
+// Get Live Classes
+export const getLiveClasses = createAsyncThunk('student/getLiveClasses', async (_, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token;
+        const config = { headers: { Authorization: `Bearer ${token}` } };
+        const response = await axios.get(`${API_URL}/live-classes`, config);
+        return response.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+});
+
 export const studentSlice = createSlice({
     name: 'student',
     initialState,
@@ -135,6 +161,12 @@ export const studentSlice = createSlice({
             })
             .addCase(removeFromWishlist.fulfilled, (state, action) => {
                 state.wishlist = action.payload;
+            })
+            .addCase(getStudentStats.fulfilled, (state, action) => {
+                state.stats = action.payload;
+            })
+            .addCase(getLiveClasses.fulfilled, (state, action) => {
+                state.liveClasses = action.payload;
             });
     },
 });

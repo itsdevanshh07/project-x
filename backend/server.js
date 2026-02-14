@@ -37,7 +37,8 @@ app.use(cors({
         const isLocalhost = origin.includes('localhost') || origin.includes('127.0.0.1');
         const isAllowed = allowedOrigins.includes(origin) || isLocalhost;
 
-        if (isAllowed) {
+        // In development, allow all origins
+        if (process.env.NODE_ENV === 'development' || isAllowed) {
             callback(null, true);
         } else {
             console.warn(`Origin ${origin} not allowed by CORS`);
@@ -66,6 +67,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/auth', require('./src/routes/authRoutes'));
 app.use('/api/courses', require('./src/routes/courseRoutes'));
+app.use('/api/mux', require('./src/routes/muxRoutes'));
 app.use('/api/student', require('./src/routes/studentRoutes'));
 app.use('/api/teacher', require('./src/routes/teacherRoutes'));
 app.use('/api/payments', require('./src/routes/paymentRoutes'));
@@ -76,12 +78,17 @@ app.use('/api/current-affairs', require('./src/routes/currentAffairsRoutes'));
 // Error Handling Middleware
 app.use((err, req, res, next) => {
     const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-    console.error(`Error: ${err.message}`);
+    console.error(`Error [${req.method}] ${req.path}: ${err.message}`);
+    if (process.env.NODE_ENV !== 'production' && err.stack) {
+        console.error(err.stack);
+    }
     res.status(statusCode).json({
         message: err.message,
         stack: process.env.NODE_ENV === 'production' ? null : err.stack,
     });
 });
+
+
 
 const startServer = async () => {
     try {

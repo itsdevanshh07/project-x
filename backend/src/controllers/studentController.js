@@ -3,6 +3,9 @@ const Course = require('../models/Course');
 const Order = require('../models/Order');
 const TestSeries = require('../models/TestSeries');
 const LiveClass = require('../models/LiveClass');
+const Doubt = require('../models/Doubt');
+const Lesson = require('../models/Lesson');
+const Module = require('../models/Module');
 
 // @desc    Get student profile
 // @route   GET /api/student/profile
@@ -192,7 +195,6 @@ exports.getOrderHistory = async (req, res, next) => {
     }
 };
 const { watermarkPDF } = require('../utils/pdfWatermark');
-const Lesson = require('../models/Lesson');
 
 // @desc    Download watermarked notes
 // @route   GET /api/student/download-notes/:lessonId
@@ -217,6 +219,89 @@ exports.downloadNotes = async (req, res, next) => {
 
         res.contentType("application/pdf");
         res.send(Buffer.from(watermarkedPdfBytes));
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Get student stats
+// @route   GET /api/student/stats
+// @access  Private/Student
+exports.getStudentStats = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user._id);
+        const activePrograms = user.enrolledCourses.length;
+        const conceptualUnits = user.courseProgress.length;
+        const intellectualHours = (conceptualUnits * 1.5).toFixed(1);
+
+        res.json({
+            activePrograms,
+            intellectualHours,
+            conceptualUnits,
+            tier: 'Tier A',
+            aggregateScore: '84.2%'
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Get detailed course content
+// @route   GET /api/student/courses/:id/content
+// @access  Private/Student
+exports.getCourseContent = async (req, res, next) => {
+    try {
+        const course = await Course.findById(req.params.id);
+        if (!course) return res.status(404).json({ message: 'Course not found' });
+
+        const modules = await Module.find({ course: req.params.id }).sort('order');
+        const modulesWithLessons = await Promise.all(modules.map(async (mod) => {
+            const lessons = await Lesson.find({ module: mod._id }).sort('order');
+            return {
+                ...mod._doc,
+                lessons
+            };
+        }));
+
+        res.json({
+            course,
+            modules: modulesWithLessons
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Submit a doubt
+// @route   POST /api/student/doubts
+// @access  Private/Student
+exports.submitDoubt = async (req, res, next) => {
+    try {
+        const { courseId, question, lessonId } = req.body;
+        const doubt = await Doubt.create({
+            student: req.user._id,
+            course: courseId,
+            lecture: lessonId,
+            question
+        });
+        res.status(201).json({ success: true, data: doubt });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Get live classes for enrolled courses
+// @route   GET /api/student/live-classes
+// @access  Private/Student
+exports.getLiveClasses = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user._id);
+        const liveSessions = await LiveClass.find({
+            course: { $in: user.enrolledCourses },
+            status: { $in: ['upcoming', 'live'] }
+        }).populate('course', 'title');
+
+        res.json(liveSessions);
     } catch (error) {
         next(error);
     }

@@ -1,5 +1,6 @@
 const Course = require('../models/Course');
 const Lecture = require('../models/Lecture');
+const Lesson = require('../models/Lesson');
 const LiveClass = require('../models/LiveClass');
 const Doubt = require('../models/Doubt');
 const Assignment = require('../models/Assignment');
@@ -8,6 +9,11 @@ const Enrollment = require('../models/Enrollment');
 const TestSeries = require('../models/TestSeries');
 const PYQ = require('../models/PYQ');
 const CurrentAffairs = require('../models/CurrentAffairs');
+const User = require('../models/User');
+
+const muxService = require('../services/mux.service');
+const zoomService = require('../services/zoom.service');
+const storageService = require('../services/storage.service');
 
 // @desc    Create a new course
 // @route   POST /api/teacher/courses
@@ -82,12 +88,12 @@ exports.deleteCourse = async (req, res, next) => {
     }
 };
 
-// @desc    Add lecture to course
-// @route   POST /api/teacher/lectures
+// @desc    Add lesson to module
+// @route   POST /api/teacher/lessons
 // @access  Private/Teacher Approved
-exports.addLecture = async (req, res, next) => {
+exports.addLesson = async (req, res, next) => {
     try {
-        const { courseId } = req.body;
+        const { courseId, moduleId } = req.body;
         const course = await Course.findById(courseId);
 
         if (!course) {
@@ -98,12 +104,38 @@ exports.addLecture = async (req, res, next) => {
             return res.status(401).json({ message: 'Not authorized' });
         }
 
-        const lecture = await Lecture.create({
+        const lesson = await Lesson.create({
             ...req.body,
-            course: courseId
+            course: courseId,
+            module: moduleId
         });
 
-        res.status(201).json({ success: true, data: lecture });
+        res.status(201).json({ success: true, data: lesson });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Get Mux upload URL
+// @route   GET /api/teacher/mux/upload-url
+// @access  Private/Teacher
+exports.getMuxUploadUrl = async (req, res, next) => {
+    try {
+        const upload = await muxService.createUploadUrl();
+        res.status(200).json({ success: true, data: upload });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Get Storage upload URL
+// @route   POST /api/teacher/storage/upload-url
+// @access  Private/Teacher
+exports.getStorageUploadUrl = async (req, res, next) => {
+    try {
+        const { fileName, contentType } = req.body;
+        const data = await storageService.getUploadPresignedUrl(fileName, contentType);
+        res.status(200).json({ success: true, data });
     } catch (error) {
         next(error);
     }
@@ -124,7 +156,22 @@ exports.getCourseLectures = async (req, res, next) => {
 // LIVE CLASSES
 exports.scheduleLiveClass = async (req, res, next) => {
     try {
+        const { title, scheduledTime, platform, courseId } = req.body;
         req.body.instructor = req.user._id;
+        req.body.course = courseId;
+
+        if (platform === 'zoom') {
+            const zoomMeeting = await zoomService.createMeeting(title, scheduledTime);
+            req.body.meetingId = zoomMeeting.id.toString();
+            req.body.joinUrl = zoomMeeting.joinUrl;
+            req.body.startUrl = zoomMeeting.startUrl;
+        } else if (platform === 'mux') {
+            const muxStream = await muxService.createLiveStream();
+            req.body.muxStreamId = muxStream.id;
+            req.body.streamKey = muxStream.stream_key;
+            req.body.playbackId = muxStream.playback_ids[0].id;
+        }
+
         const liveClass = await LiveClass.create(req.body);
         res.status(201).json({ success: true, data: liveClass });
     } catch (error) {
@@ -156,6 +203,19 @@ exports.updateLiveClassRecording = async (req, res, next) => {
 exports.getCourseDoubts = async (req, res, next) => {
     try {
         const doubts = await Doubt.find({ course: req.params.courseId }).populate('student', 'fullName');
+        res.status(200).json({ success: true, data: doubts });
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.getAllTeacherDoubts = async (req, res, next) => {
+    try {
+        const courses = await Course.find({ instructor: req.user._id });
+        const courseIds = courses.map(c => c._id);
+        const doubts = await Doubt.find({ course: { $in: courseIds } })
+            .populate('student', 'fullName')
+            .populate('course', 'title');
         res.status(200).json({ success: true, data: doubts });
     } catch (error) {
         next(error);
@@ -216,6 +276,22 @@ exports.getCourseQuizzes = async (req, res, next) => {
     try {
         const quizzes = await Quiz.find({ course: req.params.courseId });
         res.status(200).json({ success: true, data: quizzes });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// STUDENTS
+exports.getEnrolledStudents = async (req, res, next) => {
+    try {
+        const courses = await Course.find({ instructor: req.user._id });
+        const courseIds = courses.map(c => c._id);
+
+        const enrollments = await Enrollment.find({ course: { $in: courseIds } })
+            .populate('student', 'fullName email phone avatar')
+            .populate('course', 'title');
+
+        res.status(200).json({ success: true, count: enrollments.length, data: enrollments });
     } catch (error) {
         next(error);
     }
@@ -304,6 +380,45 @@ exports.getTeacherCurrentAffairs = async (req, res, next) => {
     try {
         const currentAffairs = await CurrentAffairs.find({ instructor: req.user._id });
         res.status(200).json({ success: true, data: currentAffairs });
+    } catch (error) {
+        next(error);
+    }
+};
+// PROFILE
+exports.updateProfile = async (req, res, next) => {
+    try {
+        const fieldsToUpdate = {
+            fullName: req.body.fullName,
+            bio: req.body.bio,
+            expertise: req.body.expertise,
+            experience: req.body.experience,
+        };
+
+        if (req.body.avatar) fieldsToUpdate.avatar = req.body.avatar;
+
+        const user = await User.findByIdAndUpdate(req.user._id, fieldsToUpdate, {
+            new: true,
+            runValidators: true
+        });
+
+        res.status(200).json({ success: true, data: user });
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.changePassword = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user._id).select('+password');
+
+        if (!(await user.matchPassword(req.body.currentPassword))) {
+            return res.status(401).json({ message: 'Current password incorrect' });
+        }
+
+        user.password = req.body.newPassword;
+        await user.save();
+
+        res.status(200).json({ success: true, message: 'Password updated' });
     } catch (error) {
         next(error);
     }

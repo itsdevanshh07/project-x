@@ -19,12 +19,14 @@ import { logout } from '@/slices/authSlice';
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
     const pathname = usePathname();
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
 
     useEffect(() => {
+        setMounted(true);
         const handleScroll = () => setIsScrolled(window.scrollY > 50);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
@@ -101,7 +103,7 @@ const Navbar = () => {
 
                 {/* Actions */}
                 <div className="flex items-center space-x-4">
-                    {user ? (
+                    {mounted && user ? (
                         <Link
                             href="/dashboard"
                             className="flex items-center space-x-2 p-1 pl-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all group"

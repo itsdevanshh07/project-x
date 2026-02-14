@@ -13,7 +13,10 @@ const courseSchema = new mongoose.Schema({
     category: {
         type: String,
         required: [true, 'Please add a category'],
-        enum: ['SSC', 'Railway', 'Defence', 'State', 'Banking']
+        enum: {
+            values: ['Class 9', 'Class 10', 'Class 11', 'Class 12', 'Mathematics', 'Physics', 'Chemistry', 'Biology', 'JEE', 'NEET', 'Board Exam'],
+            message: '{VALUE} is not a valid academic category'
+        }
     },
     instructor: {
         type: mongoose.Schema.ObjectId,
@@ -33,7 +36,8 @@ const courseSchema = new mongoose.Schema({
     },
     validity: {
         type: Number, // in days
-        required: [true, 'Please add validity in days']
+        required: [true, 'Please add validity in days'],
+        min: [1, 'Validity must be at least 1 day']
     },
     features: [String],
     tags: [String],
@@ -70,9 +74,8 @@ const courseSchema = new mongoose.Schema({
 });
 
 // Cascade delete modules when a course is deleted
-courseSchema.pre('remove', async function (next) {
+courseSchema.pre('remove', async function () {
     await this.model('Module').deleteMany({ course: this._id });
-    next();
 });
 
 // Reverse populate with virtuals
@@ -84,9 +87,9 @@ courseSchema.virtual('modules', {
 });
 
 // Update the updatedAt field on save
-courseSchema.pre('save', function (next) {
+courseSchema.pre('save', function () {
     this.updatedAt = Date.now();
-    next();
 });
+
 
 module.exports = mongoose.model('Course', courseSchema);

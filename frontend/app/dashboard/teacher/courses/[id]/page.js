@@ -23,6 +23,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import UploadVideoModal from '@/components/UploadVideoModal';
 
 export default function CourseDetail() {
     const { id } = useParams();
@@ -33,6 +34,7 @@ export default function CourseDetail() {
     const [loading, setLoading] = useState(true);
     const [showModuleModal, setShowModuleModal] = useState(false);
     const [showLessonModal, setShowLessonModal] = useState(false);
+    const [showUploadModal, setShowUploadModal] = useState(false);
     const [selectedModuleId, setSelectedModuleId] = useState(null);
     const [expandedModules, setExpandedModules] = useState({});
 
@@ -138,6 +140,13 @@ export default function CourseDetail() {
                     </div>
                     <div className="flex items-center space-x-3">
                         <button
+                            onClick={() => setShowUploadModal(true)}
+                            className="px-8 py-4 bg-blue-600 text-white rounded-2xl font-bold flex items-center space-x-2 hover:bg-blue-700 transition-all shadow-xl shadow-blue-100"
+                        >
+                            <Plus className="w-5 h-5" />
+                            <span>Upload Recorded Lecture</span>
+                        </button>
+                        <button
                             onClick={() => setShowModuleModal(true)}
                             className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold flex items-center space-x-2 hover:bg-slate-800 transition-all shadow-xl shadow-slate-200"
                         >
@@ -199,7 +208,15 @@ export default function CourseDetail() {
                                                                     </div>
                                                                     <div>
                                                                         <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">LESSON {idx + 1}</div>
-                                                                        <div className="font-bold text-slate-900 text-sm">{lesson.title}</div>
+                                                                        <div className="flex items-center gap-2">
+                                                                            <div className="font-bold text-slate-900 text-sm">{lesson.title}</div>
+                                                                            {lesson.videoUrl === 'uploading...' && (
+                                                                                <span className="px-2 py-0.5 bg-blue-100 text-blue-600 rounded-md text-[8px] font-black uppercase animate-pulse">Uploading...</span>
+                                                                            )}
+                                                                            {lesson.videoUrl === 'processing...' && (
+                                                                                <span className="px-2 py-0.5 bg-amber-100 text-amber-600 rounded-md text-[8px] font-black uppercase animate-pulse">Processing...</span>
+                                                                            )}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div className="flex items-center space-x-3">
@@ -321,6 +338,14 @@ export default function CourseDetail() {
                     </div>
                 )}
             </AnimatePresence>
+
+            <UploadVideoModal
+                isOpen={showUploadModal}
+                onClose={() => setShowUploadModal(false)}
+                courses={course ? [course] : []}
+                initialCourseId={id}
+                onUploadComplete={fetchCourseDetails}
+            />
         </div>
     );
 }
