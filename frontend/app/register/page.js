@@ -59,10 +59,10 @@ export default function RegisterPage() {
     };
 
     return (
-        <main className="min-h-screen bg-primary-bg overflow-hidden selection:bg-secondary-action/30">
+        <main className="min-h-screen bg-primary-bg flex flex-col selection:bg-secondary-action/30 overflow-x-hidden">
             <Navbar />
 
-            <div className="flex flex-col lg:flex-row min-h-screen">
+            <div className="flex-1 flex flex-col lg:flex-row pt-24 min-h-screen">
                 {/* Left Branding Area */}
                 <div className="hidden lg:flex flex-[0.8] items-center justify-center p-12 relative overflow-hidden bg-[radial-gradient(circle_at_30%_50%,rgba(99,102,241,0.1),transparent_70%)]">
                     <div className="relative z-10 max-w-lg space-y-12">
@@ -107,7 +107,7 @@ export default function RegisterPage() {
                 </div>
 
                 {/* Right Form Area */}
-                <div className="flex-1 flex items-center justify-center p-8 lg:p-24 pt-32 lg:pt-24 border-l border-white/5">
+                <div className="flex-1 flex items-center justify-center p-6 md:p-12 lg:p-24 border-l border-white/5">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -128,11 +128,11 @@ export default function RegisterPage() {
                                     key={r.id}
                                     type="button"
                                     onClick={() => setFormData({ ...formData, role: r.id })}
-                                    className={`relative z-10 flex-1 flex items-center justify-center space-x-2 py-3.5 rounded-xl text-xs font-bold transition-all duration-500 ${role === r.id ? 'text-primary-bg' : 'text-surface-light/40 hover:text-white'
+                                    className={`relative z-10 flex-1 flex items-center justify-center space-x-2 py-3.5 rounded-xl text-[9px] sm:text-xs font-bold transition-all duration-500 ${role === r.id ? 'text-primary-bg' : 'text-surface-light/40 hover:text-white'
                                         }`}
                                 >
-                                    <r.icon className={`w-4 h-4 ${role === r.id ? 'text-primary-bg' : 'text-surface-light/20'}`} />
-                                    <span className="uppercase tracking-widest">{r.label}</span>
+                                    <r.icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${role === r.id ? 'text-primary-bg' : 'text-surface-light/20'}`} />
+                                    <span className="uppercase tracking-wider">{r.label}</span>
                                     {role === r.id && (
                                         <motion.div
                                             layoutId="register-role-active"
@@ -215,9 +215,9 @@ export default function RegisterPage() {
                                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                                     </button>
 
-                                    <div className="relative flex items-center justify-center">
+                                    <div className="relative flex items-center justify-center mb-8 md:mb-10">
                                         <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/5"></div></div>
-                                        <span className="relative bg-[#161d2f] px-3 md:px-4 text-[10px] font-bold text-surface-light/10 uppercase tracking-[0.3em]">Single Sign-On</span>
+                                        <span className="relative bg-primary-bg px-3 md:px-4 text-[10px] font-bold text-surface-light/10 uppercase tracking-[0.3em]">Single Sign-On</span>
                                     </div>
                                     <SocialAuthButtons requiredRole={role} />
                                 </div>

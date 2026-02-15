@@ -16,7 +16,7 @@ const TeacherCard = ({ teacher, index }) => {
             viewport={{ once: true }}
             className="group relative"
         >
-            <div className="glass-card p-8 h-full flex flex-col transition-all duration-500 hover:border-secondary-action/40 hover:translate-y-[-8px]">
+            <div className="glass-card p-6 md:p-8 h-full flex flex-col transition-all duration-500 hover:border-secondary-action/40 hover:translate-y-[-8px]">
                 {/* Profile Section */}
                 <div className="flex items-start gap-6 mb-8">
                     <div className="relative">
@@ -153,7 +153,7 @@ export default function TeachersPage() {
             <Navbar />
 
             {/* Header Section */}
-            <header className="pt-40 pb-24 relative overflow-hidden">
+            <header className="pt-28 md:pt-40 pb-16 md:pb-24 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_-20%,rgba(99,102,241,0.15),transparent_50%)]" />
                 <div className="container max-w-7xl mx-auto px-6 relative z-10">
                     <div className="max-w-3xl space-y-8">
@@ -172,7 +172,7 @@ export default function TeachersPage() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-step-4 md:text-7xl font-display font-bold text-white tracking-tight"
+                            className="text-4xl md:text-7xl font-display font-bold text-white tracking-tight leading-tight"
                         >
                             Meet Our <span className="text-secondary-action">Teachers.</span>
                         </motion.h1>

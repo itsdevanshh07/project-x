@@ -36,12 +36,14 @@ export default function MobileSidebar({ isOpen, onClose }) {
                         animate={{ x: 0 }}
                         exit={{ x: '-100%' }}
                         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                        className="fixed left-0 top-0 bottom-0 w-[280px] bg-[#0B0F14] z-[80] lg:hidden flex flex-col"
+                        className="fixed left-0 top-0 bottom-0 w-[280px] bg-primary-bg z-[120] lg:hidden flex flex-col border-r border-white/5"
                     >
-                        <div className="p-6 flex items-center justify-between border-b border-slate-800">
-                            <Link href="/" className="flex items-center space-x-3">
-                                <Library className="text-[#F5C542] w-6 h-6" />
-                                <span className="text-white font-display font-bold text-lg">DGD</span>
+                        <div className="p-6 flex items-center justify-between border-b border-white/5 bg-white/2">
+                            <Link href="/" className="flex items-center space-x-3 group">
+                                <div className="bg-secondary-action/20 p-2 rounded-lg border border-secondary-action/30">
+                                    <Library className="text-secondary-action w-5 h-5" />
+                                </div>
+                                <span className="text-white font-display font-bold text-lg tracking-tight">DGD <span className="text-secondary-action">PORTAL</span></span>
                             </Link>
                             <button onClick={onClose} className="p-2 text-slate-400 hover:text-white">
                                 <X className="w-6 h-6" />
@@ -57,8 +59,8 @@ export default function MobileSidebar({ isOpen, onClose }) {
                                         href={item.href}
                                         onClick={onClose}
                                         className={`flex items-center space-x-4 px-4 py-4 rounded-xl text-sm font-semibold transition-all ${isActive
-                                                ? 'bg-slate-800 text-[#F5C542]'
-                                                : 'text-slate-400 hover:text-white'
+                                            ? 'bg-slate-800 text-[#F5C542]'
+                                            : 'text-slate-400 hover:text-white'
                                             }`}
                                     >
                                         <item.icon className="w-5 h-5" />

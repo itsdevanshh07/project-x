@@ -40,99 +40,97 @@ const Navbar = () => {
     ];
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-[100] flex justify-center p-6 pointer-events-none">
-            <motion.nav
-                initial={{ y: -100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                className={`
-                    pointer-events-auto
-                    flex items-center justify-between
-                    w-full max-w-6xl px-6 py-3
-                    glass-card transition-all duration-500 ease-out
-                    ${isScrolled ? 'scale-95 opacity-90 translate-y-2' : ''}
-                `}
-            >
-                {/* Logo */}
-                <Link href="/" className="flex items-center space-x-3 group">
-                    <div className="relative">
-                        <div className="bg-secondary-action/20 p-2 rounded-xl border border-secondary-action/30 flex items-center justify-center group-hover:bg-secondary-action/30 transition-colors">
-                            <Library className="text-secondary-action w-5 h-5" strokeWidth={2} />
-                        </div>
-                        <motion.div
-                            className="absolute -top-1 -right-1"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                        >
-                            <Sparkles className="w-3 h-3 text-accent-highlight" />
-                        </motion.div>
-                    </div>
-                    <div className="flex flex-col">
-                        <span className="text-lg font-display font-bold text-white tracking-tight leading-none">
-                            Divya Gyan <span className="text-secondary-action">Dhara</span>
-                        </span>
-                        <span className="text-[8px] font-medium uppercase tracking-[0.2em] text-surface-light/40 mt-1">
-                            Future-Ready Education
-                        </span>
-                    </div>
-                </Link>
-
-                {/* Desktop Nav */}
-                <div className="hidden lg:flex items-center gap-1 bg-white/5 p-1 rounded-2xl border border-white/5">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className={`
-                                relative px-4 py-2 text-sm font-medium rounded-xl transition-all duration-300
-                                ${pathname === link.href
-                                    ? 'text-white bg-white/10 shadow-sm'
-                                    : 'text-surface-light/60 hover:text-white hover:bg-white/5'}
-                            `}
-                        >
-                            {link.name}
-                            {pathname === link.href && (
-                                <motion.div
-                                    layoutId="nav-active"
-                                    className="absolute inset-0 bg-white/10 rounded-xl -z-10"
-                                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                />
-                            )}
-                        </Link>
-                    ))}
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center space-x-4">
-                    {mounted && user ? (
-                        <Link
-                            href="/dashboard"
-                            className="flex items-center space-x-2 p-1 pl-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all group"
-                        >
-                            <span className="text-white text-xs font-semibold">{user.fullName.split(' ')[0]}</span>
-                            <div className="w-8 h-8 bg-secondary-action rounded-lg flex items-center justify-center text-white font-bold text-xs group-hover:scale-110 transition-transform">
-                                {user.fullName.charAt(0)}
+        <header className="fixed top-0 left-0 right-0 z-[50] w-full flex justify-center pointer-events-none transition-all duration-300">
+            <div className="w-full max-w-7xl px-4 md:px-8 py-4 md:py-6 flex justify-center">
+                <motion.nav
+                    initial={{ y: -100, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    className={`
+                        pointer-events-auto
+                        flex items-center justify-between
+                        w-full h-[64px] md:h-[72px] lg:h-[80px] px-4 md:px-8
+                        glass-card transition-all duration-500 ease-out
+                        ${isScrolled ? 'scale-[0.98] lg:scale-95 opacity-95 lg:opacity-90 translate-y-2' : ''}
+                    `}
+                >
+                    {/* Left: Logo */}
+                    <Link href="/" className="flex items-center gap-2 md:gap-3 group shrink-0">
+                        <div className="relative shrink-0">
+                            <div className="bg-secondary-action/20 p-2 rounded-xl border border-secondary-action/30 flex items-center justify-center group-hover:bg-secondary-action/30 transition-colors">
+                                <Library className="text-secondary-action w-4 h-4 md:w-5 md:h-5" strokeWidth={2} />
                             </div>
-                        </Link>
-                    ) : (
-                        <div className="flex items-center space-x-3">
-                            <Link href="/login" className="text-sm font-medium text-surface-light/70 hover:text-white transition-colors px-4">
-                                Sign In
-                            </Link>
-                            <Link href="/courses" className="bg-accent-highlight text-primary-bg px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:shadow-[0_0_20px_rgba(250,204,21,0.3)] transition-all active:scale-95">
-                                Enroll Now
-                            </Link>
                         </div>
-                    )}
+                        <div className="flex flex-col min-w-0 overflow-hidden">
+                            <span className="text-sm md:text-lg font-display font-bold text-white tracking-tight leading-none truncate">
+                                Divya Gyan <span className="text-secondary-action">Dhara</span>
+                            </span>
+                            <span className="text-[7px] md:text-[8px] font-medium uppercase tracking-[0.2em] text-surface-light/40 mt-1 truncate">
+                                Future-Ready Education
+                            </span>
+                        </div>
+                    </Link>
 
-                    {/* Mobile Toggle */}
-                    <button
-                        className="lg:hidden text-white p-2 hover:bg-white/5 rounded-xl transition-colors"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-                    </button>
-                </div>
-            </motion.nav>
+                    {/* Center: Navigation links (Desktop Only) */}
+                    <div className="hidden lg:flex items-center gap-6 bg-white/5 px-6 py-2 rounded-full border border-white/10 ring-1 ring-white/5">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className={`
+                                    relative text-sm font-semibold transition-all duration-300
+                                    ${pathname === link.href
+                                        ? 'text-white'
+                                        : 'text-surface-light/60 hover:text-white'}
+                                `}
+                            >
+                                {link.name}
+                                {pathname === link.href && (
+                                    <motion.div
+                                        layoutId="nav-active"
+                                        className="absolute -bottom-[2px] left-0 right-0 h-[2px] bg-secondary-action rounded-full"
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
+                            </Link>
+                        ))}
+                    </div>
+
+                    {/* Right: Actions */}
+                    <div className="flex items-center gap-3 md:gap-6">
+                        {mounted && user ? (
+                            <Link
+                                href="/dashboard"
+                                className="flex items-center gap-2 p-1.5 pl-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all group lg:min-w-[140px]"
+                            >
+                                <span className="hidden sm:inline text-white text-xs lg:text-sm font-bold">{user.fullName.split(' ')[0]}</span>
+                                <div className="w-8 h-8 md:w-9 md:h-9 bg-secondary-action rounded-lg flex items-center justify-center text-white font-bold text-xs group-hover:scale-110 transition-transform">
+                                    {user.fullName.charAt(0)}
+                                </div>
+                            </Link>
+                        ) : (
+                            <div className="flex items-center gap-4 md:gap-6">
+                                <Link href="/login" className="hidden lg:block text-sm font-bold text-surface-light/70 hover:text-white transition-colors">
+                                    Sign In
+                                </Link>
+                                <Link
+                                    href="/courses"
+                                    className="bg-accent-highlight text-primary-bg px-4 md:px-6 h-10 md:h-11 rounded-xl text-[10px] md:text-xs font-bold uppercase tracking-wider flex items-center justify-center hover:shadow-[0_0_25px_rgba(250,204,21,0.4)] transition-all active:scale-95 whitespace-nowrap shadow-lg shadow-black/20"
+                                >
+                                    Enroll Now
+                                </Link>
+                            </div>
+                        )}
+
+                        {/* Mobile Toggle */}
+                        <button
+                            className="lg:hidden text-white p-2.5 hover:bg-white/5 rounded-xl transition-colors shrink-0"
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        >
+                            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                        </button>
+                    </div>
+                </motion.nav>
+            </div>
 
             {/* Mobile Menu Sidebar */}
             <AnimatePresence>
@@ -150,7 +148,7 @@ const Navbar = () => {
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="fixed top-0 right-0 bottom-0 w-[300px] bg-primary-bg border-l border-white/10 z-[120] p-8 lg:hidden flex flex-col justify-between"
+                            className="fixed top-0 right-0 bottom-0 w-[280px] bg-primary-bg border-l border-white/10 z-[120] p-8 lg:hidden flex flex-col justify-between pointer-events-auto"
                         >
                             <div className="space-y-12">
                                 <div className="flex justify-between items-center">
@@ -158,8 +156,8 @@ const Navbar = () => {
                                         <span className="text-xl font-display font-bold text-white tracking-tight">Divya Gyan</span>
                                         <span className="text-[10px] text-secondary-action font-black uppercase tracking-widest">Navigation Hub</span>
                                     </div>
-                                    <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 bg-white/5 rounded-xl text-white">
-                                        <X size={20} />
+                                    <button onClick={() => setIsMobileMenuOpen(false)} className="p-4 bg-white/5 rounded-xl text-white active:scale-90 transition-transform">
+                                        <X size={24} />
                                     </button>
                                 </div>
 

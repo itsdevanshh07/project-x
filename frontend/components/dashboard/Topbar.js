@@ -21,7 +21,7 @@ export default function DashboardTopbar({ onMenuClick }) {
     }) : '';
 
     return (
-        <header className="sticky top-0 z-50 w-full h-24 bg-primary-bg/50 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-10">
+        <header className="sticky top-0 z-50 w-full h-20 md:h-24 bg-primary-bg/50 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-6 md:px-10">
             {/* Contextual Awareness */}
             <div className="flex items-center space-x-8">
                 <button

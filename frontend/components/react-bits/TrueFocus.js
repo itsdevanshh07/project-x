@@ -18,7 +18,7 @@ const TrueFocus = ({ text }) => {
                         ease: [0.21, 0.45, 0.32, 0.9]
                     }}
                     viewport={{ once: true }}
-                    className="text-step-2 font-display text-surface-light/80 hover:text-accent-highlight transition-colors duration-300"
+                    className="text-sm sm:text-lg md:text-xl lg:text-2xl font-display text-surface-light/80 hover:text-accent-highlight transition-colors duration-300"
                 >
                     {word}
                 </motion.span>

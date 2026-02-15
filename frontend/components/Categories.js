@@ -39,7 +39,7 @@ const Categories = () => {
     return (
         <section className="py-24 bg-muted/30">
             <div className="max-w-[1280px] mx-auto px-6">
-                <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+                <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 gap-6">
                     <div className="max-w-xl">
                         <motion.span
                             initial={{ opacity: 0, x: -10 }}

@@ -65,7 +65,7 @@ const BentoInfo = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-6">
                     {features.map((f, i) => (
                         <motion.div
                             key={i}
@@ -73,10 +73,10 @@ const BentoInfo = () => {
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: i * 0.1 }}
                             whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                            className={`${f.size.replace('md:', 'lg:')} md:col-span-1 lg:${f.size.replace('md:', '')} glass-card p-6 md:p-8 group cursor-default`}
+                            className={`${f.size === 'md:col-span-2' ? 'md:col-span-3 lg:col-span-4' : 'md:col-span-3 lg:col-span-2'} glass-card p-6 md:p-8 group cursor-default`}
                         >
-                            <div className={`p-4 rounded-2xl bg-white/5 border border-white/10 w-fit group-hover:bg-${f.color}/20 group-hover:border-${f.color}/30 transition-colors mb-6`}>
-                                <f.icon className={`w-8 h-8 text-surface-light/60 group-hover:text-white transition-colors`} />
+                            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 w-fit group-hover:bg-secondary-action/20 group-hover:border-secondary-action/30 transition-colors mb-6">
+                                <f.icon className="w-8 h-8 text-surface-light/60 group-hover:text-white transition-colors" />
                             </div>
                             <h3 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-secondary-action transition-colors">{f.title}</h3>
                             <p className="text-surface-light/40 text-sm leading-relaxed">{f.desc}</p>

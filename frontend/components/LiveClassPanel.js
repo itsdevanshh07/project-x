@@ -72,7 +72,7 @@ const LiveClassPanel = ({ isOpen, onClose, courses }) => {
                     initial={{ opacity: 0, y: 50, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 50, scale: 0.9 }}
-                    className="relative w-full max-w-4xl glass-card overflow-hidden flex flex-col md:flex-row min-h-[500px]"
+                    className="relative w-full max-w-4xl glass-card overflow-y-auto max-h-[90vh] flex flex-col md:flex-row min-h-[500px]"
                 >
                     <button
                         onClick={onClose}

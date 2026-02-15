@@ -28,7 +28,8 @@ import {
     ExternalLink,
     CheckCircle2,
     Lock,
-    ChevronDown
+    ChevronDown,
+    Menu
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -51,6 +52,7 @@ export default function TeacherDashboard() {
     const [mounted, setMounted] = useState(false);
     const [activeTab, setActiveTab] = useState('overview');
     const [loading, setLoading] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     // Data States
     const [courses, setCourses] = useState([]);
@@ -250,9 +252,7 @@ export default function TeacherDashboard() {
 
     return (
         <div className="min-h-screen bg-primary-bg overflow-hidden flex flex-col">
-            <Navbar />
-
-            <div className="flex flex-col lg:flex-row pt-28 h-screen overflow-hidden relative">
+            <div className="flex flex-col lg:flex-row h-screen overflow-hidden relative">
                 {/* Mobile Menu Trigger & Header */}
                 <div className="lg:hidden flex items-center justify-between px-6 py-4 border-b border-white/5 bg-primary-bg/50 backdrop-blur-xl z-30">
                     <button
@@ -380,7 +380,7 @@ export default function TeacherDashboard() {
                                             initial={{ opacity: 0, scale: 0.9 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: i * 0.1 }}
-                                            className="glass-card p-6 md:p-8 group hover:border-white/20 transition-all duration-500"
+                                            className="glass-card p-5 md:p-8 group hover:border-white/20 transition-all duration-500"
                                         >
                                             <div className="flex items-center justify-between mb-6 md:mb-8">
                                                 <div className={`p-2.5 md:p-3 rounded-xl ${stat.bg} ${stat.color} group-hover:rotate-12 transition-transform duration-500`}>
@@ -395,7 +395,7 @@ export default function TeacherDashboard() {
                                 </div>
 
                                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
-                                    <div className="lg:col-span-8 glass-card p-6 md:p-10 border border-white/5 relative overflow-hidden group">
+                                    <div className="lg:col-span-8 glass-card p-5 md:p-10 border border-white/5 relative overflow-hidden group">
                                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8 md:mb-12">
                                             <div className="space-y-1">
                                                 <h2 className="text-xl md:text-2xl font-display font-black text-white">Course Progress</h2>
@@ -449,7 +449,7 @@ export default function TeacherDashboard() {
                                     </div>
 
                                     <div className="lg:col-span-4 relative">
-                                        <div className="sticky top-0 bg-secondary-action rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-10 text-white shadow-3xl shadow-secondary-action/20 overflow-hidden min-h-[400px] md:min-h-[450px] flex flex-col group">
+                                        <div className="sticky top-0 bg-secondary-action rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-10 text-white shadow-3xl shadow-secondary-action/20 overflow-hidden min-h-[400px] md:min-h-[450px] flex flex-col group">
                                             <div className="relative z-10 flex-grow">
                                                 <div className="flex items-center justify-between mb-8 md:mb-12">
                                                     <h2 className="text-xl md:text-2xl font-display font-black tracking-tight">Live Classes</h2>
@@ -570,7 +570,7 @@ export default function TeacherDashboard() {
                                 </div>
                                 <div className="grid gap-6">
                                     {doubts.length > 0 ? doubts.map(doubt => (
-                                        <div key={doubt._id} className="glass-card p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between group gap-6 md:gap-8">
+                                        <div key={doubt._id} className="glass-card p-5 md:p-8 flex flex-col md:flex-row md:items-center justify-between group gap-6 md:gap-8">
                                             <div className="space-y-4 flex-1">
                                                 <div className="flex items-center gap-4">
                                                     <div className="w-10 h-10 rounded-xl bg-secondary-action/10 border border-secondary-action/20 flex items-center justify-center text-secondary-action font-black">
@@ -656,28 +656,28 @@ export default function TeacherDashboard() {
                                     </>
                                 ) : (
                                     <div className="space-y-12">
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center gap-6">
-                                                <button onClick={() => setSelectedCourseDetails(null)} className="p-3 bg-white/5 rounded-xl text-surface-light/40 hover:text-white transition-all">
-                                                    <ChevronRight className="w-5 h-5 rotate-180" />
+                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                                            <div className="flex items-center gap-4 md:gap-6">
+                                                <button onClick={() => setSelectedCourseDetails(null)} className="p-2 md:p-3 bg-white/5 rounded-xl text-surface-light/40 hover:text-white transition-all shrink-0">
+                                                    <ChevronRight className="w-4 md:w-5 h-4 md:h-5 rotate-180" />
                                                 </button>
-                                                <div>
-                                                    <h2 className="text-3xl font-display font-black text-white">{selectedCourseDetails.title}</h2>
-                                                    <p className="text-xs text-secondary-action font-bold uppercase tracking-widest mt-1">Course Management Hub</p>
+                                                <div className="min-w-0">
+                                                    <h2 className="text-xl md:text-3xl font-display font-black text-white truncate">{selectedCourseDetails.title}</h2>
+                                                    <p className="text-[10px] md:text-xs text-secondary-action font-bold uppercase tracking-widest mt-1">Course Management Hub</p>
                                                 </div>
                                             </div>
                                             <button
                                                 onClick={() => { setSelectedCourse(selectedCourseDetails); setShowUploadModal(true); }}
-                                                className="px-8 py-4 bg-secondary-action text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-secondary-action/20 flex items-center gap-3 hover:scale-105 transition-all"
+                                                className="w-full sm:w-auto px-6 md:px-8 py-3.5 md:py-4 bg-secondary-action text-white rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-widest shadow-2xl shadow-secondary-action/20 flex items-center justify-center gap-3 hover:scale-105 transition-all"
                                             >
-                                                <Plus className="w-4 h-4" /> Upload Recorded Lecture
+                                                <Plus className="w-4 h-4" /> <span className="sm:hidden lg:inline">Upload Recorded Lecture</span><span className="hidden sm:inline lg:hidden">Upload</span>
                                             </button>
                                         </div>
 
                                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                                             <div className="lg:col-span-2 space-y-8">
-                                                <div className="glass-card p-8">
-                                                    <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                                                <div className="glass-card p-5 md:p-8">
+                                                    <h3 className="text-base md:text-lg font-bold text-white mb-6 flex items-center gap-2">
                                                         <BookOpen className="w-5 h-5 text-secondary-action" /> Course Content
                                                     </h3>
                                                     {/* Modules and Lessons list goes here */}
@@ -716,8 +716,8 @@ export default function TeacherDashboard() {
                                                 </div>
                                             </div>
                                             <div className="space-y-8">
-                                                <div className="glass-card p-8">
-                                                    <h3 className="text-lg font-bold text-white mb-6">Course Stats</h3>
+                                                <div className="glass-card p-5 md:p-8">
+                                                    <h3 className="text-base md:text-lg font-bold text-white mb-6">Course Stats</h3>
                                                     <div className="space-y-6">
                                                         <div className="flex items-center justify-between">
                                                             <span className="text-xs text-surface-light/40">Total Students</span>
@@ -750,35 +750,35 @@ export default function TeacherDashboard() {
 
                                 <div className="grid gap-6">
                                     {liveClasses.length > 0 ? liveClasses.map(live => (
-                                        <div key={live._id} className="glass-card p-8 flex items-center justify-between group">
-                                            <div className="flex items-center gap-8">
-                                                <div className="w-20 h-20 bg-secondary-action/10 rounded-2xl flex items-center justify-center text-secondary-action border border-secondary-action/20 group-hover:bg-secondary-action/20 transition-all">
-                                                    <Video size={32} />
+                                        <div key={live._id} className="glass-card p-5 md:p-8 flex flex-col sm:flex-row sm:items-center justify-between group gap-6">
+                                            <div className="flex flex-col sm:flex-row sm:items-center gap-5 md:gap-8">
+                                                <div className="w-16 md:w-20 h-16 md:h-20 bg-secondary-action/10 rounded-2xl flex items-center justify-center text-secondary-action border border-secondary-action/20 group-hover:bg-secondary-action/20 transition-all shrink-0">
+                                                    <Video size={28} className="md:w-8 md:h-8" />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <div className="flex items-center gap-3">
-                                                        <h4 className="text-xl font-bold text-white">{live.title}</h4>
+                                                    <div className="flex flex-wrap items-center gap-3">
+                                                        <h4 className="text-lg md:text-xl font-bold text-white leading-tight">{live.title}</h4>
                                                         {live.status === 'live' && (
-                                                            <span className="px-3 py-1 bg-red-500/10 text-red-500 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse border border-red-500/20">Live Now</span>
+                                                            <span className="px-2.5 py-1 bg-red-500/10 text-red-500 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest animate-pulse border border-red-500/20">Live Now</span>
                                                         )}
                                                         {live.status === 'ended' && (
-                                                            <span className="px-3 py-1 bg-surface-light/10 text-surface-light/40 rounded-full text-[10px] font-black uppercase tracking-widest border border-white/5">Live Ended</span>
+                                                            <span className="px-2.5 py-1 bg-surface-light/10 text-surface-light/40 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest border border-white/5">Ended</span>
                                                         )}
                                                         {live.status === 'scheduled' && (
-                                                            <span className="px-3 py-1 bg-secondary-action/10 text-secondary-action rounded-full text-[10px] font-black uppercase tracking-widest border border-secondary-action/20">Upcoming</span>
+                                                            <span className="px-2.5 py-1 bg-secondary-action/10 text-secondary-action rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest border border-secondary-action/20">Upcoming</span>
                                                         )}
                                                     </div>
-                                                    <p className="text-xs text-surface-light/40 font-medium">Scheduled for: {new Date(live.scheduledTime).toLocaleString()}</p>
-                                                    <div className="flex items-center gap-4 text-[10px] font-bold text-secondary-action uppercase tracking-widest">
+                                                    <p className="text-[10px] md:text-xs text-surface-light/40 font-medium">Scheduled: {new Date(live.scheduledTime).toLocaleString()}</p>
+                                                    <div className="flex flex-wrap items-center gap-3 md:gap-4 text-[9px] md:text-[10px] font-bold text-secondary-action uppercase tracking-widest">
                                                         <span>{live.course?.title}</span>
-                                                        <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                                                        <span className="hidden md:block w-1 h-1 rounded-full bg-white/10" />
                                                         <span>Platform: {live.platform}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <button
                                                 onClick={() => setShowLiveModal(true)}
-                                                className="px-8 py-4 bg-white/5 border border-white/10 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all"
+                                                className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-white/5 border border-white/10 text-white rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all"
                                             >
                                                 Manage Stream
                                             </button>
@@ -796,7 +796,7 @@ export default function TeacherDashboard() {
 
                         {activeTab === 'settings' && (
                             <motion.div key="settings" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-4xl mx-auto">
-                                <div className="glass-card p-12 space-y-12">
+                                <div className="glass-card p-6 md:p-12 space-y-8 md:space-y-12">
                                     <div className="flex items-center gap-8">
                                         <div className="w-24 h-24 rounded-3xl bg-secondary-action/20 border border-secondary-action/30 flex items-center justify-center overflow-hidden">
                                             {user.avatar && user.avatar !== 'no-photo.jpg' ? <img src={user.avatar} className="w-full h-full object-cover" /> : <Camera className="w-8 h-8 text-secondary-action" />}

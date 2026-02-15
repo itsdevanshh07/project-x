@@ -54,12 +54,12 @@ export default function LoginPage() {
     };
 
     return (
-        <main className="min-h-screen bg-primary-bg overflow-hidden selection:bg-secondary-action/30">
+        <main className="min-h-screen bg-primary-bg flex flex-col selection:bg-secondary-action/30 overflow-x-hidden">
             <Navbar />
 
-            <div className="flex flex-col lg:flex-row min-h-screen">
+            <div className="flex-1 flex flex-col lg:flex-row pt-24">
                 {/* Left Side - Form Area */}
-                <div className="flex-1 flex items-center justify-center p-8 lg:p-24 pt-32 lg:pt-24">
+                <div className="flex-1 flex items-center justify-center p-6 md:p-12 lg:p-24">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -81,11 +81,11 @@ export default function LoginPage() {
                                     key={role.id}
                                     type="button"
                                     onClick={() => setSelectedRole(role.id)}
-                                    className={`relative z-10 flex-1 flex items-center justify-center space-x-2 py-3.5 rounded-xl text-xs font-bold transition-all duration-500 ${selectedRole === role.id ? 'text-primary-bg' : 'text-surface-light/40 hover:text-white'
+                                    className={`relative z-10 flex-1 flex items-center justify-center space-x-2 py-3.5 rounded-xl text-[9px] sm:text-xs font-bold transition-all duration-500 ${selectedRole === role.id ? 'text-primary-bg' : 'text-surface-light/40 hover:text-white'
                                         }`}
                                 >
-                                    <role.icon className={`w-4 h-4 ${selectedRole === role.id ? 'text-primary-bg' : 'text-surface-light/20'}`} />
-                                    <span className="uppercase tracking-widest">{role.label}</span>
+                                    <role.icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${selectedRole === role.id ? 'text-primary-bg' : 'text-surface-light/20'}`} />
+                                    <span className="uppercase tracking-wider">{role.label}</span>
                                     {selectedRole === role.id && (
                                         <motion.div
                                             layoutId="role-active"
@@ -154,7 +154,7 @@ export default function LoginPage() {
                             <div className="mt-8 md:mt-10">
                                 <div className="relative flex items-center justify-center mb-8 md:mb-10">
                                     <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/5"></div></div>
-                                    <span className="relative bg-[#161d2f] px-3 md:px-4 text-[10px] font-bold text-surface-light/10 uppercase tracking-[0.3em]">Single Sign-On</span>
+                                    <span className="relative bg-primary-bg px-3 md:px-4 text-[10px] font-bold text-surface-light/10 uppercase tracking-[0.3em]">Single Sign-On</span>
                                 </div>
                                 <SocialAuthButtons requiredRole={selectedRole} />
                             </div>

@@ -56,9 +56,9 @@ export default function CoursesPage() {
             <Navbar />
 
             {/* Academic Header */}
-            <header className="pt-40 pb-20 relative overflow-hidden">
+            <header className="pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-secondary-action/5 via-transparent to-transparent" />
-                <div className="container max-w-6xl mx-auto px-6 relative z-10 text-center space-y-8">
+                <div className="container max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6 md:space-y-8">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ export default function CoursesPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-6xl font-display font-bold text-white tracking-tight"
+                        className="text-4xl md:text-6xl font-display font-bold text-white tracking-tight leading-tight"
                     >
                         Master Your <span className="text-secondary-action">Curriculum.</span>
                     </motion.h1>
@@ -93,8 +93,8 @@ export default function CoursesPage() {
             </header>
 
             {/* Curriculum Filter */}
-            <div className="sticky top-24 z-40 flex justify-center px-6">
-                <div className="glass-card px-8 py-3 flex items-center justify-between gap-8 max-w-4xl w-full border border-white/5">
+            <div className="sticky top-20 md:top-24 z-40 flex justify-center px-4 md:px-6">
+                <div className="glass-card px-4 md:px-8 py-3 flex items-center justify-between gap-4 md:gap-8 max-w-4xl w-full border border-white/5 mx-auto">
                     <div className="flex items-center space-x-8 overflow-x-auto no-scrollbar">
                         {categories.map((cat) => (
                             <button

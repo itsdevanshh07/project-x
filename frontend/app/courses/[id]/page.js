@@ -79,8 +79,7 @@ export default function CourseDetailPage() {
             <Navbar />
 
             {/* Institutional Header */}
-            {/* Institutional Header */}
-            <header className="relative pt-32 pb-48 overflow-hidden bg-primary-bg">
+            <header className="relative pt-28 md:pt-32 pb-40 md:pb-48 overflow-hidden bg-primary-bg">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary-action/10 blur-[120px] rounded-full pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-secondary-action/5 blur-[100px] rounded-full pointer-events-none" />
 
@@ -94,7 +93,7 @@ export default function CourseDetailPage() {
                             <span className="text-surface-light/40 font-bold text-[10px] uppercase tracking-[0.2em]">Academic Year 2026-27</span>
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl font-display font-black text-white leading-[0.9] tracking-tighter">
+                        <h1 className="text-3xl md:text-5xl lg:text-7xl font-display font-black text-white leading-[1.1] md:leading-[0.9] tracking-tighter">
                             {course.title}
                         </h1>
 
@@ -149,7 +148,7 @@ export default function CourseDetailPage() {
             </header>
 
             {/* Main Content Area */}
-            <section className="max-w-[1280px] mx-auto px-6 -mt-32 pb-32">
+            <section className="max-w-[1280px] mx-auto px-4 md:px-6 -mt-16 md:-mt-32 pb-24 md:pb-32">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Academic Narrative & Structure */}
                     <div className="lg:col-span-2 space-y-8">
@@ -170,12 +169,12 @@ export default function CourseDetailPage() {
                         </div>
 
                         {/* Content Pane */}
-                        <div className="glass-card p-10 md:p-14 border border-white/5 relative overflow-hidden group min-h-[600px] shadow-2xl">
+                        <div className="glass-card p-6 md:p-10 lg:p-14 border border-white/5 relative overflow-hidden group min-h-[400px] md:min-h-[600px] shadow-2xl">
                             {activeTab === 'overview' && (
                                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-12">
-                                    <div className="space-y-6">
-                                        <h3 className="text-3xl font-display font-black text-white tracking-tight">Course Overview</h3>
-                                        <p className="text-base text-surface-light/40 leading-relaxed font-medium">
+                                    <div className="space-y-4 md:space-y-6">
+                                        <h3 className="text-2xl md:text-3xl font-display font-black text-white tracking-tight">Course Overview</h3>
+                                        <p className="text-sm md:text-base text-surface-light/40 leading-relaxed font-medium">
                                             {course.description}
                                         </p>
                                     </div>
@@ -212,8 +211,8 @@ export default function CourseDetailPage() {
                                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-10">
                                     <div className="flex items-center justify-between">
                                         <div className="space-y-1">
-                                            <h3 className="text-3xl font-display font-black text-white tracking-tight">Course Syllabus</h3>
-                                            <p className="text-xs text-surface-light/30 font-bold uppercase tracking-[0.2em]">Academic Roadmap</p>
+                                            <h3 className="text-2xl md:text-3xl font-display font-black text-white tracking-tight">Course Syllabus</h3>
+                                            <p className="text-[10px] text-surface-light/30 font-bold uppercase tracking-[0.2em]">Academic Roadmap</p>
                                         </div>
                                         <span className="bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-[10px] text-surface-light/40 font-black uppercase tracking-widest">{course.modules?.length || 0} Modules</span>
                                     </div>
@@ -224,15 +223,15 @@ export default function CourseDetailPage() {
                                                 <div key={idx} className="border border-white/5 rounded-2xl overflow-hidden bg-white/[0.02] hover:bg-white/[0.04] transition-all">
                                                     <button
                                                         onClick={() => setExpandedSection(expandedSection === idx ? -1 : idx)}
-                                                        className="w-full px-8 py-7 flex items-center justify-between transition-colors"
+                                                        className="w-full px-5 md:px-8 py-5 md:py-7 flex items-center justify-between transition-colors text-left"
                                                     >
-                                                        <div className="flex items-center space-x-6">
-                                                            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xs font-black text-surface-light/20">
+                                                        <div className="flex items-center space-x-4 md:space-x-6">
+                                                            <div className="w-8 md:w-10 h-8 md:h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[10px] md:text-xs font-black text-surface-light/20 shrink-0">
                                                                 0{idx + 1}
                                                             </div>
-                                                            <h4 className="text-xl font-display font-black text-white text-left tracking-tight">{module.title}</h4>
+                                                            <h4 className="text-lg md:text-xl font-display font-black text-white tracking-tight">{module.title}</h4>
                                                         </div>
-                                                        <div className={`p-2 rounded-lg bg-white/5 border border-white/10 transition-all ${expandedSection === idx ? 'bg-secondary-action border-secondary-action text-white rotate-180' : 'text-surface-light/30'}`}>
+                                                        <div className={`p-1.5 md:p-2 rounded-lg bg-white/5 border border-white/10 transition-all shrink-0 ${expandedSection === idx ? 'bg-secondary-action border-secondary-action text-white rotate-180' : 'text-surface-light/30'}`}>
                                                             <ChevronDown className="w-4 h-4" />
                                                         </div>
                                                     </button>
@@ -293,9 +292,9 @@ export default function CourseDetailPage() {
                                             </div>
                                         </div>
                                         <div className="flex-grow space-y-8">
-                                            <div className="space-y-2">
-                                                <div className="flex items-center gap-3">
-                                                    <h3 className="text-4xl font-display font-black text-white tracking-tight">{course.instructor?.fullName || 'Senior Instructor'}</h3>
+                                            <div className="space-y-4 text-center md:text-left">
+                                                <div className="flex flex-col md:flex-row items-center gap-3">
+                                                    <h3 className="text-3xl md:text-4xl font-display font-black text-white tracking-tight">{course.instructor?.fullName || 'Senior Instructor'}</h3>
                                                     <CheckCircle2 className="w-5 h-5 text-secondary-action" />
                                                 </div>
                                                 <p className="text-secondary-action font-black uppercase tracking-[0.3em] text-[10px]">Lead Academic Mentor</p>
