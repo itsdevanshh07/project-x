@@ -76,7 +76,7 @@ const Footer = () => {
                                 <div className="p-2 rounded-lg bg-white/5 text-accent-highlight">
                                     <MapPin className="w-4 h-4" />
                                 </div>
-                                <span className="text-sm text-surface-light/40 leading-relaxed font-medium">Knowledge Park, Sector 12, New Delhi, 110001</span>
+                                <span className="text-sm text-surface-light/40 leading-relaxed font-medium">Suddhonwala, Dehradun, Uttarakhand</span>
                             </li>
                             <li className="flex items-center space-x-4">
                                 <div className="p-2 rounded-lg bg-white/5 text-secondary-action">
