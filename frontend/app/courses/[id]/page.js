@@ -64,6 +64,7 @@ export default function CourseDetailPage() {
             }
 
             const API_BASE_URL = getApiUrl();
+            console.log('Initiating payment for Course ID:', id, 'at', API_BASE_URL);
 
             // Create Order
             const config = {
@@ -123,8 +124,8 @@ export default function CourseDetailPage() {
             setIsProcessing(false);
 
         } catch (err) {
-            console.error('Payment Error:', err);
-            toast.error(err.response?.data?.message || 'Something went wrong');
+            console.error('Payment Error Details:', err.response?.data || err);
+            toast.error(err.response?.data?.message || 'Something went wrong with the enrollment');
             setIsProcessing(false);
         }
     };

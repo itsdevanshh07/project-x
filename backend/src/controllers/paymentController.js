@@ -5,8 +5,8 @@ const User = require('../models/User');
 const Course = require('../models/Course');
 
 const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET
+    key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_SMhExM1ZocY2Uv',
+    key_secret: process.env.RAZORPAY_KEY_SECRET || 'zVvFnpJv3naMIgWZtgDHfpDn'
 });
 
 // @desc    Create Razorpay Order
@@ -82,7 +82,7 @@ exports.verifyPayment = async (req, res, next) => {
         const body = razorpay_order_id + "|" + razorpay_payment_id;
 
         const expectedSignature = crypto
-            .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+            .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET || 'zVvFnpJv3naMIgWZtgDHfpDn')
             .update(body.toString())
             .digest('hex');
 
@@ -140,7 +140,7 @@ exports.verifyPayment = async (req, res, next) => {
 // @access  Public
 exports.handleWebhook = async (req, res, next) => {
     try {
-        const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+        const secret = process.env.RAZORPAY_WEBHOOK_SECRET || 'academy_rzp_webhook_2026';
         const signature = req.headers['x-razorpay-signature'];
 
         const expectedSignature = crypto
