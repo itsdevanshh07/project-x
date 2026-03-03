@@ -18,7 +18,9 @@ import {
     Trophy,
     Target,
     Zap,
-    Video
+    Video,
+    TrendingUp,
+    Brain
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -62,29 +64,27 @@ export default function StudentDashboard() {
                             animate={{ opacity: 1, x: 0 }}
                             className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-white/5 border border-white/10"
                         >
-                            <Sparkles className="w-3 md:w-3.5 h-3 md:h-3.5 text-secondary-action" />
-                            <span className="text-[8px] md:text-[10px] font-black text-secondary-action uppercase tracking-[0.3em]">Verification Complete</span>
+                            <Calendar className="w-3 md:w-3.5 h-3 md:h-3.5 text-secondary-action" />
+                            <span className="text-[8px] md:text-[10px] font-black text-secondary-action uppercase tracking-[0.3em]">
+                                {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+                            </span>
                         </motion.div>
                         <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-white tracking-tight leading-tight md:leading-none">
-                            Greetings, <span className="text-secondary-action font-black">{user.fullName.split(' ')[0]}.</span>
+                            Welcome back, <br />
+                            <span className="text-secondary-action font-black">{user.fullName.split(' ')[0]}.</span>
                         </h1>
                         <p className="text-surface-light/40 font-medium max-w-md italic border-l-2 border-secondary-action/30 pl-4 md:pl-6 text-sm md:text-lg">
-                            "The pursuit of knowledge is the blueprint for future excellence."
+                            "Unlock your potential today. Every lesson brings you one step closer to mastery."
                         </p>
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 md:gap-12 pt-6 md:pt-0 border-t sm:border-t-0 border-white/5">
                         <div className="text-left sm:text-right group-hover:translate-x-[-10px] transition-transform duration-700">
-                            <p className="text-[8px] md:text-[10px] font-black text-surface-light/20 uppercase tracking-[0.3em] mb-2 md:mb-4">Academic Tier</p>
+                            <p className="text-[8px] md:text-[10px] font-black text-surface-light/20 uppercase tracking-[0.3em] mb-2 md:mb-4">Course Progress</p>
                             <p className="text-xl md:text-3xl font-display font-black text-white flex items-center gap-3 sm:justify-end">
-                                <Trophy className="w-5 md:w-6 h-5 md:h-6 text-secondary-action" />
-                                {stats?.tier || 'Tier A'}
+                                <TrendingUp className="w-5 md:w-6 h-5 md:h-6 text-emerald-400" />
+                                {myCourses.length > 0 ? Math.round(myCourses.reduce((acc, c) => acc + (c.progress || 0), 0) / myCourses.length) : 0}%
                             </p>
-                        </div>
-                        <div className="w-[1px] h-12 md:h-16 bg-white/10 hidden sm:block" />
-                        <div className="text-left sm:text-right group-hover:translate-x-[-10px] transition-transform duration-700 delay-100">
-                            <p className="text-[8px] md:text-[10px] font-black text-surface-light/20 uppercase tracking-[0.3em] mb-2 md:mb-4">Aggregate Accuracy</p>
-                            <p className="text-xl md:text-3xl font-display font-black text-white">{stats?.aggregateScore || '84.2%'}</p>
                         </div>
                     </div>
                 </div>
@@ -129,6 +129,70 @@ export default function StudentDashboard() {
                         )}
                     </motion.div>
                 ))}
+            </div>
+
+            {/* Motivational Learning Insights */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    className="glass-card p-10 md:p-12 bg-gradient-to-br from-secondary-action/10 to-transparent border-secondary-action/20 flex flex-col md:flex-row items-center gap-10 group"
+                >
+                    <div className="space-y-6 flex-1">
+                        <div className="flex items-center gap-4">
+                            <div className="p-3 bg-secondary-action/20 rounded-xl">
+                                <TrendingUp className="text-secondary-action w-6 h-6" />
+                            </div>
+                            <h3 className="text-2xl font-black text-white uppercase tracking-tight">Today's Mission</h3>
+                        </div>
+                        <p className="text-sm text-surface-light/40 font-medium leading-relaxed italic">
+                            Complete the next module in <span className="text-white font-bold">{myCourses[0]?.title || 'your ongoing course'}</span> to reach a {Math.min(100, (myCourses[0]?.progress || 0) + 10)}% completion milestone.
+                        </p>
+                        <Link href={`/courses/${myCourses[0]?._id || ''}/learn`} className="inline-flex items-center gap-3 text-[10px] font-black text-secondary-action uppercase tracking-[0.3em] hover:gap-5 transition-all">
+                            Accept Challenge <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </div>
+                    <div className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center">
+                        <svg className="w-full h-full rotate-[-90deg]">
+                            <circle cx="50%" cy="50%" r="45%" className="stroke-white/5 fill-none" strokeWidth="8" />
+                            <motion.circle
+                                cx="50%" cy="50%" r="45%"
+                                className="stroke-secondary-action fill-none shadow-[0_0_20px_rgba(99,102,241,0.5)]"
+                                strokeWidth="8"
+                                strokeLinecap="round"
+                                initial={{ strokeDasharray: "0 1000" }}
+                                animate={{ strokeDasharray: `${((myCourses[0]?.progress || 45) * 2.8).toFixed(1)} 1000` }}
+                                transition={{ duration: 2, ease: "easeOut" }}
+                            />
+                        </svg>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                            <span className="text-2xl font-black text-white">{myCourses[0]?.progress || 45}%</span>
+                            <span className="text-[7px] font-black text-surface-light/20 uppercase tracking-widest">Done</span>
+                        </div>
+                    </div>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    className="glass-card p-10 md:p-12 bg-gradient-to-br from-purple-500/10 to-transparent border-purple-500/10 flex flex-col gap-10 group"
+                >
+                    <div className="flex items-center gap-4">
+                        <div className="p-3 bg-purple-500/20 rounded-xl">
+                            <Brain className="text-purple-400 w-6 h-6" />
+                        </div>
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tight">AI Insights</h3>
+                    </div>
+                    <div className="space-y-6">
+                        <p className="text-sm text-surface-light/40 font-medium leading-relaxed italic">
+                            "You are performing exceptionally well in <span className="text-purple-400 font-bold">Conceptual Logical Reasoning</span>. We noticed a trend where your focus peaks in the early mornings."
+                        </p>
+                        <div className="p-5 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-between">
+                            <span className="text-[9px] font-black text-surface-light/40 uppercase tracking-widest italic">Suggested Focus: Vector Analysis</span>
+                            <Sparkles className="w-4 h-4 text-purple-400" />
+                        </div>
+                    </div>
+                </motion.div>
             </div>
 
             {/* Core Learning Grid */}

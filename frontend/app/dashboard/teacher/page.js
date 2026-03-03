@@ -29,7 +29,8 @@ import {
     CheckCircle2,
     Lock,
     ChevronDown,
-    Menu
+    Menu,
+    Home
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -242,6 +243,7 @@ export default function TeacherDashboard() {
     if (!mounted) return null;
 
     const navItems = [
+        { id: 'home', label: 'Home', icon: Home },
         { id: 'overview', label: 'Overview', icon: LayoutDashboard },
         { id: 'courses', label: 'Courses', icon: BookOpen },
         { id: 'live', label: 'Live Classes', icon: Video },
@@ -314,7 +316,11 @@ export default function TeacherDashboard() {
                                         <button
                                             key={item.id}
                                             onClick={() => {
-                                                setActiveTab(item.id);
+                                                if (item.id === 'home') {
+                                                    router.push('/');
+                                                } else {
+                                                    setActiveTab(item.id);
+                                                }
                                                 setIsSidebarOpen(false);
                                             }}
                                             className={`w-full flex items-center space-x-4 px-5 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all duration-500 relative group
@@ -368,12 +374,11 @@ export default function TeacherDashboard() {
                                 className="space-y-12 max-w-7xl mx-auto"
                             >
                                 {/* Stat Grid */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                                     {[
                                         { label: 'Total Students', value: stats.totalStudents, icon: Users, color: 'text-blue-400', bg: 'bg-blue-400/10' },
                                         { label: 'Total Courses', value: stats.totalCourses, icon: BookOpen, color: 'text-purple-400', bg: 'bg-purple-400/10' },
                                         { label: 'Live Classes', value: stats.liveClasses, icon: Video, color: 'text-pink-400', bg: 'bg-pink-400/10' },
-                                        { label: 'Earnings', value: `₹${stats.earnings}`, icon: Activity, color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
                                     ].map((stat, i) => (
                                         <motion.div
                                             key={i}

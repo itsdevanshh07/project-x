@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
+    Home,
     LayoutDashboard,
     BookOpen,
     Video,
@@ -20,6 +21,7 @@ import { logout } from '@/slices/authSlice';
 import { motion } from 'framer-motion';
 
 const studentMenuItems = [
+    { name: 'Home', href: '/', icon: Home },
     { name: 'Overview', href: '/dashboard/student', icon: LayoutDashboard },
     { name: 'Academic Courses', href: '/dashboard/student/courses', icon: BookOpen },
     { name: 'Live Classes', href: '/dashboard/student/live', icon: Video },

@@ -1,13 +1,14 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Library, LayoutDashboard, BookOpen, Video, FileText, BarChart3, User, LogOut } from 'lucide-react';
+import { X, Library, LayoutDashboard, BookOpen, Video, FileText, BarChart3, User, LogOut, Home } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { logout } from '@/slices/authSlice';
 
 const menuItems = [
+    { name: 'Home', href: '/', icon: Home },
     { name: 'Overview', href: '/dashboard/student', icon: LayoutDashboard },
     { name: 'Academic Courses', href: '/dashboard/student/courses', icon: BookOpen },
     { name: 'Live Classes', href: '/dashboard/student/live', icon: Video },
