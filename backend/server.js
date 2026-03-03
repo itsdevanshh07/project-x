@@ -79,7 +79,7 @@ app.use('/api/current-affairs', require('./src/routes/currentAffairsRoutes'));
 // Error Handling Middleware
 app.use((err, req, res, next) => {
     const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-    console.error(`Error [${req.method}] ${req.path}: ${err.message}`);
+    console.error(`Error [${req.method}] ${req.path}:`, err);
     if (process.env.NODE_ENV !== 'production' && err.stack) {
         console.error(err.stack);
     }
@@ -115,6 +115,13 @@ const startServer = async () => {
         server.listen(PORT, '0.0.0.0', () => {
             console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
             console.log(`API URL: http://localhost:${PORT}`);
+
+            // Critical Env Checks
+            if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+                console.warn('WARNING: Razorpay keys are missing from environment variables!');
+            } else {
+                console.log('Razorpay keys detected.');
+            }
         });
 
         // Handle server errors

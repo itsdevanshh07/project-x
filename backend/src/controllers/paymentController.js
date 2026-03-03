@@ -21,7 +21,11 @@ exports.createOrder = async (req, res, next) => {
             return res.status(404).json({ message: 'Course not found' });
         }
 
-        const amount = (course.discountedPrice || course.price) * 100; // Amount in paise
+        const amount = Math.round((course.discountedPrice || course.price || 0) * 100);
+
+        if (isNaN(amount) || amount < 100) { // Razorpay minimum is 100 paise (1 INR)
+            return res.status(400).json({ message: 'Invalid course price' });
+        }
 
         const options = {
             amount,
@@ -29,7 +33,16 @@ exports.createOrder = async (req, res, next) => {
             receipt: `receipt_${Date.now()}`
         };
 
-        const razorpayOrder = await razorpay.orders.create(options);
+        let razorpayOrder;
+        try {
+            razorpayOrder = await razorpay.orders.create(options);
+        } catch (rzpError) {
+            console.error('Razorpay Order Creation Failed:', rzpError);
+            return res.status(rzpError.statusCode || 500).json({
+                message: 'Failed to create Razorpay order',
+                error: rzpError.description || rzpError.message || 'Razorpay error'
+            });
+        }
 
         // Create pending order in our database
         await Order.create({
