@@ -16,6 +16,7 @@ import { useRouter, useParams } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { loadRazorpayScript } from '@/lib/razorpay';
+import { getApiUrl } from '@/lib/api';
 
 export default function CourseDetailPage() {
     const { id } = useParams();
@@ -33,7 +34,7 @@ export default function CourseDetailPage() {
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api').replace(/\/auth$/, '');
+                const API_BASE_URL = getApiUrl();
                 const response = await axios.get(`${API_BASE_URL}/courses/${id}`);
                 setCourse(response.data);
                 setLoading(false);
@@ -62,7 +63,7 @@ export default function CourseDetailPage() {
                 return;
             }
 
-            const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api').replace(/\/auth$/, '');
+            const API_BASE_URL = getApiUrl();
 
             // Create Order
             const config = {
@@ -82,7 +83,7 @@ export default function CourseDetailPage() {
             }
 
             const options = {
-                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_SMhExM1ZocY2Uv',
                 amount: data.order.amount,
                 currency: data.order.currency,
                 name: 'Academy',

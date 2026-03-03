@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Bell, Search, Menu, User, Calendar, Sparkles } from 'lucide-react';
+import { Bell, Search, Menu, User, Calendar, Sparkles, Home } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function DashboardTopbar({ onMenuClick }) {
     const { user } = useSelector((state) => state.auth);
@@ -34,6 +35,10 @@ export default function DashboardTopbar({ onMenuClick }) {
                     <Calendar className="w-3.5 h-3.5 text-secondary-action shrink-0" />
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-surface-light/40 group-hover:text-white transition-colors">{today}</span>
                 </div>
+                <Link href="/" className="hidden sm:flex items-center gap-3 px-5 py-2.5 bg-white/5 border border-white/10 rounded-full backdrop-blur-md group hover:bg-secondary-action/20 transition-all">
+                    <Home className="w-3.5 h-3.5 text-secondary-action shrink-0" />
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-surface-light/40 group-hover:text-white transition-colors">Home</span>
+                </Link>
             </div>
 
             {/* Interaction Hub */}

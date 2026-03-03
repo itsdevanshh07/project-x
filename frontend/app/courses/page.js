@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CourseCard from '@/components/CourseCard';
 import axios from 'axios';
+import { getApiUrl } from '@/lib/api';
 
 export default function CoursesPage() {
     const [courses, setCourses] = useState([]);
@@ -22,7 +23,7 @@ export default function CoursesPage() {
 
     const fetchCourses = async () => {
         try {
-            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+            const API_URL = getApiUrl();
             const response = await axios.get(`${API_URL}/courses`);
             setCourses(response.data);
             setLoading(false);
