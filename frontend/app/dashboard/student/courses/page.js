@@ -47,7 +47,7 @@ export default function StudentCourses() {
                         className="glass-card group hover:border-secondary-action/20 transition-all duration-500 overflow-hidden"
                     >
                         <div className="aspect-video relative overflow-hidden bg-white/5">
-                            <img src={course.thumbnail} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                            <img src={course.thumbnail} alt="" className="w-full h-full object-cover transition-all duration-700" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                             <div className="absolute bottom-4 left-6 right-6 flex items-end justify-between">
                                 <span className="text-[9px] font-black text-white/50 uppercase tracking-widest">{course.category}</span>

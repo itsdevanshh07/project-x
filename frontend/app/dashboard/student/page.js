@@ -263,7 +263,7 @@ export default function StudentDashboard() {
                                     </div>
 
                                     <div className="w-full md:w-40 h-32 md:h-28 rounded-2xl md:rounded-3xl bg-white/5 overflow-hidden shrink-0 border border-white/10 group-hover:border-secondary-action/30 transition-all duration-700 relative">
-                                        <img src={course.thumbnail} alt="" className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110" />
+                                        <img src={course.thumbnail} alt="" className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] to-transparent opacity-60" />
                                     </div>
                                     <div className="flex-1 min-w-0 space-y-4 md:space-y-5 w-full">

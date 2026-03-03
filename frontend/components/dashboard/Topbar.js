@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Bell, Search, Menu, User, Calendar, Sparkles, Home } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import { Bell, Search, Menu, User, Calendar, Sparkles, Home, LogOut } from 'lucide-react';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '@/slices/authSlice';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -20,6 +21,8 @@ export default function DashboardTopbar({ onMenuClick }) {
         month: 'long',
         day: 'numeric'
     }) : '';
+
+    const dispatch = useDispatch();
 
     return (
         <header className="sticky top-0 z-50 w-full h-20 md:h-24 bg-primary-bg/50 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-6 md:px-10">
@@ -56,6 +59,14 @@ export default function DashboardTopbar({ onMenuClick }) {
                     <button className="relative p-3 bg-white/5 border border-white/5 rounded-2xl text-surface-light/40 hover:text-white hover:bg-white/10 transition-all group">
                         <Bell className="w-4 h-4" />
                         <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-accent-highlight rounded-full border-2 border-primary-bg box-content group-hover:scale-125 transition-transform" />
+                    </button>
+
+                    <button
+                        onClick={() => dispatch(logout())}
+                        className="p-3 bg-white/5 border border-white/5 rounded-2xl text-surface-light/40 hover:text-red-400 hover:bg-red-500/10 hover:border-red-500/20 transition-all active:scale-95"
+                        title="Logout"
+                    >
+                        <LogOut className="w-4 h-4" />
                     </button>
 
                     <div className="h-10 w-[1px] bg-white/5 hidden sm:block mx-2" />

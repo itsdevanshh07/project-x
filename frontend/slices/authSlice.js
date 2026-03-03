@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { getApiUrl } from '@/lib/api';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
-    ? `${process.env.NEXT_PUBLIC_API_URL}/auth`
-    : 'http://localhost:5000/api/auth';
+const API_URL = `${getApiUrl()}/auth`;
 
 // Get user from localStorage
 const user = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : null;

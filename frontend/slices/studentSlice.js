@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { getApiUrl } from '@/lib/api';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/student';
+const API_URL = `${getApiUrl()}/student`;
 
 const initialState = {
     myCourses: [],

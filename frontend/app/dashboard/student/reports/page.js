@@ -13,9 +13,9 @@ export default function StudentReports() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[
-                    { label: 'Cumulative Accuracy', value: '92.4%', change: '+2.1%', icon: Target, color: 'text-secondary-action' },
-                    { label: 'Conceptual Depth', value: 'Tier S', change: 'Evolved', icon: Shield, color: 'text-accent-highlight' },
-                    { label: 'Weekly Velocity', value: '42h', change: '+12%', icon: BarChart3, color: 'text-emerald-400' },
+                    { label: 'Course Completion', value: '78%', change: '+5.4%', icon: Target, color: 'text-secondary-action' },
+                    { label: 'Active Mastery', value: 'Core', change: 'Stable', icon: Shield, color: 'text-accent-highlight' },
+                    { label: 'Weekly Learning', value: '42h', change: '+12%', icon: BarChart3, color: 'text-emerald-400' },
                 ].map((stat, i) => (
                     <motion.div
                         key={i}

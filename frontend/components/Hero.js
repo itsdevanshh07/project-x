@@ -47,7 +47,7 @@ const Hero = () => {
                         </motion.h1>
 
                         <div className="max-w-2xl mx-auto">
-                            <TrueFocus text="Classes 5–12 | Conceptual • Structured • Trusted" />
+                            <TrueFocus text="Classes 5–11 | Conceptual • Structured • Trusted" />
                         </div>
                     </div>
 
