@@ -98,15 +98,24 @@ const Navbar = () => {
                     {/* Right: Actions */}
                     <div className="flex items-center gap-3 md:gap-6">
                         {mounted && user ? (
-                            <Link
-                                href="/dashboard"
-                                className="flex items-center gap-2 p-1.5 pl-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all group lg:min-w-[140px]"
-                            >
-                                <span className="hidden sm:inline text-white text-xs lg:text-sm font-bold">{user.fullName.split(' ')[0]}</span>
-                                <div className="w-8 h-8 md:w-9 md:h-9 bg-secondary-action rounded-lg flex items-center justify-center text-white font-bold text-xs group-hover:scale-110 transition-transform">
-                                    {user.fullName.charAt(0)}
-                                </div>
-                            </Link>
+                            <div className="flex items-center gap-3">
+                                <Link
+                                    href="/dashboard"
+                                    className="flex items-center gap-2 p-1.5 pl-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all group lg:min-w-[140px]"
+                                >
+                                    <span className="hidden sm:inline text-white text-xs lg:text-sm font-bold">{user.fullName.split(' ')[0]}</span>
+                                    <div className="w-8 h-8 md:w-9 md:h-9 bg-secondary-action rounded-lg flex items-center justify-center text-white font-bold text-xs group-hover:scale-110 transition-transform">
+                                        {user.fullName.charAt(0)}
+                                    </div>
+                                </Link>
+                                <button
+                                    onClick={() => dispatch(logout())}
+                                    className="p-2.5 bg-white/5 border border-white/10 rounded-xl text-surface-light/40 hover:text-red-400 hover:bg-red-400/10 hover:border-red-400/20 transition-all active:scale-90"
+                                    title="Logout"
+                                >
+                                    <LogOut size={18} />
+                                </button>
+                            </div>
                         ) : (
                             <div className="flex items-center gap-4 md:gap-6">
                                 <Link href="/login" className="hidden lg:block text-sm font-bold text-surface-light/70 hover:text-white transition-colors">
@@ -183,17 +192,29 @@ const Navbar = () => {
 
                             <div className="space-y-4">
                                 {mounted && user ? (
-                                    <Link
-                                        href="/dashboard"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                        className="w-full h-16 glass-card flex items-center gap-4 px-6 border-secondary-action/30"
-                                    >
-                                        <div className="w-10 h-10 bg-secondary-action rounded-xl flex items-center justify-center text-white font-bold">{user.fullName.charAt(0)}</div>
-                                        <div className="flex flex-col">
-                                            <span className="text-sm font-bold text-white">{user.fullName.split(' ')[0]}</span>
-                                            <span className="text-[10px] text-surface-light/40 uppercase tracking-widest font-black">Student Access</span>
-                                        </div>
-                                    </Link>
+                                    <div className="space-y-3">
+                                        <Link
+                                            href="/dashboard"
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="w-full h-16 glass-card flex items-center gap-4 px-6 border-secondary-action/30"
+                                        >
+                                            <div className="w-10 h-10 bg-secondary-action rounded-xl flex items-center justify-center text-white font-bold">{user.fullName.charAt(0)}</div>
+                                            <div className="flex flex-col">
+                                                <span className="text-sm font-bold text-white">{user.fullName.split(' ')[0]}</span>
+                                                <span className="text-[10px] text-surface-light/40 uppercase tracking-widest font-black">Student Access</span>
+                                            </div>
+                                        </Link>
+                                        <button
+                                            onClick={() => {
+                                                dispatch(logout());
+                                                setIsMobileMenuOpen(false);
+                                            }}
+                                            className="w-full h-14 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center justify-center gap-3 text-red-500 font-bold uppercase tracking-widest text-[10px]"
+                                        >
+                                            <LogOut size={16} />
+                                            Logout Session
+                                        </button>
+                                    </div>
                                 ) : (
                                     <>
                                         <Link href="/login" onClick={() => setIsMobileMenuOpen(false)} className="block py-4 text-center text-surface-light/40 font-bold uppercase tracking-widest text-xs">Sign In</Link>
