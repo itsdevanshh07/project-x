@@ -15,11 +15,13 @@ import Footer from '@/components/Footer';
 import { useRouter, useParams } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { loadRazorpayScript } from '@/lib/razorpay';
 
 export default function CourseDetailPage() {
     const { id } = useParams();
     const [course, setCourse] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isProcessing, setIsProcessing] = useState(false);
     const [error, setError] = useState(null);
     const [activeTab, setActiveTab] = useState('curriculum');
     const [expandedSection, setExpandedSection] = useState(0);
@@ -31,7 +33,7 @@ export default function CourseDetailPage() {
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/auth').replace(/\/auth$/, '');
+                const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api').replace(/\/auth$/, '');
                 const response = await axios.get(`${API_BASE_URL}/courses/${id}`);
                 setCourse(response.data);
                 setLoading(false);
@@ -43,6 +45,81 @@ export default function CourseDetailPage() {
         };
         fetchCourse();
     }, [id]);
+
+    const handlePayment = async () => {
+        if (!user) {
+            router.push('/login');
+            return;
+        }
+
+        try {
+            setIsProcessing(true);
+            const resScript = await loadRazorpayScript();
+
+            if (!resScript) {
+                toast.error('Razorpay SDK failed to load. Are you online?');
+                setIsProcessing(false);
+                return;
+            }
+
+            const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api').replace(/\/auth$/, '');
+
+            // Create Order
+            const { data } = await axios.post(`${API_BASE_URL}/payments/create-order`,
+                { courseId: id },
+                { withCredentials: true }
+            );
+
+            if (!data.success) {
+                throw new Error('Could not create order');
+            }
+
+            const options = {
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                amount: data.order.amount,
+                currency: data.order.currency,
+                name: 'Academy',
+                description: `Enrollment for ${course.title}`,
+                image: '/logo.png', // Add your logo path
+                order_id: data.order.id,
+                handler: async (response) => {
+                    try {
+                        const verifyRes = await axios.post(`${API_BASE_URL}/payments/verify`, {
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                            courseId: id
+                        }, { withCredentials: true });
+
+                        if (verifyRes.data.success) {
+                            toast.success('Successfully Enrolled!');
+                            router.push(`/courses/${id}/learn`);
+                        }
+                    } catch (err) {
+                        console.error('Verification Error:', err);
+                        toast.error('Payment verification failed.');
+                    }
+                },
+                prefill: {
+                    name: user.fullName,
+                    email: user.email,
+                    contact: user.phone || ''
+                },
+                theme: {
+                    color: '#6366f1' // Adjust to your theme color
+                }
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+            setIsProcessing(false);
+
+        } catch (err) {
+            console.error('Payment Error:', err);
+            toast.error(err.response?.data?.message || 'Something went wrong');
+            setIsProcessing(false);
+        }
+    };
 
     const handleEnroll = () => {
         if (!user) {
@@ -350,10 +427,20 @@ export default function CourseDetailPage() {
 
                                     <div className="space-y-4">
                                         <button
-                                            onClick={handleEnroll}
-                                            className="w-full btn-enroll"
+                                            onClick={handlePayment}
+                                            disabled={isProcessing}
+                                            className="w-full btn-enroll flex items-center justify-center gap-2"
                                         >
-                                            Secure Enrollment <ArrowRight className="w-4 h-4 ml-2" />
+                                            {isProcessing ? (
+                                                <>
+                                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                                    Processing...
+                                                </>
+                                            ) : (
+                                                <>
+                                                    Secure Enrollment <ArrowRight className="w-4 h-4" />
+                                                </>
+                                            )}
                                         </button>
                                         <p className="text-[10px] text-center text-surface-light/30 font-bold uppercase tracking-widest">Fixed Annual Fee • No Hidden Costs</p>
                                     </div>
