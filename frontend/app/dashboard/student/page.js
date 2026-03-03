@@ -193,6 +193,40 @@ export default function StudentDashboard() {
                         </div>
                     </div>
                 </motion.div>
+
+                {/* Academic Wisdom Banner */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    className="lg:col-span-2 glass-card p-10 md:p-14 bg-[#111113] border-white/5 relative overflow-hidden group"
+                >
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-action/5 blur-[120px] rounded-full -mr-48 -mt-48" />
+                    <div className="relative z-10 space-y-8 text-center max-w-3xl mx-auto">
+                        <div className="inline-flex p-4 rounded-3xl bg-white/5 border border-white/10 text-secondary-action shadow-2xl group-hover:scale-110 transition-transform duration-700">
+                            <Trophy className="w-10 h-10" />
+                        </div>
+                        <div className="space-y-4">
+                            <h2 className="text-3xl md:text-4xl font-display font-black text-white tracking-tight uppercase">Wisdom of the Scholar</h2>
+                            <p className="text-xl md:text-2xl text-surface-light/60 font-medium italic leading-relaxed">
+                                "Education is the most powerful weapon which you can use to change the world. Your potential is limited only by your imagination."
+                            </p>
+                        </div>
+                        <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
+                            {[
+                                { label: 'Conceptual Clarity', val: 'Elite' },
+                                { label: 'Pedagogy', val: 'Structured' },
+                                { label: 'Analysis', val: 'AI-Driven' }
+                            ].map((item, i) => (
+                                <div key={i} className="flex items-center gap-3 px-6 py-3 bg-white/5 rounded-2xl border border-white/5">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-secondary-action shadow-[0_0_10px_currentColor]" />
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-surface-light/40">
+                                        {item.label}: <span className="text-white">{item.val}</span>
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
             </div>
 
             {/* Core Learning Grid */}

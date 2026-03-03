@@ -122,7 +122,7 @@ export default function StudentProfile() {
                                 className="w-full bg-white/5 border border-white/5 rounded-2xl p-5 text-white text-sm font-bold tracking-wide outline-none focus:border-secondary-action/30 transition-all appearance-none"
                             >
                                 <option value="" disabled className="bg-primary-bg">Select Grade</option>
-                                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(g => (
+                                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(g => (
                                     <option key={g} value={g} className="bg-primary-bg">Class {g}</option>
                                 ))}
                             </select>

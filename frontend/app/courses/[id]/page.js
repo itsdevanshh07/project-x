@@ -65,9 +65,16 @@ export default function CourseDetailPage() {
             const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api').replace(/\/auth$/, '');
 
             // Create Order
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                },
+                withCredentials: true
+            };
+
             const { data } = await axios.post(`${API_BASE_URL}/payments/create-order`,
                 { courseId: id },
-                { withCredentials: true }
+                config
             );
 
             if (!data.success) {
@@ -89,7 +96,7 @@ export default function CourseDetailPage() {
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature,
                             courseId: id
-                        }, { withCredentials: true });
+                        }, config);
 
                         if (verifyRes.data.success) {
                             toast.success('Successfully Enrolled!');
