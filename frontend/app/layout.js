@@ -16,8 +16,8 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: "Divya Gyan Dhara | Institutional Academic Excellence",
-  description: "Advanced learning platform for Classes 5-12. Conceptual clarity, structured pedagogy, and parent-trusted academic results.",
+  title: "Divya Gyan Dhara | Coming Soon",
+  description: "Concept-based learning ecosystem for Classes 5–12 launching soon in Dehradun and Uttarakhand.",
 };
 
 export default function RootLayout({ children }) {

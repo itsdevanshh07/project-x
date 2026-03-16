@@ -75,6 +75,7 @@ app.use('/api/payments', require('./src/routes/paymentRoutes'));
 app.use('/api/test-series', require('./src/routes/testSeriesRoutes'));
 app.use('/api/pyq', require('./src/routes/pyqRoutes'));
 app.use('/api/current-affairs', require('./src/routes/currentAffairsRoutes'));
+app.use('/api/early-access', require('./src/routes/earlyAccessRoutes'));
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

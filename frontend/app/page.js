@@ -3,8 +3,10 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import CoursePreview from '@/components/CoursePreview';
-import DashboardPreview from '@/components/DashboardPreview';
+import KeyHighlights from '@/components/KeyHighlights';
 import BentoInfo from '@/components/BentoInfo';
+import FounderMessage from '@/components/FounderMessage';
+import SocialFollow from '@/components/SocialFollow';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -13,8 +15,10 @@ export default function Home() {
       <Navbar />
       <Hero />
       <CoursePreview />
-      <DashboardPreview />
+      <KeyHighlights />
       <BentoInfo />
+      <FounderMessage />
+      <SocialFollow />
       <Footer />
     </main>
   );

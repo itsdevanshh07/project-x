@@ -6,46 +6,32 @@ import { Users, ShieldCheck, BookOpen, Microscope, Globe, Lightbulb } from 'luci
 const BentoInfo = () => {
     const features = [
         {
-            title: "Teacher-Led Learning",
-            desc: "Direct mentorship from industry veterans and academic scholars.",
-            icon: Users,
+            title: "Concept-Based Classes",
+            desc: "Focusing on conceptual clarity rather than rote learning.",
+            icon: BookOpen,
             color: "secondary-action",
             size: "md:col-span-2"
         },
         {
-            title: "Parental Trust",
-            desc: "Real-time tracking and collaborative growth monitoring for parents.",
-            icon: ShieldCheck,
+            title: "Hybrid Learning",
+            desc: "The perfect blend of tradition and modern technology.",
+            icon: Globe,
             color: "green-400",
             size: "md:col-span-1"
         },
         {
-            title: "Structured Pedagogy",
-            desc: "Scientifically proven learning paths tailored to individual pace.",
-            icon: BookOpen,
+            title: "Progress Tracking",
+            desc: "Real-time tracking and collaborative growth monitoring.",
+            icon: ShieldCheck,
             color: "accent-highlight",
             size: "md:col-span-1"
         },
         {
-            title: "Lab Experiments",
-            desc: "Virtual simulations to bring complex concepts to life.",
-            icon: Microscope,
+            title: "Values of Devbhoomi",
+            desc: "Rooted in our culture and values while embracing the future.",
+            icon: Users,
             color: "purple-400",
-            size: "md:col-span-1"
-        },
-        {
-            title: "Global Standards",
-            desc: "Curriculum aligned with international academic benchmarks.",
-            icon: Globe,
-            color: "blue-400",
             size: "md:col-span-2"
-        },
-        {
-            title: "Creative Thinking",
-            desc: "Fostering innovation beyond the textbook boundaries.",
-            icon: Lightbulb,
-            color: "yellow-400",
-            size: "md:col-span-1"
         }
     ];
 
@@ -58,10 +44,10 @@ const BentoInfo = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         className="text-4xl md:text-5xl font-display font-bold text-white"
                     >
-                        Why Choose <span className="text-secondary-action">Divya Gyan Dhara?</span>
+                        What We Are <span className="text-secondary-action">Building</span>
                     </motion.h2>
                     <p className="text-surface-light/40 text-lg">
-                        We don't just teach. We engineer success through a unique blend of tradition and technology.
+                        A new approach to education shaping the leaders of tomorrow.
                     </p>
                 </div>
 

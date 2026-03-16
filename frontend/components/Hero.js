@@ -3,7 +3,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, Play, Award, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowRight, Play, Award, ShieldCheck, Zap, Loader2 } from 'lucide-react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import Hyperspeed from './react-bits/Hyperspeed';
 import TrueFocus from './react-bits/TrueFocus';
 import Magnetic from './utils/Magnetic';
@@ -11,6 +13,37 @@ import VideoModal from './VideoModal';
 
 const Hero = () => {
     const [isVideoOpen, setIsVideoOpen] = useState(false);
+
+    // Form State
+    const [formData, setFormData] = useState({
+        studentName: '',
+        studentClass: '',
+        parentPhone: '',
+        city: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        try {
+            const apiUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:5000/api' : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api');
+            const res = await axios.post(`${apiUrl}/early-access`, formData);
+            if (res.data.success) {
+                toast.success('Early access registered successfully!');
+                setFormData({ studentName: '', studentClass: '', parentPhone: '', city: '' });
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error(error.response?.data?.message || 'Something went wrong. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <section className="relative min-h-screen flex items-center justify-center pt-32 md:pt-44 pb-16 md:pb-24 overflow-hidden">
@@ -28,7 +61,7 @@ const Hero = () => {
                     >
                         <Zap className="w-4 h-4 text-accent-highlight" />
                         <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] md:tracking-widest text-surface-light/80 text-center">
-                            The Future of Learning is Here
+                            Launching August 2026
                         </span>
                     </motion.div>
 
@@ -40,41 +73,63 @@ const Hero = () => {
                             transition={{ delay: 0.1, duration: 0.8 }}
                             className="text-5xl sm:text-7xl lg:text-8xl font-display font-bold text-white tracking-tighter leading-[1.1] md:leading-[1.05]"
                         >
-                            Elevating Minds <br className="hidden md:block" />
+                            Education that <br className="hidden md:block" />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-action via-accent-highlight to-secondary-action bg-[length:200%_auto] animate-gradient-x">
-                                Beyond Limits.
+                                Builds Future Leaders.
                             </span>
                         </motion.h1>
 
                         <div className="max-w-2xl mx-auto">
-                            <TrueFocus text="Classes 5–11 | Conceptual • Structured • Trusted" />
+                            <TrueFocus text="A new learning ecosystem for Classes 5–12 focused on concept clarity, skills and real growth." />
                         </div>
                     </div>
 
-                    {/* CTAs */}
+                    {/* Early Access Form */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
-                        className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 w-full sm:w-auto px-4 sm:px-0"
+                        className="w-full max-w-2xl mx-auto px-4 sm:px-0 mt-8"
                     >
-                        <Magnetic strength={0.3} className="w-full sm:w-auto">
-                            <Link href="/courses" className="btn-enroll group w-full sm:w-auto py-5 md:py-4">
-                                <span className="text-lg md:text-base">Enroll Now</span>
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                        </Magnetic>
-                        <Magnetic strength={0.3} className="w-full sm:w-auto">
-                            <button
-                                onClick={() => setIsVideoOpen(true)}
-                                className="btn-demo group w-full sm:w-auto py-5 md:py-4 flex items-center justify-center gap-3"
-                            >
-                                <div className="bg-white/10 p-2 rounded-lg group-hover:bg-accent-highlight group-hover:text-primary-bg transition-colors">
-                                    <Play className="w-4 h-4" />
+                        <form onSubmit={handleFormSubmit} className="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl backdrop-blur-md space-y-4 text-left">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-surface-light/80 uppercase tracking-wider">Student Name</label>
+                                    <input type="text" name="studentName" value={formData.studentName} onChange={handleInputChange} placeholder="Enter student name" className="w-full bg-primary-bg/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-surface-light/40 focus:outline-none focus:border-accent-highlight focus:ring-1 focus:ring-accent-highlight transition-all" required />
                                 </div>
-                                <span className="text-lg md:text-base">Book Free Demo</span>
-                            </button>
-                        </Magnetic>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-surface-light/80 uppercase tracking-wider">Class</label>
+                                    <select name="studentClass" value={formData.studentClass} onChange={handleInputChange} className="w-full bg-primary-bg/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-highlight focus:ring-1 focus:ring-accent-highlight transition-all appearance-none" required>
+                                        <option value="" disabled>Select Class</option>
+                                        <option value="5">Class 5</option>
+                                        <option value="6">Class 6</option>
+                                        <option value="7">Class 7</option>
+                                        <option value="8">Class 8</option>
+                                        <option value="9">Class 9</option>
+                                        <option value="10">Class 10</option>
+                                        <option value="11">Class 11</option>
+                                        <option value="12">Class 12</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-surface-light/80 uppercase tracking-wider">Parent Phone</label>
+                                    <input type="tel" name="parentPhone" value={formData.parentPhone} onChange={handleInputChange} placeholder="Enter parent phone" className="w-full bg-primary-bg/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-surface-light/40 focus:outline-none focus:border-accent-highlight focus:ring-1 focus:ring-accent-highlight transition-all" required />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-surface-light/80 uppercase tracking-wider">City</label>
+                                    <input type="text" name="city" value={formData.city} onChange={handleInputChange} placeholder="Enter city" className="w-full bg-primary-bg/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-surface-light/40 focus:outline-none focus:border-accent-highlight focus:ring-1 focus:ring-accent-highlight transition-all" required />
+                                </div>
+                            </div>
+                            <div className="pt-4">
+                                <Magnetic strength={0.3} className="w-full">
+                                    <button type="submit" disabled={isSubmitting} className="btn-enroll group w-full py-4 text-center justify-center disabled:opacity-70 disabled:cursor-not-allowed">
+                                        <span className="text-lg md:text-base">{isSubmitting ? 'Submitting...' : 'Join Early Access'}</span>
+                                        {!isSubmitting && <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+                                        {isSubmitting && <Loader2 className="w-5 h-5 animate-spin ml-2" />}
+                                    </button>
+                                </Magnetic>
+                            </div>
+                        </form>
                     </motion.div>
 
 

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Library, Facebook, Instagram, Twitter, Youtube, Mail, MapPin, ChevronRight, Sparkles } from 'lucide-react';
+import { Library, Facebook, Instagram, Twitter, Youtube, Mail, MapPin, ChevronRight, Sparkles, Phone, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
     return (
@@ -28,9 +28,13 @@ const Footer = () => {
                             A premium academic institution dedicated to deep understanding, assessment-driven learning, and long-term academic success for the next generation.
                         </p>
                         <div className="flex space-x-4">
-                            {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
-                                <a key={i} href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-surface-light/30 hover:bg-secondary-action hover:text-white hover:border-secondary-action transition-all duration-300">
-                                    <Icon className="w-4 h-4" />
+                            {[
+                                { icon: Instagram, href: '#' },
+                                { icon: Youtube, href: '#' },
+                                { icon: MessageCircle, href: '#' }
+                            ].map((LinkItem, i) => (
+                                <a key={i} href={LinkItem.href} className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-surface-light/30 hover:bg-secondary-action hover:text-white hover:border-secondary-action transition-all duration-300">
+                                    <LinkItem.icon className="w-4 h-4" />
                                 </a>
                             ))}
                         </div>
@@ -76,13 +80,19 @@ const Footer = () => {
                                 <div className="p-2 rounded-lg bg-white/5 text-accent-highlight">
                                     <MapPin className="w-4 h-4" />
                                 </div>
-                                <span className="text-sm text-surface-light/40 leading-relaxed font-medium">Suddhonwala, Dehradun, Uttarakhand</span>
+                                <span className="text-sm text-surface-light/40 leading-relaxed font-medium">Sudhonwala, Premnagar, Dehradun</span>
+                            </li>
+                            <li className="flex items-center space-x-4">
+                                <div className="p-2 rounded-lg bg-white/5 text-secondary-action">
+                                    <Phone className="w-4 h-4" />
+                                </div>
+                                <span className="text-sm text-surface-light/40 font-medium">9368448564</span>
                             </li>
                             <li className="flex items-center space-x-4">
                                 <div className="p-2 rounded-lg bg-white/5 text-secondary-action">
                                     <Mail className="w-4 h-4" />
                                 </div>
-                                <span className="text-sm text-surface-light/40 font-medium">registrar@divyagyandhara.edu</span>
+                                <span className="text-sm text-surface-light/40 font-medium">divyagyandhara.com</span>
                             </li>
                         </ul>
                         <Link href="/contact" className="inline-flex items-center gap-2 text-accent-highlight font-bold uppercase tracking-widest text-[10px] group">
