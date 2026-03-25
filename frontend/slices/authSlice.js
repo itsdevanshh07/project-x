@@ -131,6 +131,24 @@ export const updateTeacherStatus = createAsyncThunk(
     }
 );
 
+// Admin: Delete User
+export const deleteUser = createAsyncThunk(
+    'auth/deleteUser',
+    async (id, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token;
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+            await axios.delete(`${API_URL}/users/${id}`, config);
+            return id;
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
 // Admin: Get All Users
 export const getAllUsers = createAsyncThunk(
     'auth/getAllUsers',
@@ -239,6 +257,14 @@ export const authSlice = createSlice({
             })
             .addCase(updateTeacherStatus.fulfilled, (state, action) => {
                 state.teacherRequests = state.teacherRequests.filter(req => req._id !== action.payload.id);
+                // Also update status in allUsers list if exists
+                const userIndex = state.allUsers.findIndex(u => u._id === action.payload.id);
+                if (userIndex !== -1) {
+                    state.allUsers[userIndex].status = action.payload.status;
+                }
+            })
+            .addCase(deleteUser.fulfilled, (state, action) => {
+                state.allUsers = state.allUsers.filter(u => u._id !== action.payload);
             })
             .addCase(getAllUsers.pending, (state) => {
                 state.isLoading = true;

@@ -263,7 +263,7 @@ exports.getPublicTeachers = async (req, res, next) => {
     }
 };
 
-// @desc    Approve/Reject Teacher
+// @desc    Approve/Reject Teacher or Suspend any user
 // @route   PUT /api/auth/approve-teacher/:id
 // @access  Private/Admin
 exports.updateTeacherStatus = async (req, res, next) => {
@@ -273,19 +273,25 @@ exports.updateTeacherStatus = async (req, res, next) => {
             return res.status(400).json({ message: 'Invalid status' });
         }
 
-        const teacher = await User.findById(req.params.id);
-        if (!teacher || teacher.role !== 'teacher') {
-            return res.status(404).json({ message: 'Teacher not found' });
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
         }
 
-        teacher.status = status;
-        teacher.approvedBy = req.user._id;
-        if (status === 'approved') {
-            teacher.approvedAt = Date.now();
+        if (user.role === 'admin' && status === 'suspended') {
+            return res.status(403).json({ message: 'Cannot suspend an admin' });
         }
-        await teacher.save();
 
-        res.json({ message: `Teacher status updated to ${status}`, teacher });
+        user.status = status;
+        if (user.role === 'teacher') {
+            user.approvedBy = req.user._id;
+            if (status === 'approved') {
+                user.approvedAt = Date.now();
+            }
+        }
+        await user.save();
+
+        res.json({ message: `User status updated to ${status}`, teacher: user });
     } catch (error) {
         next(error);
     }
@@ -329,6 +335,31 @@ exports.createAdmin = async (req, res, next) => {
         });
 
         res.status(201).json({ message: 'Admin created successfully', adminUser });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Delete a user
+// @route   DELETE /api/auth/users/:id
+// @access  Private/Admin
+exports.deleteUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (user.role === 'admin') {
+            return res.status(403).json({ message: 'Cannot delete an admin account' });
+        }
+
+        if (user.role === 'teacher') {
+            await Course.deleteMany({ instructor: user._id });
+        }
+
+        await user.deleteOne();
+        res.json({ message: 'User removed successfully' });
     } catch (error) {
         next(error);
     }

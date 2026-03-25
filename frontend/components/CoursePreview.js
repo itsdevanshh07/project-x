@@ -7,16 +7,31 @@ import { Loader2, ArrowRight } from 'lucide-react';
 import axios from 'axios';
 import CourseCard from './CourseCard';
 
-const CoursePreview = () => {
-    const [courses, setCourses] = useState([]);
-    const [loading, setLoading] = useState(true);
+const CoursePreview = ({ initialCourses }) => {
+    const [courses, setCourses] = useState(initialCourses || []);
+    const [loading, setLoading] = useState(!initialCourses);
 
     useEffect(() => {
+        // Instant load from cache for returning users
+        const cachedStr = localStorage.getItem('academy_courses_cache');
+        if (cachedStr && (!initialCourses || initialCourses.length === 0)) {
+            try {
+                const parsed = JSON.parse(cachedStr);
+                if (parsed && parsed.length > 0) {
+                    setCourses(parsed.slice(0, 4));
+                    setLoading(false);
+                }
+            } catch (e) { }
+        }
+
         const fetchCourses = async () => {
             try {
                 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
                 const response = await axios.get(`${API_URL}/courses`);
-                setCourses(response.data.slice(0, 4));
+                const latestCourses = response.data;
+                // Update state and cache
+                setCourses(latestCourses.slice(0, 4));
+                localStorage.setItem('academy_courses_cache', JSON.stringify(latestCourses));
             } catch (err) {
                 console.error('Error fetching courses:', err.message);
                 if (err.response) {

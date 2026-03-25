@@ -148,14 +148,14 @@ export default function RegisterPage() {
                             <form onSubmit={onSubmit} className="space-y-4 md:space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                                     <div className="space-y-2 md:space-y-3">
-                                        <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Full Identity</label>
+                                        <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Full Name</label>
                                         <div className="relative group">
                                             <User className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fullName ? 'text-secondary-action' : 'text-white/10'}`} />
                                             <input type="text" name="fullName" value={fullName} onChange={onChange} placeholder="John Doe" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
                                         </div>
                                     </div>
                                     <div className="space-y-2 md:space-y-3">
-                                        <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Secure Link (Phone)</label>
+                                        <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Phone Number</label>
                                         <div className="relative group">
                                             <Phone className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${phone ? 'text-secondary-action' : 'text-white/10'}`} />
                                             <input type="tel" name="phone" value={phone} onChange={onChange} placeholder="9876543210" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
@@ -164,7 +164,7 @@ export default function RegisterPage() {
                                 </div>
 
                                 <div className="space-y-2 md:space-y-3">
-                                    <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Electronic Mail Address</label>
+                                    <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Email</label>
                                     <div className="relative group">
                                         <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${email ? 'text-secondary-action' : 'text-white/10'}`} />
                                         <input type="email" name="email" value={email} onChange={onChange} placeholder="name@domain.com" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
@@ -173,14 +173,14 @@ export default function RegisterPage() {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                                     <div className="space-y-2 md:space-y-3">
-                                        <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Access Key</label>
+                                        <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Password</label>
                                         <div className="relative group">
                                             <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${password ? 'text-secondary-action' : 'text-white/10'}`} />
                                             <input type="password" name="password" value={password} onChange={onChange} placeholder="••••••••" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
                                         </div>
                                     </div>
                                     <div className="space-y-2 md:space-y-3">
-                                        <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Confirm Key</label>
+                                        <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-2">Confirm Password</label>
                                         <div className="relative group">
                                             <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${confirmPassword ? 'text-secondary-action' : 'text-white/10'}`} />
                                             <input type="password" name="confirmPassword" value={confirmPassword} onChange={onChange} placeholder="••••••••" className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 md:py-4 text-white outline-none focus:border-secondary-action/50 focus:ring-4 focus:ring-secondary-action/5 transition-all text-sm font-medium placeholder:text-white/5" required />
@@ -200,7 +200,7 @@ export default function RegisterPage() {
                                                     <span>{role === 'teacher' ? (
                                                         <span className="hidden sm:inline">Apply for Verification</span>
                                                     ) : (
-                                                        <span className="hidden sm:inline">Initialize Account</span>
+                                                        <span className="hidden sm:inline">Sign Up</span>
                                                     )}
                                                         {role === 'teacher' ? (
                                                             <span className="sm:hidden">Apply Now</span>
@@ -226,7 +226,7 @@ export default function RegisterPage() {
 
                         <div className="mt-10 text-center text-surface-light/20 text-xs font-bold uppercase tracking-widest">
                             Already part of the community?{' '}
-                            <Link href="/login" className="text-secondary-action hover:text-white transition-colors underline underline-offset-8 decoration-secondary-action/30">Authenticate</Link>
+                            <Link href="/login" className="text-secondary-action hover:text-white transition-colors underline underline-offset-8 decoration-secondary-action/30">Sign In</Link>
                         </div>
                     </motion.div>
                 </div>

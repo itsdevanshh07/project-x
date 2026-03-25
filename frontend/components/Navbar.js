@@ -121,11 +121,8 @@ const Navbar = () => {
                                 <Link href="/login" className="hidden lg:block text-sm font-bold text-surface-light/70 hover:text-white transition-colors">
                                     Sign In
                                 </Link>
-                                <Link
-                                    href="/courses"
-                                    className="bg-accent-highlight text-primary-bg px-4 md:px-6 h-10 md:h-11 rounded-xl text-[10px] md:text-xs font-bold uppercase tracking-wider flex items-center justify-center hover:shadow-[0_0_25px_rgba(250,204,21,0.4)] transition-all active:scale-95 whitespace-nowrap shadow-lg shadow-black/20"
-                                >
-                                    Enroll Now
+                                <Link href="/register" className="hidden lg:block text-sm font-bold text-surface-light/70 hover:text-white transition-colors">
+                                    Sign Up
                                 </Link>
                             </div>
                         )}
@@ -217,8 +214,11 @@ const Navbar = () => {
                                     </div>
                                 ) : (
                                     <>
-                                        <Link href="/login" onClick={() => setIsMobileMenuOpen(false)} className="block py-4 text-center text-surface-light/40 font-bold uppercase tracking-widest text-xs">Sign In</Link>
-                                        <Link href="/courses" onClick={() => setIsMobileMenuOpen(false)} className="btn-enroll w-full">Enroll Now</Link>
+                                        <div className="flex items-center justify-center gap-4">
+                                            <Link href="/login" onClick={() => setIsMobileMenuOpen(false)} className="block py-4 text-center text-surface-light/40 font-bold uppercase tracking-widest text-xs">Sign In</Link>
+                                            <div className="w-[1px] h-4 bg-white/10" />
+                                            <Link href="/register" onClick={() => setIsMobileMenuOpen(false)} className="block py-4 text-center text-surface-light/40 font-bold uppercase tracking-widest text-xs">Sign Up</Link>
+                                        </div>
                                     </>
                                 )}
                                 <p className="text-center text-[8px] text-surface-light/20 font-black uppercase tracking-[0.3em] mt-8">Institutional Access Mode</p>

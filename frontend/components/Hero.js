@@ -57,12 +57,20 @@ const Hero = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
+                        className="flex flex-col items-center gap-4 md:gap-6"
                     >
-                        <Zap className="w-4 h-4 text-accent-highlight" />
-                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] md:tracking-widest text-surface-light/80 text-center">
-                            Launching August 2026
-                        </span>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+                            <Zap className="w-4 h-4 text-accent-highlight" />
+                            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] md:tracking-widest text-surface-light/80 text-center">
+                                Launching August 2025
+                            </span>
+                        </div>
+                        <Link 
+                            href="/courses" 
+                            className="bg-accent-highlight text-primary-bg px-6 md:px-8 h-12 md:h-14 rounded-xl text-xs md:text-sm font-bold uppercase tracking-[0.15em] flex items-center justify-center hover:shadow-[0_0_30px_rgba(250,204,21,0.5)] transition-all active:scale-95 whitespace-nowrap shadow-xl shadow-black/30"
+                        >
+                            Enroll Now
+                        </Link>
                     </motion.div>
 
                     {/* Main Headline */}

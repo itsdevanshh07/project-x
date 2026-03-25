@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeacherRequests, updateTeacherStatus, getAllUsers } from '@/slices/authSlice';
+import { getTeacherRequests, updateTeacherStatus, getAllUsers, deleteUser } from '@/slices/authSlice';
 import {
     UserCheck,
     UserX,
@@ -16,7 +16,8 @@ import {
     AlertCircle,
     ChevronRight,
     Activity,
-    ShieldAlert
+    ShieldAlert,
+    Trash2
 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import Navbar from '@/components/Navbar';
@@ -43,6 +44,17 @@ export default function AdminDashboard() {
             toast.success(`Teacher ${status === 'approved' ? 'Approved' : 'Rejected'} successfully`);
         } catch (error) {
             toast.error(error);
+        }
+    };
+
+    const handleDeleteUser = async (id) => {
+        if (window.confirm('Are you sure you want to permanently delete this record? This action cannot be undone.')) {
+            try {
+                await dispatch(deleteUser(id)).unwrap();
+                toast.success('Record permanently deleted');
+            } catch (error) {
+                toast.error(error);
+            }
         }
     };
 
@@ -261,13 +273,22 @@ export default function AdminDashboard() {
                                             <td className="px-8 py-8">
                                                 <div className="flex items-center justify-center space-x-3">
                                                     {u.role !== 'admin' && (
-                                                        <button
-                                                            onClick={() => handleStatusUpdate(u._id, u.status === 'approved' ? 'suspended' : 'approved')}
-                                                            className={`p-3 rounded-2xl transition-all border ${u.status === 'approved' ? 'bg-red-500/10 text-red-500 border-red-500/20 hover:bg-red-500 hover:text-white' : 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20 hover:bg-emerald-500 hover:text-white'}`}
-                                                            title={u.status === 'approved' ? 'Suspend Record' : 'Reactivate Record'}
-                                                        >
-                                                            {u.status === 'approved' ? <UserX className="w-5 h-5" /> : <UserCheck className="w-5 h-5" />}
-                                                        </button>
+                                                        <>
+                                                            <button
+                                                                onClick={() => handleStatusUpdate(u._id, u.status === 'approved' ? 'suspended' : 'approved')}
+                                                                className={`p-3 rounded-2xl transition-all border ${u.status === 'approved' ? 'bg-red-500/10 text-red-500 border-red-500/20 hover:bg-red-500 hover:text-white' : 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20 hover:bg-emerald-500 hover:text-white'}`}
+                                                                title={u.status === 'approved' ? 'Suspend Record' : 'Reactivate Record'}
+                                                            >
+                                                                {u.status === 'approved' ? <UserX className="w-5 h-5" /> : <UserCheck className="w-5 h-5" />}
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleDeleteUser(u._id)}
+                                                                className="p-3 bg-red-500/10 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all border border-red-500/20"
+                                                                title="Delete Permanently"
+                                                            >
+                                                                <Trash2 className="w-5 h-5" />
+                                                            </button>
+                                                        </>
                                                     )}
                                                 </div>
                                             </td>

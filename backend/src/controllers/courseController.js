@@ -103,6 +103,29 @@ exports.updateCourse = async (req, res, next) => {
     }
 };
 
+// @desc    Delete a course
+// @route   DELETE /api/courses/:id
+// @access  Private/Teacher/Admin
+exports.deleteCourse = async (req, res, next) => {
+    try {
+        const course = await Course.findById(req.params.id);
+
+        if (!course) {
+            return res.status(404).json({ message: 'Course not found' });
+        }
+
+        // Check ownership
+        if (course.instructor.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+            return res.status(401).json({ message: 'Not authorized to delete this course' });
+        }
+
+        await course.deleteOne();
+        res.json({ message: 'Course removed successfully' });
+    } catch (error) {
+        next(error);
+    }
+};
+
 // --- MODULES ---
 
 exports.createModule = async (req, res, next) => {

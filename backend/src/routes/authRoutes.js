@@ -10,7 +10,8 @@ const {
     updateTeacherStatus,
     createAdmin,
     getAllUsers,
-    getPublicTeachers
+    getPublicTeachers,
+    deleteUser
 } = require('../controllers/authController');
 const { protect, authorize } = require('../middleware/authMiddleware');
 
@@ -26,5 +27,6 @@ router.get('/teachers', protect, authorize('admin'), getAllTeachers);
 router.put('/approve-teacher/:id', protect, authorize('admin'), updateTeacherStatus);
 router.post('/create-admin', protect, authorize('admin'), createAdmin);
 router.get('/users', protect, authorize('admin'), getAllUsers);
+router.delete('/users/:id', protect, authorize('admin'), deleteUser);
 
 module.exports = router;

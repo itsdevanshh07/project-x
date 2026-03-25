@@ -100,7 +100,7 @@ export default function LoginPage() {
                         <div className="glass-card p-6 md:p-10 relative overflow-hidden">
                             <form onSubmit={onSubmit} className="space-y-6 md:space-y-8">
                                 <div className="space-y-3 md:space-y-4">
-                                    <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-1">Email Identifier</label>
+                                    <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20 ml-1">Email</label>
                                     <div className="relative group">
                                         <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 md:w-5 h-4 md:h-5 transition-colors duration-300 ${formData.email ? 'text-secondary-action' : 'text-white/10'}`} />
                                         <input
@@ -117,7 +117,7 @@ export default function LoginPage() {
 
                                 <div className="space-y-3 md:space-y-4">
                                     <div className="flex justify-between items-center px-1">
-                                        <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20">Security Key</label>
+                                        <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-surface-light/20">Password</label>
                                         <Link href="#" className="text-[10px] font-bold text-secondary-action hover:text-accent-highlight tracking-widest transition-colors">FORGOT?</Link>
                                     </div>
                                     <div className="relative group">
@@ -142,7 +142,7 @@ export default function LoginPage() {
                                     <div className="relative z-10 flex items-center justify-center gap-3">
                                         {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
                                             <>
-                                                <span>Authorize Access</span>
+                                                <span>Sign In</span>
                                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                             </>
                                         )}
@@ -162,7 +162,7 @@ export default function LoginPage() {
 
                         <div className="mt-10 text-center text-surface-light/20 text-xs font-bold uppercase tracking-widest">
                             No credentials yet?{' '}
-                            <Link href="/register" className="text-secondary-action hover:text-white transition-colors underline underline-offset-8 decoration-secondary-action/30">Start Enrollment</Link>
+                            <Link href="/register" className="text-secondary-action hover:text-white transition-colors underline underline-offset-8 decoration-secondary-action/30">Sign Up</Link>
                         </div>
                     </motion.div>
                 </div>
