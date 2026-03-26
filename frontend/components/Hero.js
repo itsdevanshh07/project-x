@@ -92,12 +92,36 @@ const Hero = () => {
                         </div>
                     </div>
 
-                    {/* Early Access Form */}
+                    {/* Trust Indicators */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
-                        className="w-full max-w-2xl mx-auto px-4 sm:px-0 mt-8"
+                        className="grid grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-6 md:gap-8 pt-8 w-full max-w-4xl mx-auto"
+                    >
+                        <div className="flex flex-col items-center gap-2">
+                            <Award className="w-6 md:w-8 h-6 md:h-8 text-accent-highlight" />
+                            <span className="text-sm md:text-base font-semibold text-white">Elite Pedagogy</span>
+                            <span className="text-[10px] text-surface-light/40 uppercase tracking-widest text-center">Top Tier Results</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-2">
+                            <ShieldCheck className="w-6 md:w-8 h-6 md:h-8 text-secondary-action" />
+                            <span className="text-sm md:text-base font-semibold text-white">Verified Trust</span>
+                            <span className="text-[10px] text-surface-light/40 uppercase tracking-widest text-center">Parent Approved</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-2 col-span-2 md:col-span-1">
+                            <Zap className="w-6 md:w-8 h-6 md:h-8 text-accent-highlight" />
+                            <span className="text-sm md:text-base font-semibold text-white">AI-Driven Insights</span>
+                            <span className="text-[10px] text-surface-light/40 uppercase tracking-widest text-center">Personalized Growth</span>
+                        </div>
+                    </motion.div>
+
+                    {/* Early Access Form */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6 }}
+                        className="w-full max-w-2xl mx-auto px-4 sm:px-0 pt-12 border-t border-white/5 mt-4"
                     >
                         <form onSubmit={handleFormSubmit} className="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl backdrop-blur-md space-y-4 text-left">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -138,31 +162,6 @@ const Hero = () => {
                                 </Magnetic>
                             </div>
                         </form>
-                    </motion.div>
-
-
-                    {/* Trust Indicators */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6 }}
-                        className="grid grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-6 md:gap-8 pt-12 border-t border-white/5 w-full max-w-4xl"
-                    >
-                        <div className="flex flex-col items-center gap-2">
-                            <Award className="w-6 md:w-8 h-6 md:h-8 text-accent-highlight" />
-                            <span className="text-sm md:text-base font-semibold text-white">Elite Pedagogy</span>
-                            <span className="text-[10px] text-surface-light/40 uppercase tracking-widest text-center">Top Tier Results</span>
-                        </div>
-                        <div className="flex flex-col items-center gap-2">
-                            <ShieldCheck className="w-6 md:w-8 h-6 md:h-8 text-secondary-action" />
-                            <span className="text-sm md:text-base font-semibold text-white">Verified Trust</span>
-                            <span className="text-[10px] text-surface-light/40 uppercase tracking-widest text-center">Parent Approved</span>
-                        </div>
-                        <div className="flex flex-col items-center gap-2 col-span-2 md:col-span-1">
-                            <Zap className="w-6 md:w-8 h-6 md:h-8 text-accent-highlight" />
-                            <span className="text-sm md:text-base font-semibold text-white">AI-Driven Insights</span>
-                            <span className="text-[10px] text-surface-light/40 uppercase tracking-widest text-center">Personalized Growth</span>
-                        </div>
                     </motion.div>
                 </div>
             </div>
