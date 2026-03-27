@@ -62,7 +62,7 @@ const Hero = () => {
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
                             <Zap className="w-4 h-4 text-accent-highlight" />
                             <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] md:tracking-widest text-surface-light/80 text-center">
-                                Launching August 2025
+                                Launching August 2026
                             </span>
                         </div>
                         <Link 
