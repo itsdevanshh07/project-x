@@ -17,7 +17,24 @@ const outfit = Outfit({
 
 export const metadata = {
   title: "Divya Gyan Dhara | Coming Soon",
-  description: "Concept-based learning ecosystem for Classes 5–12 launching soon in Dehradun and Uttarakhand.",
+  description: "Divya Gyan Dhara is a concept-based learning ecosystem for Classes 5–12. Future-ready education launching soon in Dehradun and Uttarakhand.",
+  keywords: ["Divya Gyan Dhara", "concept-based learning", "education Dehradun", "Uttarakhand tutoring", "Classes 5-12", "future-ready education"],
+  openGraph: {
+    title: "Divya Gyan Dhara | Coming Soon",
+    description: "Divya Gyan Dhara is a concept-based learning ecosystem for Classes 5–12. Future-ready education launching soon in Dehradun and Uttarakhand.",
+    url: "https://divyagyandhara.com",
+    siteName: "Divya Gyan Dhara",
+    locale: "en_IN",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({ children }) {
