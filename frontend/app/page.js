@@ -130,11 +130,11 @@ export default function ComingSoon() {
                   </div>
                   <span className="text-lg">WhatsApp: +91 7454811848</span>
                 </a>
-                <a href="mailto:info@divyagyandhara.com" className="flex items-center gap-4 text-white/80 hover:text-accent-highlight transition-colors">
+                <a href="mailto:gyandharadivya@gmail.com" className="flex items-center gap-4 text-white/80 hover:text-accent-highlight transition-colors">
                   <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
                     <Mail className="w-5 h-5 text-accent-highlight" />
                   </div>
-                  <span className="text-lg">info@divyagyandhara.com</span>
+                  <span className="text-lg">gyandharadivya@gmail.com</span>
                 </a>
                 <div className="flex items-center gap-4 text-white/80">
                   <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 shrink-0">
@@ -149,7 +149,7 @@ export default function ComingSoon() {
               <h4 className="text-2xl font-bold mb-6 font-display">Connect With Us</h4>
               <p className="text-white/60 mb-8">Follow our journey on social media to get the latest updates on our launch.</p>
               <div className="flex gap-4">
-                <a href="#" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-2xl bg-[#0F172A] border border-white/10 flex items-center justify-center text-white/70 hover:text-accent-highlight hover:border-accent-highlight/50 transition-all shadow-lg hover:-translate-y-1">
+                <a href="https://www.instagram.com/divyagyanadhara?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-2xl bg-[#0F172A] border border-white/10 flex items-center justify-center text-white/70 hover:text-accent-highlight hover:border-accent-highlight/50 transition-all shadow-lg hover:-translate-y-1">
                   <Instagram className="w-6 h-6" />
                 </a>
                 <a href="#" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-2xl bg-[#0F172A] border border-white/10 flex items-center justify-center text-white/70 hover:text-accent-highlight hover:border-accent-highlight/50 transition-all shadow-lg hover:-translate-y-1">
