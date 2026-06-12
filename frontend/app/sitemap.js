@@ -3,12 +3,6 @@ export default function sitemap() {
 
   const routes = [
     '',
-    '/about',
-    '/courses',
-    '/teachers',
-    '/current-affairs',
-    '/pyq',
-    '/tests',
   ];
 
   return routes.map((route) => ({
