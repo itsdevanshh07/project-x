@@ -2,12 +2,12 @@
 
 @theme {
   /* Divya Gyan Dhara - 2026 Digital Sophistication Palette */
-  --color-primary-bg: #0F172A;
-  --color-secondary-action: #6366F1;
-  --color-accent-highlight: #FACC15;
-  --color-shadow-yellow: rgba(250, 204, 21, 0.4);
-  --color-surface-light: #F8FAFC;
-  --color-surface-border: #E2E8F0;
+  --color-primary-bg: #F8F9FA;
+  --color-secondary-action: #F9C935;
+  --color-accent-highlight: #F9C935;
+  --color-shadow-yellow: rgba(249, 201, 53, 0.4);
+  --color-surface-light: #1E293B;
+  --color-surface-border: #CBD5E1;
 
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
@@ -32,18 +32,16 @@
 }
 
 :root {
-  --background: #0F172A;
-  /* Dark mode first */
-  --foreground: #F8FAFC;
-  --primary: #6366F1;
-  --primary-foreground: #FFFFFF;
-  --secondary: #0F172A;
-  --secondary-foreground: #F8FAFC;
-  --accent: #FACC15;
+  --background: #F8F9FA;
+  --foreground: #1E293B;
+  --primary: #F9C935;
+  --primary-foreground: #0F172A;
+  --secondary: #FFFFFF;
+  --secondary-foreground: #1E293B;
+  --accent: #F9C935;
   --accent-foreground: #0F172A;
-  --muted: rgba(248, 250, 252, 0.08);
-  /* Glassmorphism base */
-  --muted-foreground: #94A3B8;
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B;
   --border: #E2E8F0;
   --radius: 1.5rem;
 }
