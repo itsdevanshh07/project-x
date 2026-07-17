@@ -63,26 +63,16 @@ export default function ComingSoon() {
       <main className="relative z-10 container mx-auto px-6 pb-24">
         {/* Hero Section Wrapper with Background */}
         <div className="relative -mx-6 px-6 overflow-hidden">
-          {/* Background Mountains */}
+          {/* Unified AI Generated Background */}
           <div 
-            className="absolute inset-0 z-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1544634076-a90160ddf44a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')" }}
+            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('/hero-bg.jpg')" }}
           />
-          {/* Gradient Mask for Readability */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/95 via-white/85 to-[#F8F9FA]/40" />
-          
-          {/* Foreground Trees (Masked) */}
-          <div 
-            className="absolute bottom-[-100px] left-0 w-full h-[50%] z-0 bg-cover bg-bottom opacity-80"
-            style={{ 
-              backgroundImage: "url('https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
-              maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)"
-            }}
-          />
+          {/* Left-side Gradient Mask for Text Readability */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/95 via-white/60 to-transparent md:w-2/3 pointer-events-none" />
 
           {/* Hero Section Content */}
-          <section className="relative z-10 pt-12 md:pt-20 pb-20 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+          <section className="relative z-10 pt-12 md:pt-20 pb-40 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <motion.div
               className="flex-1 text-center md:text-left"
               initial={{ opacity: 0, x: -20 }}
@@ -111,30 +101,7 @@ export default function ComingSoon() {
                 From academic excellence to AI literacy, from values to leadership — <span className="font-bold">Divya Gyan Dhara (A 'The Dhara Way' Initiative)</span> is creating a future-ready learning ecosystem for every learner.
               </p>
               
-              {/* Badges */}
-              <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
-                <div className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-md border border-white/50">
-                  <Mountain className="w-6 h-6 text-slate-700" />
-                  <div className="text-left leading-tight">
-                    <div className="text-xs text-slate-500 font-medium">Founded in</div>
-                    <div className="text-sm font-bold text-slate-800">Uttarakhand</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-md border border-white/50">
-                  <MapIcon className="w-6 h-6 text-[#EAB308]" />
-                  <div className="text-left leading-tight">
-                    <div className="text-xs text-slate-500 font-medium">Built for</div>
-                    <div className="text-sm font-bold text-slate-800">Bharat</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-md border border-white/50">
-                  <Globe className="w-6 h-6 text-slate-700" />
-                  <div className="text-left leading-tight">
-                    <div className="text-xs text-slate-500 font-medium">Designed for</div>
-                    <div className="text-sm font-bold text-slate-800">the Future</div>
-                  </div>
-                </div>
-              </div>
+              {/* Badges removed for new ribbon layout */}
               
               <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
                 <a 
@@ -196,6 +163,30 @@ export default function ComingSoon() {
               </div>
             </motion.div>
           </section>
+
+          {/* Full-width Dark Blue Ribbon Bar */}
+          <div className="absolute bottom-0 left-0 w-full bg-[#0F172A] py-6 z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.3)]">
+            <div className="container mx-auto px-6 max-w-6xl">
+              <div className="flex flex-wrap items-center justify-between gap-6 md:gap-4 text-center md:text-left">
+                <div className="flex items-center gap-4 flex-1 justify-center md:justify-start">
+                  <BookOpen className="w-8 h-8 text-[#EAB308]" />
+                  <span className="text-white font-bold text-lg leading-tight text-left">Academic<br/>Excellence</span>
+                </div>
+                <div className="flex items-center gap-4 flex-1 justify-center">
+                  <Monitor className="w-8 h-8 text-[#EAB308]" />
+                  <span className="text-white font-bold text-lg leading-tight text-left">AI Literacy &<br/>Future Skills</span>
+                </div>
+                <div className="flex items-center gap-4 flex-1 justify-center">
+                  <Users className="w-8 h-8 text-[#EAB308]" />
+                  <span className="text-white font-bold text-lg leading-tight text-left">Values &<br/>Leadership</span>
+                </div>
+                <div className="flex items-center gap-4 flex-1 justify-center md:justify-end">
+                  <Target className="w-8 h-8 text-[#EAB308]" />
+                  <span className="text-white font-bold text-lg leading-tight text-left">Service to<br/>Society</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Brand Positioning Section */}
