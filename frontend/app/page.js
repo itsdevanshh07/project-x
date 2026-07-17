@@ -122,8 +122,6 @@ export default function ComingSoon() {
                 </button>
               </div>
             </motion.div>
-            
-            </motion.div>
           </section>
 
           {/* Full-width Dark Blue Ribbon Bar */}
