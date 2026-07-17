@@ -61,109 +61,142 @@ export default function ComingSoon() {
       </header>
 
       <main className="relative z-10 container mx-auto px-6 pb-24">
-        {/* Hero Section */}
-        <section className="pt-12 md:pt-20 pb-20 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
-          <motion.div
-            className="flex-1 text-center md:text-left"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-block mb-6 px-5 py-2 rounded-full bg-[#F9C935]/20 border border-[#F9C935]/30 text-sm font-bold text-slate-800 shadow-sm">
-              🚀 Launching Soon | Uttarakhand's Future Learning Movement
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-display leading-[1.15] mb-6 text-slate-900">
-              Building the Next <br className="hidden xl:block" />
-              Generation of <span className="text-[#EAB308]">Thinkers,</span> <br className="hidden xl:block" />
-              <span className="text-[#EAB308]">Leaders & Changemakers</span>
-            </h1>
-            
-            <div className="flex items-center justify-center md:justify-start gap-4 mb-6">
-              <div className="h-[2px] w-12 bg-[#EAB308]"></div>
-              <h2 className="text-xl md:text-2xl text-slate-700 font-bold tracking-wide font-display">
-                ज्ञान | धर्म | विज्ञान | सेवा
-              </h2>
-              <div className="h-[2px] w-12 bg-[#EAB308]"></div>
-            </div>
-            
-            <p className="text-lg text-slate-600 mb-10 leading-relaxed max-w-xl mx-auto md:mx-0 font-medium">
-              From academic excellence to AI literacy, from values to leadership — <span className="font-bold text-slate-800">Divya Gyan Dhara (A 'The Dhara Way' Initiative)</span> is creating a future-ready learning ecosystem for every learner.
-            </p>
-            
-            {/* Badges */}
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
-              <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl shadow-sm border border-gray-100">
-                <Mountain className="w-6 h-6 text-slate-700" />
-                <div className="text-left leading-tight">
-                  <div className="text-xs text-slate-500 font-medium">Founded in</div>
-                  <div className="text-sm font-bold text-slate-800">Uttarakhand</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl shadow-sm border border-gray-100">
-                <MapIcon className="w-6 h-6 text-[#EAB308]" />
-                <div className="text-left leading-tight">
-                  <div className="text-xs text-slate-500 font-medium">Built for</div>
-                  <div className="text-sm font-bold text-slate-800">Bharat</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl shadow-sm border border-gray-100">
-                <Globe className="w-6 h-6 text-slate-700" />
-                <div className="text-left leading-tight">
-                  <div className="text-xs text-slate-500 font-medium">Designed for</div>
-                  <div className="text-sm font-bold text-slate-800">the Future</div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
-              <a 
-                href="https://wa.me/917454811848" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-lg transition-transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 bg-[#F9C935] text-slate-900 shadow-md"
-              >
-                <MessageCircle className="w-5 h-5" />
-                Get in Touch
-              </a>
-              <button 
-                onClick={scrollToAbout}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-lg transition-colors hover:bg-gray-100 flex items-center justify-center gap-2 bg-white text-slate-900 border border-gray-200"
-              >
-                Learn More
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
-          </motion.div>
+        {/* Hero Section Wrapper with Background */}
+        <div className="relative -mx-6 px-6 overflow-hidden">
+          {/* Background Mountains */}
+          <div 
+            className="absolute inset-0 z-0 bg-cover bg-center"
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1544634076-a90160ddf44a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')" }}
+          />
+          {/* Gradient Mask for Readability */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/95 via-white/85 to-[#F8F9FA]/40" />
           
-          <motion.div 
-            className="flex-1 w-full max-w-md mx-auto md:max-w-none relative mt-12 md:mt-0"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {/* Flat visual replacing the rides image */}
-            <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 relative z-10 text-center">
-                <div className="w-20 h-20 bg-[#F9C935] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm border-4 border-white">
-                    <BookOpen className="w-10 h-10 text-slate-900" />
+          {/* Foreground Trees (Masked) */}
+          <div 
+            className="absolute bottom-[-100px] left-0 w-full h-[50%] z-0 bg-cover bg-bottom opacity-80"
+            style={{ 
+              backgroundImage: "url('https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+              maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)"
+            }}
+          />
+
+          {/* Hero Section Content */}
+          <section className="relative z-10 pt-12 md:pt-20 pb-20 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <motion.div
+              className="flex-1 text-center md:text-left"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="inline-block mb-6 px-5 py-2 rounded-full bg-white/90 border border-[#F9C935]/30 text-sm font-bold text-slate-800 shadow-sm backdrop-blur-sm">
+                🚀 Launching Soon | Uttarakhand's Future Learning Movement
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-display leading-[1.15] mb-6 text-slate-900 drop-shadow-sm">
+                Building the Next <br className="hidden xl:block" />
+                Generation of <span className="text-[#EAB308]">Thinkers,</span> <br className="hidden xl:block" />
+                <span className="text-[#EAB308]">Leaders & Changemakers</span>
+              </h1>
+              
+              <div className="flex items-center justify-center md:justify-start gap-4 mb-6">
+                <div className="h-[2px] w-12 bg-[#EAB308]"></div>
+                <h2 className="text-xl md:text-2xl text-[#EAB308] font-bold tracking-wide font-display">
+                  ज्ञान | धर्म | विज्ञान | सेवा
+                </h2>
+                <div className="h-[2px] w-12 bg-[#EAB308]"></div>
+              </div>
+              
+              <p className="text-lg text-slate-800 mb-10 leading-relaxed max-w-xl mx-auto md:mx-0 font-medium">
+                From academic excellence to AI literacy, from values to leadership — <span className="font-bold">Divya Gyan Dhara (A 'The Dhara Way' Initiative)</span> is creating a future-ready learning ecosystem for every learner.
+              </p>
+              
+              {/* Badges */}
+              <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
+                <div className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-md border border-white/50">
+                  <Mountain className="w-6 h-6 text-slate-700" />
+                  <div className="text-left leading-tight">
+                    <div className="text-xs text-slate-500 font-medium">Founded in</div>
+                    <div className="text-sm font-bold text-slate-800">Uttarakhand</div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 font-display text-slate-900">Empowering Students</h3>
-                <p className="text-slate-500 mb-6 font-medium">Join our waitlist to get early access to our personalized learning ecosystem.</p>
-                
-                <div className="space-y-4">
-                    <div className="h-2 bg-gray-100 rounded-full w-full overflow-hidden">
-                        <div className="h-full bg-[#F9C935] w-3/4 rounded-full"></div>
-                    </div>
-                    <div className="h-2 bg-gray-100 rounded-full w-full overflow-hidden">
-                        <div className="h-full bg-[#0F172A] w-1/2 rounded-full"></div>
-                    </div>
+                <div className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-md border border-white/50">
+                  <MapIcon className="w-6 h-6 text-[#EAB308]" />
+                  <div className="text-left leading-tight">
+                    <div className="text-xs text-slate-500 font-medium">Built for</div>
+                    <div className="text-sm font-bold text-slate-800">Bharat</div>
+                  </div>
                 </div>
-            </div>
+                <div className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-md border border-white/50">
+                  <Globe className="w-6 h-6 text-slate-700" />
+                  <div className="text-left leading-tight">
+                    <div className="text-xs text-slate-500 font-medium">Designed for</div>
+                    <div className="text-sm font-bold text-slate-800">the Future</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+                <a 
+                  href="https://wa.me/917454811848" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-lg transition-transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 bg-[#F9C935] text-slate-900 shadow-lg"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Get in Touch
+                </a>
+                <button 
+                  onClick={scrollToAbout}
+                  className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-lg transition-colors hover:bg-gray-100 flex items-center justify-center gap-2 bg-white text-slate-900 border border-gray-200 shadow-md"
+                >
+                  Learn More
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
+            </motion.div>
             
-            {/* Decorative background shape */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-[#F9C935]/10 rounded-full -z-10 blur-2xl"></div>
-          </motion.div>
-        </section>
+            <motion.div 
+              className="flex-1 w-full max-w-md mx-auto md:max-w-none relative mt-12 md:mt-0"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              {/* Empowering Students Card */}
+              <div className="bg-white/80 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/60 relative z-10 text-left">
+                  <h3 className="text-3xl font-extrabold mb-8 font-display text-slate-900">Empowering Students</h3>
+                  
+                  <ul className="space-y-6 mb-8">
+                      <li className="flex gap-4">
+                          <div className="w-3 h-3 bg-[#EAB308] rounded-full mt-2 shadow-[0_0_10px_rgba(234,179,8,0.5)] shrink-0"></div>
+                          <div>
+                              <strong className="block text-lg text-slate-900 mb-1">Holistic Development</strong>
+                              <p className="text-slate-600 font-medium">Blending modern science with timeless wisdom.</p>
+                          </div>
+                      </li>
+                      <li className="flex gap-4">
+                          <div className="w-3 h-3 bg-[#EAB308] rounded-full mt-2 shadow-[0_0_10px_rgba(234,179,8,0.5)] shrink-0"></div>
+                          <div>
+                              <strong className="block text-lg text-slate-900 mb-1">AI & Technology</strong>
+                              <p className="text-slate-600 font-medium">Future-ready skills for the digital age.</p>
+                          </div>
+                      </li>
+                      <li className="flex gap-4">
+                          <div className="w-3 h-3 bg-[#EAB308] rounded-full mt-2 shadow-[0_0_10px_rgba(234,179,8,0.5)] shrink-0"></div>
+                          <div>
+                              <strong className="block text-lg text-slate-900 mb-1">Leadership & Ethics</strong>
+                              <p className="text-slate-600 font-medium">Nurturing character and moral integrity.</p>
+                          </div>
+                      </li>
+                  </ul>
+
+                  <button className="w-full py-4 rounded-xl font-bold text-lg transition-transform hover:scale-105 active:scale-95 bg-[#0F172A] text-white shadow-lg">
+                      Join the Movement
+                  </button>
+              </div>
+            </motion.div>
+          </section>
+        </div>
 
         {/* Brand Positioning Section */}
         <section id="about" className="py-20 mt-10 border-t border-gray-200">
