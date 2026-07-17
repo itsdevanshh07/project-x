@@ -69,10 +69,10 @@ export default function ComingSoon() {
             style={{ backgroundImage: "url('/hero-bg.jpg')" }}
           />
           {/* Left-side Gradient Mask for Text Readability */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/95 via-white/60 to-transparent md:w-2/3 pointer-events-none" />
+          <div className="absolute inset-0 z-0 bg-gradient-to-b md:bg-gradient-to-r from-white/95 via-white/80 md:via-white/60 to-transparent md:w-2/3 pointer-events-none" />
 
           {/* Hero Section Content */}
-          <section className="relative z-10 pt-12 md:pt-20 pb-40 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+          <section className="relative z-10 pt-6 md:pt-20 pb-48 md:pb-40 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <motion.div
               className="flex-1 text-center md:text-left"
               initial={{ opacity: 0, x: -20 }}
@@ -91,7 +91,7 @@ export default function ComingSoon() {
               
               <div className="flex items-center justify-center md:justify-start gap-4 mb-6">
                 <div className="h-[2px] w-12 bg-[#EAB308]"></div>
-                <h2 className="text-xl md:text-2xl text-[#EAB308] font-bold tracking-wide font-display">
+                <h2 className="text-xl md:text-2xl text-[#EAB308] font-bold tracking-wide font-display drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
                   ज्ञान | धर्म | विज्ञान | सेवा
                 </h2>
                 <div className="h-[2px] w-12 bg-[#EAB308]"></div>
@@ -123,66 +123,28 @@ export default function ComingSoon() {
               </div>
             </motion.div>
             
-            <motion.div 
-              className="flex-1 w-full max-w-md mx-auto md:max-w-none relative mt-12 md:mt-0"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              {/* Empowering Students Card */}
-              <div className="bg-white/80 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/60 relative z-10 text-left">
-                  <h3 className="text-3xl font-extrabold mb-8 font-display text-slate-900">Empowering Students</h3>
-                  
-                  <ul className="space-y-6 mb-8">
-                      <li className="flex gap-4">
-                          <div className="w-3 h-3 bg-[#EAB308] rounded-full mt-2 shadow-[0_0_10px_rgba(234,179,8,0.5)] shrink-0"></div>
-                          <div>
-                              <strong className="block text-lg text-slate-900 mb-1">Holistic Development</strong>
-                              <p className="text-slate-600 font-medium">Blending modern science with timeless wisdom.</p>
-                          </div>
-                      </li>
-                      <li className="flex gap-4">
-                          <div className="w-3 h-3 bg-[#EAB308] rounded-full mt-2 shadow-[0_0_10px_rgba(234,179,8,0.5)] shrink-0"></div>
-                          <div>
-                              <strong className="block text-lg text-slate-900 mb-1">AI & Technology</strong>
-                              <p className="text-slate-600 font-medium">Future-ready skills for the digital age.</p>
-                          </div>
-                      </li>
-                      <li className="flex gap-4">
-                          <div className="w-3 h-3 bg-[#EAB308] rounded-full mt-2 shadow-[0_0_10px_rgba(234,179,8,0.5)] shrink-0"></div>
-                          <div>
-                              <strong className="block text-lg text-slate-900 mb-1">Leadership & Ethics</strong>
-                              <p className="text-slate-600 font-medium">Nurturing character and moral integrity.</p>
-                          </div>
-                      </li>
-                  </ul>
-
-                  <button className="w-full py-4 rounded-xl font-bold text-lg transition-transform hover:scale-105 active:scale-95 bg-[#0F172A] text-white shadow-lg">
-                      Join the Movement
-                  </button>
-              </div>
             </motion.div>
           </section>
 
           {/* Full-width Dark Blue Ribbon Bar */}
           <div className="absolute bottom-0 left-0 w-full bg-[#0F172A] py-6 z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.3)]">
-            <div className="container mx-auto px-6 max-w-6xl">
-              <div className="flex flex-wrap items-center justify-between gap-6 md:gap-4 text-center md:text-left">
-                <div className="flex items-center gap-4 flex-1 justify-center md:justify-start">
+            <div className="container mx-auto px-4 max-w-6xl">
+              <div className="grid grid-cols-2 gap-y-6 gap-x-4 md:flex md:flex-wrap md:items-center md:justify-between md:gap-4 text-center md:text-left">
+                <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 md:flex-1 md:justify-start">
                   <BookOpen className="w-8 h-8 text-[#EAB308]" />
-                  <span className="text-white font-bold text-lg leading-tight text-left">Academic<br/>Excellence</span>
+                  <span className="text-white font-bold text-[13px] md:text-lg leading-tight md:text-left">Academic<br className="hidden md:block"/> Excellence</span>
                 </div>
-                <div className="flex items-center gap-4 flex-1 justify-center">
+                <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 md:flex-1 justify-center">
                   <Monitor className="w-8 h-8 text-[#EAB308]" />
-                  <span className="text-white font-bold text-lg leading-tight text-left">AI Literacy &<br/>Future Skills</span>
+                  <span className="text-white font-bold text-[13px] md:text-lg leading-tight md:text-left">AI Literacy &<br className="hidden md:block"/> Future Skills</span>
                 </div>
-                <div className="flex items-center gap-4 flex-1 justify-center">
+                <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 md:flex-1 justify-center">
                   <Users className="w-8 h-8 text-[#EAB308]" />
-                  <span className="text-white font-bold text-lg leading-tight text-left">Values &<br/>Leadership</span>
+                  <span className="text-white font-bold text-[13px] md:text-lg leading-tight md:text-left">Values &<br className="hidden md:block"/> Leadership</span>
                 </div>
-                <div className="flex items-center gap-4 flex-1 justify-center md:justify-end">
+                <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 md:flex-1 md:justify-end">
                   <Target className="w-8 h-8 text-[#EAB308]" />
-                  <span className="text-white font-bold text-lg leading-tight text-left">Service to<br/>Society</span>
+                  <span className="text-white font-bold text-[13px] md:text-lg leading-tight md:text-left">Service to<br className="hidden md:block"/> Society</span>
                 </div>
               </div>
             </div>
